@@ -1,0 +1,56 @@
+{
+	"h": {
+		"name": "h",
+		"group": "Usuario",
+		"desc": "Despliega una lista de comandos",
+		"usage": "h [grupo o comando]"
+	},
+	"info": {
+		"name": "info",
+		"group": "Usuario",
+		"desc": "Información sobre mi",
+		"usage": "info"
+	},
+	"scp": {
+		"name": "scp",
+		"group": "SCP",
+		"desc": "Buscar enlaces sobre SCPs",
+		"usage": "scp [sitio de la SCP] <terminación (ej: -es-100)>"
+	},
+	"scpr": {
+		"name": "scpr",
+		"group": "SCP",
+		"desc": "SCP aleatorio",
+		"usage": "scp [sitio de la SCP]"
+	},
+	"r": {
+		"name": "r",
+		"group": "SCP",
+		"desc": "Buscar enlaces sobre relatos, guías, ensayos, etc",
+		"usage": "r <nombre del relato (ej: good as new)> [sitio de la SCP]"
+	},
+	"rr": {
+		"name": "rr",
+		"group": "SCP",
+		"desc": "Relato aleatorio",
+		"usage": "rr"
+	},
+	"tag": {
+		"name": "tag",
+		"group": "SCP",
+		"desc": "Busca 4 artículos según la etiqueta. Para incluir una etiqueta se utiliza +, para excluirla -. Si se busca en otra rama, recuerda que tienen etiquetas en otros idiomas.",
+		"usage": "tag <grupo de etiqueta (ej: +meta -euclid)> [sitio de la SCP]"
+	},
+	"user": {
+		"name": "user",
+		"group": "SCP",
+		"desc": "Busca un usuario específico de la Fundación SCP en SCPperDB",
+		"usage": "user <usuario>"
+	},
+	"purga": {
+		"name": "purga",
+		"group": "Mod",
+		"desc": "Elimina mensajes",
+		"usage": "h <número de mensajes a eliminar"		
+	}
+}
