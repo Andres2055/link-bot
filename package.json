@@ -5,9 +5,9 @@
   "engines": {
     "node": "10.x"
   },
-  "main": "linker-bot.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node linker-bot.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "ejs": "^2.5.6",
