@@ -392,7 +392,7 @@ client.on("message", (message) => {
 					color: 0x1D82B6,
 					fields: [{
 						name:commandFound,
-						value:`**Descripción:** ${commandDesc}\n**Uso:** ${commandUsage}\n**Grupo:** ${commandGroup}`
+						value:`**Descripción:** ${commandDesc}\n**Uso:** !${commandUsage}\n**Grupo:** ${commandGroup}`
 					}]
 				}})
 				return;
