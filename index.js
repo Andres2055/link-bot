@@ -1,5 +1,8 @@
 const Discord = require("discord.js");
 const Scpper = require("scpper.js");
+const fs = require('fs')
+
+const commands = JSON.parse(fs.readFileSync('Storage/commands_help.json'), 'utf8')
 
 const api = new Scpper.Scpper({ site: 'es' })
 const client = new Discord.Client();
@@ -18,9 +21,30 @@ client.on("ready", () => {
 	client.user.setActivity('Cada !h ayuda a 3 desamparados')
 });
 
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find(ch => ch.name === 'lobby');
+  if (!channel) return;
+  channel.send(`Bienvenido al Sitio-34, ${member}`);
+});
+
 client.on("message", (message) => {
 	function mention() {
 		return client.users.find('username', message.author.username).toString()
+	}
+
+	function checkBranch(branch) {
+		if (site == 'en') {return true}
+		else if (site == 'ru') {return true}
+		else if (site == 'ko') {return true}
+		else if (site == 'ja') {return true} 
+		else if (site == 'fr') {return true} 
+		else if (site == 'th') {return true} 
+		else if (site == 'pl') {return true} 
+		else if (site == 'de') {return true} 
+		else if (site == 'cn') {return true} 
+		else if (site == 'it') {return true} 
+		else if (site == 'int') {return true}
+		else {return false}
 	}
 
 	function marv() { //%10 chance to qoute Marvin after a successful command
@@ -80,8 +104,8 @@ client.on("message", (message) => {
 						.setTitle( page['altTitle'] + ' (+' + page['adjustedRating'] + ')')
 						.setURL(page['site'] + '\/' + page['name'])
 						.setDescription(status + " (-" + site.toUpperCase() + ")")
-		                .setAuthor(message.author.username, message.author.displayAvatarURL)
-		                .setColor(0x588d9b) 
+						.setAuthor(message.author.username, message.author.displayAvatarURL)
+						.setColor(0x588d9b) 
 
 					message.channel.send({ embed });
 				}
@@ -111,8 +135,8 @@ client.on("message", (message) => {
 						.setTitle( page['altTitle'] + ' (+' + page['adjustedRating'] + ')')
 						.setURL(page['site'] + '\/' + page['name'])
 						.setDescription(status + " (-" + site.toUpperCase() + ")")
-		                .setAuthor(message.author.username, message.author.displayAvatarURL)
-		                .setColor(0x588d9b) 
+						.setAuthor(message.author.username, message.author.displayAvatarURL)
+						.setColor(0x588d9b) 
 
 				message.channel.send({ embed });
 			});
@@ -121,17 +145,7 @@ client.on("message", (message) => {
 
 			/*codigo feo por flojera*/
 
-			if (site == 'en') {}
-			else if (site == 'ru') {}
-			else if (site == 'ko') {}
-			else if (site == 'ja') {} 
-			else if (site == 'fr') {} 
-			else if (site == 'th') {} 
-			else if (site == 'pl') {} 
-			else if (site == 'de') {} 
-			else if (site == 'cn') {} 
-			else if (site == 'it') {} 
-			else if (site == 'int') {}
+			if (checkBranch(site)) {}
 			else {args.push(site); site = 'es'}
 
 			args.push('-')
@@ -156,8 +170,8 @@ client.on("message", (message) => {
 						.setTitle( page['title'] + ' (+' + page['adjustedRating'] + ')')
 						.setURL(page['site'] + '\/' + page['name'])
 						.setDescription(status + " (-" + site.toUpperCase() + ")")
-		                .setAuthor(message.author.username, message.author.displayAvatarURL)
-		                .setColor(0x588d9b) 
+						.setAuthor(message.author.username, message.author.displayAvatarURL)
+						.setColor(0x588d9b) 
 
 				message.channel.send({ embed });
 			});
@@ -177,25 +191,15 @@ client.on("message", (message) => {
 						.setTitle( page['title'] + ' (+' + page['adjustedRating'] + ')')
 						.setURL(page['site'] + '\/' + page['name'])
 						.setDescription(status)
-		                .setAuthor(message.author.username, message.author.displayAvatarURL)
-		                .setColor(0x588d9b) 
+						.setAuthor(message.author.username, message.author.displayAvatarURL)
+						.setColor(0x588d9b) 
 
 				message.channel.send({ embed });
 			});
 		} else if (command == "tag") {
 			site = args.pop()
 
-			if (site == 'en') {}
-			else if (site == 'ru') {}
-			else if (site == 'ko') {}
-			else if (site == 'ja') {} 
-			else if (site == 'fr') {} 
-			else if (site == 'th') {} 
-			else if (site == 'pl') {} 
-			else if (site == 'de') {} 
-			else if (site == 'cn') {} 
-			else if (site == 'it') {} 
-			else if (site == 'int') {}
+			if (checkBranch(site)) {}
 			else {args.push(site); site = 'es'}
 
 			query = args
@@ -226,8 +230,8 @@ client.on("message", (message) => {
 				const embed = new Discord.RichEmbed()
 						.setTitle('Artículos con las etiquetas: ' + args + " (-" + site.toUpperCase() + ")")
 						.setDescription(list)
-		                .setAuthor(message.author.username, message.author.displayAvatarURL)
-		                .setColor(0x588d9b) 
+						.setAuthor(message.author.username, message.author.displayAvatarURL)
+						.setColor(0x588d9b) 
 
 				message.channel.send({ embed });
 
@@ -266,11 +270,139 @@ client.on("message", (message) => {
 				message.channel.bulkDelete(fetched)
 					.catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
 			}
+		purge();
 
-		// We want to make sure we call the function whenever the purge command is run.
-		purge(); // Make sure this is inside the if(msg.startsWith)
+ 		} else if (command == "info") {
+ 			const embed = new Discord.RichEmbed()
+						.setURL('https://github.com/Andres2055/link-bot')
+						.setDescription("¡Hola! Soy Estiben, probablemente alguna proyección de algún sujeto en un universo paralelo o algo.")
+						.setAuthor("Estiben (ver 0.1)", "https://media.discordapp.net/attachments/520481910397468685/521122008369594405/Ball3.jpg")
+						.setThumbnail("https://media.discordapp.net/attachments/520481910397468685/521122008369594405/Ball3.jpg")
+						.addField('Gustos', "Cuervos y Consomé Panchi", true)
+						.addField('Hobbys', "Buscar enlaces, escribir y ser tu esclavo", true)
+						.setColor(0x588d9b) 
 
- 		} /*else if (ban) kick*/
+			message.channel.send({ embed });
+ 		} else if (command === "h") { 
+
+			if (args.length === 0) {
+
+				const embed = new Discord.RichEmbed()
+					.setColor(0x1D82B6)
+
+				let commandsFound = 0;
+
+				for (var cmd in commands) {
+					if (commands[cmd].group.toUpperCase() === 'USUARIO') {
+						commandsFound += 1
+						embed.addField(`* ${commands[cmd].name}`, `**Descripción:** ${commands[cmd].desc}\n**Uso:** !${commands[cmd].usage}`);
+					}
+
+				}
+
+				embed.setFooter(`Actualmente está viendo el grupo de comandos "usuario". Para ver otro grupo escriba !h [grupo / comando]`)
+				embed.setDescription(`**${commandsFound} comandos encontrados** - <> significa requerimiento, [] significa opcional`)
+
+				message.author.send({embed})
+				message.channel.send({embed: {
+					color: 0x1D82B6,
+					description: '**Mira tus MDs** ' + mention()
+				}})
+
+			} else if (args.join(' ').toUpperCase() === 'GRUPOS') {
+
+				// Variables
+				let groups = '';
+
+				for (var cmd in commands) {
+					if (!groups.includes(commands[cmd].group)) {
+						groups += `${commands[cmd].group}\n`
+					}
+				}
+
+				message.channel.send({embed: {
+					description:`**${groups}**`,
+					title: "Grupos",
+					color: 0x1D82B6
+				}})
+
+				return;
+
+			} else {
+
+				let groupFound = '';
+
+				for (var cmd in commands) {
+					if (args.join(" ").trim().toUpperCase() === commands[cmd].group.toUpperCase()) {
+						groupFound = commands[cmd].group.toUpperCase();
+						break;
+					}
+				}
+
+				if (groupFound != '') {
+
+					const embed = new Discord.RichEmbed()
+						.setColor(0x1D82B6)
+
+					let commandsFound = 0; 
+
+					for (var cmd in commands) { 
+						if (commands[cmd].group.toUpperCase() === groupFound) {
+							commandsFound += 1
+							embed.addField(`* ${commands[cmd].name}`, `**Descripción:** ${commands[cmd].desc}\n**Uso:** !${commands[cmd].usage}`); 
+						}
+					}
+
+					embed.setFooter(`Actualmente está viendo el grupo de comandos "${groupFound}". Para ver otro grupo escriba !h [grupo / comando]`)
+					embed.setDescription(`**${commandsFound} comandos encontrados** - <> significa requerimiento, [] significa opcional`)
+
+					message.author.send({embed})
+					message.channel.send({embed: {
+						color: 0x1D82B6,
+						description: '**Mira tus MDs** ' + mention()
+					}})
+
+					return; 
+				}
+
+				let commandFound = '';
+				let commandDesc = '';
+				let commandUsage = '';
+				let commandGroup = '';
+
+				for (var cmd in commands) { // Copy and paste
+					if (args.join(" ").trim().toUpperCase() === commands[cmd].name.toUpperCase()) {
+						commandFound = commands[cmd].name;
+						commandDesc = commands[cmd].desc;
+						commandUsage = commands[cmd].usage;
+						commandGroup = commands[cmd].group;
+						break;
+					}
+				}
+
+				if (commandFound === '') {
+					message.channel.send({embed: {
+						description:`**No se encotró el comando o grupo llamado \`${args.join(" ")}\`**`,
+						color: 0x1D82B6,
+					}})
+				}
+
+				message.channel.send({embed: {
+					title:'<> significa requerimiento, [] significa opcional',
+					color: 0x1D82B6,
+					fields: [{
+						name:commandFound,
+						value:`**Descripción:** ${commandDesc}\n**Uso:** ${commandUsage}\n**Grupo:** ${commandGroup}`
+					}]
+				}})
+				return;
+
+			}
+		} else {
+			message.channel.send('Introduzca un comando válido')
+		}
+
+ 		/*else if (ban) kick*/
 
 		message.delete();
 		marv();
