@@ -1,3 +1,5 @@
+/*f for test*/
+
 const Discord = require("discord.js");
 const Scpper = require("scpper.js");
 const fs = require('fs')
