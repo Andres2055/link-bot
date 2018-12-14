@@ -22,7 +22,7 @@ fs.readdir("./Commands/", (err, files) => {
 	});
 })
 
-const prefix = "!"
+const prefix = "+"
 
 /*const ep = api.findUsers('LazyLasagne')
 
@@ -113,9 +113,11 @@ client.on("message", (message) => {
 		msgR();
 	}
 
-	if (message.content.startsWith('uwu')) {
+	/*otherThings = message.content.startsWith('uwu')
+
+	if () {
 		message.channel.send("¡DON\'T UWU!");
-	}
+	}*/
 });
 
 
