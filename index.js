@@ -22,7 +22,7 @@ fs.readdir("./Commands/", (err, files) => {
 	});
 })
 
-const prefix = "+"
+const prefix = "!"
 
 /*const ep = api.findUsers('LazyLasagne')
 
