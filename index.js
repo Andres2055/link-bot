@@ -122,7 +122,7 @@ client.on("message", (message) => {
 
 
 try {
-	client.login("MjkzNTQzOTM2OTAxNzc1Mzcx.DvBPuQ.8p29cNQ31vTIZqBew8c0ouUmOzY");
+	client.login(process.env.token);
 } catch(err) {
 	console.error(err)
 }
