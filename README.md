@@ -1,5 +1,5 @@
 # Estiben 
-## Buscador Profesional de Links Para la Fundación SCP-ES ##
+## Buscador Profesional de Links Para la Fundación SCP-ES
 
 Estiben es un bot realizado primariamente para satisfacer progresivamente las necesidades básicas del chat de la Fundación SCP, rama en Español.
 
@@ -14,5 +14,5 @@ Segundo intento de bot. Press F to pay respects, bye bye, [Kiwi](http://github.c
 
 ## TODO
 
-- [ ] Organizar por módulos el código fuente actual.
 - [ ] Crear los comandos ``kick`` y ``ban``.
+- [ ] Implementar comandos de Kiwi en Estiben.
