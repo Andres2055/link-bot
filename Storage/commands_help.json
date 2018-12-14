@@ -11,6 +11,11 @@
 		"desc": "Información sobre mi",
 		"usage": "info"
 	},
+
+
+
+
+
 	"scp": {
 		"name": "scp",
 		"group": "SCP",
@@ -23,17 +28,17 @@
 		"desc": "SCP aleatorio",
 		"usage": "scp [sitio de la SCP]"
 	},
-	"r": {
-		"name": "r",
+	"art": {
+		"name": "art",
 		"group": "SCP",
-		"desc": "Buscar enlaces sobre relatos, guías, ensayos, etc",
-		"usage": "r <nombre del relato (ej: good as new)> [sitio de la SCP]"
+		"desc": "Buscar artículos que no son SCPs",
+		"usage": "art <nombre del relato (ej: good as new)> [sitio de la SCP]"
 	},
-	"rr": {
-		"name": "rr",
+	"artr": {
+		"name": "artr",
 		"group": "SCP",
-		"desc": "Relato aleatorio",
-		"usage": "rr"
+		"desc": "Artículo no-SCP aleatorio",
+		"usage": "artr"
 	},
 	"tag": {
 		"name": "tag",
@@ -47,10 +52,30 @@
 		"desc": "Busca un usuario específico de la Fundación SCP en SCPperDB",
 		"usage": "user <usuario>"
 	},
+
+
+
+	"f": {
+		"name": "f",
+		"group": "Ocio",
+		"desc": "Paga tus respetos",
+		"usage": "f [usuario]"
+	},
+	"jojo": {
+		"name": "jojo",
+		"group": "Ocio",
+		"desc": "¿Sos el JoJos?",
+		"usage": "jojo"
+	},
+
+
+
+
+
 	"purga": {
 		"name": "purga",
 		"group": "Mod",
 		"desc": "Elimina mensajes",
-		"usage": "h <número de mensajes a eliminar"		
+		"usage": "purga <número de mensajes a eliminar>"		
 	}
 }
