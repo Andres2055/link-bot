@@ -1,21 +1,25 @@
 {
-  "name": "Linker-bot",
-  "version": "0.3.0",
+  "name": "Estiben",
+  "version": "0.2.2",
   "description": "A simple NodeJS Discord bot",
   "engines": {
     "node": "10.x"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
   },
   "dependencies": {
-    "discord.js": "11.4.2",
-    "scpper.js": "3.0.3"
+    "discord.js": "^11.4.2",
+    "fs": "0.0.1-security",
+    "scpper.js": "^3.0.3"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Andres2055/link-bot"
+    "url": "https://github.com/heroku/node-js-getting-started"
   },
   "keywords": [
     "node",
