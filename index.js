@@ -4,7 +4,7 @@ const Scpper = require("scpper.js");
 const fs = require('fs')
 
 client.commands = new Discord.Collection()
-*/config = JSON.parse(fs.readFileSync('./config.json'), 'utf8')*/
+/*config = JSON.parse(fs.readFileSync('./config.json'), 'utf8')*/
 
 fs.readdir("./Commands/", (err, files) => {
 	if (err) console.log(err);
