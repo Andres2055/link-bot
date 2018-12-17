@@ -31,7 +31,7 @@ module.exports.run = async (client, message, args) => {
 		for (var i = 0; i < page.length; i++) {
 			queue = page[i]
 
-			response = '**' + all.checkTitle(page['title'], page['altTitle']) + ':** ' +
+			response = '**' + all.checkTitle(queue['title'], queue['altTitle']) + ':** ' +
 				queue['site'] + '\\' + queue['name'] + ' (' +
 				all.checkVotes(queue['rating']) + ')\n'
 
