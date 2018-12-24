@@ -14,10 +14,14 @@ module.exports.run = async (client, message, args) => {
 		query = args[0]
 	}
 
+	console.log(query)
+	console.log(site)
+
 	const scp = api.findPages('scp-' + query, { site: site })
 
 	scp.then(function(value) {
 		page = value['data']['pages'][0]
+		console.log(page)
 
 		if (page === undefined) {
 			return message.channel.send(`<@${message.author.id}>, el SCP en cuestión no existe`);
@@ -33,7 +37,7 @@ module.exports.run = async (client, message, args) => {
 			.setColor(0x588d9b)
 
 		message.channel.send({ embed });
-	});
+	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {
