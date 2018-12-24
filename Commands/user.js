@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args) => {
 		};
 		response = '**Datos de ' + boi['displayName'] + ':** ' + 'http://www.scpper.com/user/' + boi['id']
 		message.channel.send(response);
-	});
+	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {
