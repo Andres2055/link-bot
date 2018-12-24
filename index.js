@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const Scpper = require("scpper.js");
 const fs = require('fs')
 
-client.commands = new Discord.Collection()
+const prefix = "!";
+client.commands = new Discord.Collection();
 /*config = JSON.parse(fs.readFileSync('./config.json'), 'utf8')*/
 
 fs.readdir("./Commands/", (err, files) => {
@@ -16,26 +16,20 @@ fs.readdir("./Commands/", (err, files) => {
 	}
 
 	jsfile.forEach((f, i) => {
-		let props = require(`./Commands/${f}`)
-		console.log(`¡${f} cargado!`)
-		client.commands.set(props.help.name, props)
+		let props = require(`./Commands/${f}`);
+		console.log(`¡${f} cargado!`);
+		client.commands.set(props.help.name, props);
 	});
 })
-
-const prefix = "!"
-
-/*const ep = api.findUsers('LazyLasagne')
-
-ep.then(function(value) {
-	page = value['data']
-	console.log(page)
-	console.log(page['users'][0]['activity'])
-
-});*/
 
 client.on("ready", () => {
 	console.log("¡Estoy listo!");
 	client.user.setActivity('Cada !help ayuda a 3 desamparados')
+
+	const scpDiary = require('./scpDiary.js')
+	setInterval(() => {
+		scpDiary.postSCPDiary(client)
+	}, 3600000)
 });
 
 client.on('guildMemberAdd', member => {
@@ -50,13 +44,13 @@ client.on('guildMemberRemove', member => {
   channel.send(`¡Adios, adios, ${member}! Nos vemos luego`);
 });
 
-/*client.on('guildBanAdd', member => {
+client.on('guildBanAdd', member => {
   const channel = member.guild.channels.find(ch => ch.name === 'entradas');
   if (!channel) return;
-  channel.send(`Bienvenido al Sitio-34, ${member}`);
+  channel.send(`${member} ha sido baneado del servidor.`);
 });
 
-client.on('guildMemberAdd', member => {
+/*client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find(ch => ch.name === 'lobby');
   if (!channel) return;
   channel.send(`Bienvenido al Sitio-34, ${member}`);
@@ -100,26 +94,26 @@ client.on("message", (message) => {
 	}
 
 	if (message.content.startsWith(prefix) && message.author.id != "520480436107870211") {
+		msgR();
 		const args = message.content.trim().split(/ +/g);
 		console.log(args)
 
-		let commandFile = client.commands.get(args[0].slice(prefix.length));
+		let commandFile = client.commands.get(args[0].toLowerCase().slice(prefix.length));
 		console.log(commandFile)
 
 		if(commandFile) commandFile.run(client, message, args)
 		else {
-			message.channel.send('Introduzca un comando válido');
+			message.channel.send('Introduzca un comando válido. Escriba !help para más información.');
 		}
-		msgR();
 	}
 
-	/*otherThings = message.content.startsWith('uwu')
+	/*const msgOriginal = message;
+	const msgLower = message.content.toLowerCase();
 
-	if () {
+	if (msgLower.startsWith('uwu')) {
 		message.channel.send("¡DON\'T UWU!");
-	}*/
+	};*/
 });
-
 
 try {
 	client.login(process.env.token);
