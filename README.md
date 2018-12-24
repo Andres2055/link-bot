@@ -1,3 +1,5 @@
+[![Servidor de Discord](https://img.shields.io/badge/Support-Discord%20Server-blue.svg)](https://discord.gg/feKKpcY)
+
 # Estiben 
 ## Buscador Profesional de Links Para la Fundación SCP-ES
 
