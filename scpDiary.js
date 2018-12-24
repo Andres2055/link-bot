@@ -7,8 +7,8 @@ const date = new Date();
 
 var getChannel = (client) => {
 	try {
-		const guild = client.guilds.find(guild => guild.id === '526262811471511572');
-		const channel = guild['channels'].find(ch => ch.id === '526262811471511574');
+		const guild = client.guilds.find(guild => guild.id === '193819598565408769');
+		const channel = guild['channels'].find(ch => ch.id === '459517125946769408');
 		return channel;
 	} catch(err) {
 		console.log('Aún no se ha logeado');
