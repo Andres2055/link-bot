@@ -21,7 +21,6 @@ module.exports.run = async (client, message, args) => {
 
 	scp.then(function(value) {
 		page = value['data']['pages'][0]
-		console.log(page)
 
 		if (page === undefined) {
 			return message.channel.send(`<@${message.author.id}>, el SCP en cuestión no existe`);
