@@ -29,7 +29,7 @@ client.on("ready", () => {
 	const scpDiary = require('./scpDiary.js')
 	setInterval(() => {
 		scpDiary.postSCPDiary(client)
-	}, 3600000)
+	}, 60000)
 });
 
 client.on('guildMemberAdd', member => {
