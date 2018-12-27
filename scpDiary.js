@@ -17,7 +17,8 @@ var getChannel = (client) => {
 
 module.exports.postSCPDiary = client => {
 	const channel = getChannel(client);
-	if(date.getUTCHours() == 12) {
+	console.log(date.getUTCHours())
+	if(date.getUTCHours() == 1) {
 		channel.send('**Estas son las recomendaciones del día:**');
 
 		scpDiary = api.findTag('scp', { random: true });
