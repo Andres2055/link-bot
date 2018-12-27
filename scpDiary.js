@@ -3,7 +3,6 @@ const Scpper = require("scpper.js");
 const all = require('./Commands/utils/allUNeed.js');
 
 const api = new Scpper.Scpper({site: 'es'});
-const date = new Date();
 
 var getChannel = (client) => {
 	try {
@@ -16,9 +15,11 @@ var getChannel = (client) => {
 }
 
 module.exports.postSCPDiary = client => {
-	const channel = getChannel(client);
-	console.log(date.getUTCHours())
-	if(date.getUTCHours() == 1) {
+	const date = new Date();
+	const dateString = `${date.getUTCHours()}:${date.getUTCMinutes()}`
+	
+	if(dateString == "12:00") {
+		const channel = getChannel(client);
 		channel.send('**Estas son las recomendaciones del día:**');
 
 		scpDiary = api.findTag('scp', { random: true });
