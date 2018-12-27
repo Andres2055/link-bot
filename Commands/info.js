@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
-const version = {"major": 0, "minor": 4, "micro": 1, "build": "beta"}
-const verString = ` ${version["major"]}.${version["minor"]}.${version["micro"]} ${version["build"]} `
+const version = {"major": 0, "minor": 4, "micro": 3, "build": "beta"}
+const verString = ` ${version["major"]}.${version["minor"]}.${version["micro"]} ${version["build"]}`
 
 module.exports.run = async (client, message, args) => {
 	const embed = new Discord.RichEmbed()
