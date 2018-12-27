@@ -18,7 +18,7 @@ module.exports.postSCPDiary = client => {
 	const date = new Date();
 	const dateString = `${date.getUTCHours()}:${date.getUTCMinutes()}`
 	
-	if(dateString == "12:00") {
+	if(dateString == "4:00") {
 		const channel = getChannel(client);
 		channel.send('**Estas son las recomendaciones del día:**');
 
