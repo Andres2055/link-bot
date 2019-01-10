@@ -1,6 +1,6 @@
 {
 	"h": {
-		"name": "h",
+		"name": "help / h / ayuda",
 		"group": "Usuario",
 		"desc": "Despliega una lista de comandos",
 		"usage": "h [grupo o comando]"
@@ -29,25 +29,25 @@
 		"usage": "scp [sitio de la SCP]"
 	},
 	"art": {
-		"name": "art",
+		"name": "art / r",
 		"group": "SCP",
 		"desc": "Buscar artículos que no son SCPs",
 		"usage": "art <nombre del relato (ej: good as new)> [sitio de la SCP]"
 	},
 	"artr": {
-		"name": "artr",
+		"name": "artr / rr",
 		"group": "SCP",
 		"desc": "Artículo no-SCP aleatorio",
 		"usage": "artr"
 	},
 	"tag": {
-		"name": "tag",
+		"name": "tag / etiq",
 		"group": "SCP",
 		"desc": "Busca 4 artículos según la etiqueta. Para incluir una etiqueta se utiliza +, para excluirla -. Si se busca en otra rama, recuerda que tienen etiquetas en otros idiomas.",
 		"usage": "tag <grupo de etiqueta (ej: +meta -euclid)> [sitio de la SCP]"
 	},
 	"user": {
-		"name": "user",
+		"name": "user / autor",
 		"group": "SCP",
 		"desc": "Busca un usuario específico de la Fundación SCP en SCPperDB",
 		"usage": "user <usuario>"
@@ -56,16 +56,28 @@
 
 
 	"f": {
-		"name": "f",
+		"name": "f / pay",
 		"group": "Ocio",
 		"desc": "Paga tus respetos",
 		"usage": "f [usuario]"
 	},
 	"jojo": {
-		"name": "jojo",
+		"name": "jojo / jojos",
 		"group": "Ocio",
 		"desc": "¿Sos el JoJos?",
 		"usage": "jojo"
+	},
+	"img": {
+		"name": "img / flik",
+		"group": "Ocio",
+		"desc": "Busca imágenes en Flickr. Utilice 'gato', 'perro' o 'caballo' para gatos, perros o caballos random. ",
+		"usage": "img <búsqueda>"
+	},
+	"wiki": {
+		"name": "wiki / wikipedia",
+		"group": "Ocio",
+		"desc": "Busca artículos en Wikipedia.",
+		"usage": "wikipedia <búsqueda>"
 	},
 
 
@@ -73,7 +85,7 @@
 
 
 	"purga": {
-		"name": "purga",
+		"name": "purga / delet / elim",
 		"group": "Mod",
 		"desc": "Elimina mensajes",
 		"usage": "purga <número de mensajes a eliminar>"		
