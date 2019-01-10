@@ -1,6 +1,14 @@
 const Discord = require("discord.js");
 const Flickr = require("flickrapi");
-const flickrConfig = require("./../Storage/config.json")
+var flickrConfig;
+try {
+	flickrConfig = require("./../Storage/config.json")
+} catch(err) {
+	flickrConfig = {
+		"FLICKR_TOKEN": undefined,
+		"FLICKR_SECRET": undefined
+	}
+}
 
 /* Deviroment Variables */
 
