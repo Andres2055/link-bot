@@ -1,6 +1,6 @@
 {
   "name": "Linker-bot",
-  "version": "0.2.2",
+  "version": "0.5.3",
   "description": "A simple NodeJS Discord bot",
   "engines": {
     "node": "10.x"
@@ -11,11 +11,10 @@
   },
   "dependencies": {
     "discord.js": "^11.4.2",
-    "scpper.js": "^3.0.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "flickrapi": "^0.6.0",
+    "fs": "0.0.1-security",
+    "scpper.js": "^3.0.3",
+    "wikijs": "^4.11.1"
   },
   "keywords": [
     "node",
