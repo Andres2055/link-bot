@@ -1,26 +1,42 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const fs = require('fs')
+const fs = require('fs');
+const config = require("./Storage/config.json");
 
-const prefix = "!";
-client.commands = new Discord.Collection();
-/*config = JSON.parse(fs.readFileSync('./config.json'), 'utf8')*/
+/* Deviroment Variables */
+
+const PREFIX = config['PREFIX'] || process.env.PREFIX
+const TOKEN = config['TOKEN'] || process.env.TOKEN
+const SCPDIARY_TIME = config["SCPDIARY_TIME"] || 60000
+
+/* Deviroment Variables */
+/* Commands */
+
+client.commands = new Discord.Collection()
+client.aliases = new Discord.Collection()
 
 fs.readdir("./Commands/", (err, files) => {
 	if (err) console.log(err);
 
 	let jsfile = files.filter(f => f.split(".").pop() === "js");
 	if(jsfile.length <= 0) {
-		console.log(">>> No se encontraron comandos");
-		return;
+		return console.log(">>> No se encontraron comandos");
 	}
 
 	jsfile.forEach((f, i) => {
-		let props = require(`./Commands/${f}`);
-		console.log(`¡${f} cargado!`);
-		client.commands.set(props.help.name, props);
+		let props = require(`./Commands/${f}`)
+		console.log(`¡${f} cargado!`)
+		client.commands.set(props.help.name, props)
+		props.help.aliases.forEach(alias => {
+			client.aliases.set(alias, props.help.name)
+		})
 	});
-})
+});
+
+
+
+/* Commands */
+/* Client */
 
 client.on("ready", () => {
 	console.log("¡Estoy listo!");
@@ -29,7 +45,8 @@ client.on("ready", () => {
 	const scpDiary = require('./scpDiary.js')
 	setInterval(() => {
 		scpDiary.postSCPDiary(client)
-	}, 60000)
+	}, SCPDIARY_TIME)
+
 });
 
 client.on('guildMemberAdd', member => {
@@ -45,7 +62,7 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('guildBanAdd', member => {
-  const channel = member.guild.channels.find(ch => ch.name === 'entradas');
+  const channel = member.guild.channels.find(ch => ch.name === 'staff');
   if (!channel) return;
   channel.send(`${member} ha sido baneado del servidor.`);
 });
@@ -56,54 +73,58 @@ client.on('guildBanAdd', member => {
   channel.send(`Bienvenido al Sitio-34, ${member}`);
 });*/
 
-client.on("message", (message) => {
+client.on("message", message => {
 
-	function msgR() { //%10 de que salga
-		msgNum = 1 + Math.floor(Math.random() * 10);
+	var msgR = () => { //%10 de que salga
+		let msgNum = 1 + Math.floor(Math.random() * 10);
 		if (msgNum != 10) {} else {
-			msgNum = 1 + Math.floor(Math.random() * 10);
-			if (msgNum === 1) {
-				message.channel.send("y eso es todo lo que escribí.")
-			} else if (msgNum === 2) {
-				message.channel.send("¿Reconoces los cuerpos en el agua, <@" + message.author.id + ">?")
-			} else if (msgNum === 3) {
-				message.channel.send("Sexando los procedimientos de contención.")
-			} else if (msgNum === 4) {
-				message.channel.send("Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.")
-			} else if (msgNum === 5) {
-				message.channel.send("Casi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@" + message.author.id + ">")
-			} else if (msgNum === 6) {
-				message.channel.send("Si me permites... tengo que tomar un ascensor.")
-			} else if (msgNum === 7) {
-				orangutan = 1 + Math.floor(Math.random() * 9)
-				if (orangutan === 9) {message.channel.send("Nueve orangutanes.")}
-				else if (orangutan === 8) {message.channel.send("Ocho orangutanes.")}
-				else if (orangutan === 7) {message.channel.send("Siete orangutanes.")}
-				else if (orangutan === 6) {message.channel.send("Seis orangutanes.")}
-				else if (orangutan === 5) {message.channel.send("Cinco orangutanes.")}
-				else if (orangutan === 4) {message.channel.send("Cuatro orangutanes.")}
-				else if (orangutan === 3) {message.channel.send("Tres orangutanes.")}
-				else if (orangutan === 2) {message.channel.send("Dos orangutanes.")}
-				else if (orangutan === 1) {message.channel.send("Uno orangutanes.")}
-			} else if (msgNum === 8) {
-				message.channel.send("Todos nos hemos reído, pero ya no es gracioso.")
-			} else if (msgNum === 9) {
-				message.channel.send("Woowee veh i matate <@" + message.author.id + ">")
+			let msgNum2 = Math.floor(Math.random() * 9);
+			let orangutan = Math.floor(Math.random() * 9);
+
+			var theOrangutan = (ora) => {
+				return (ora > 7) ? `${orangutanes[ora]} orangután` : `${orangutanes[ora]} orangutanes`
 			}
+
+			var orangutanes = [
+				"Nueve", "Ocho", "Siete", 
+				"Seis", "Cinco", "Cuatro", 
+				"Tres", "Dos", "Un"
+			]
+
+			var preSendMsg = [
+				"y eso es todo lo que escribí.", 
+				`¿Reconoces los cuerpos en el agua, <@${message.author.id}>?`,
+				"Sexando los procedimientos de contención.",
+				"Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.",
+				`asi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@${message.author.id}>`,
+				"Si me permites... tengo que tomar un ascensor.",
+				"Todos nos hemos reído, pero ya no es gracioso.",
+				`Woowee veh i matate <@${message.author.id}>`,
+				theOrangutan(orangutan)
+			]
+
+			return preSendMsg[msgNum2]
 		}
 	}
 
-	if (message.content.startsWith(prefix) && message.author.id != "520480436107870211") {
-		msgR();
-		const args = message.content.trim().split(/ +/g);
-		console.log(args)
+	if (!message.author.bot) {
 
-		let commandFile = client.commands.get(args[0].toLowerCase().slice(prefix.length));
-		console.log(commandFile)
+
+		let messageArray = message.content.split(/ +/g);
+		let cmd = messageArray[0].toLowerCase();
+		let args = messageArray.slice(1)
+
+		msgR();
+
+
+		if(!message.content.startsWith(PREFIX)) return;
+		let commandsName = client.commands.get(cmd.slice(PREFIX.length));
+		let aliasesName  = client.commands.get(client.aliases.get(cmd.slice(PREFIX.length)));
+		let commandFile  = commandsName || aliasesName;
 
 		if(commandFile) commandFile.run(client, message, args)
 		else {
-			message.channel.send('Introduzca un comando válido. Escriba !help para más información.');
+			message.channel.send(`Introduzca un comando válido. Escriba ${PREFIX}help para más información.`);
 		}
 	}
 
@@ -115,8 +136,13 @@ client.on("message", (message) => {
 	};*/
 });
 
+/* Client */
+/* Login */
+
 try {
-	client.login(process.env.token);
+	client.login(TOKEN);
 } catch(err) {
-	console.error(err)
+	console.log(err)
 }
+
+/* Login */
