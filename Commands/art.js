@@ -5,7 +5,6 @@ const api = new Scpper.Scpper({ site: 'es' })
 const all = require('./utils/allUNeed.js')
 
 module.exports.run = async (client, message, args) => {
-	args.shift().toLowerCase();
 	site = args.pop()
 
 	if (all.checkBranch(site)) {}
@@ -27,12 +26,13 @@ module.exports.run = async (client, message, args) => {
 				.setURL(page['site'] + '\/' + page['name'])
 				.setDescription(all.checkAuthors(page['status'], page['authors']) + " [-" + site.toUpperCase() + "]")
 				.setAuthor(message.author.username, message.author.displayAvatarURL)
-				.setColor(0x588d9b) 
+				.setColor(all.checkSiteColor(site)) 
 
 		message.channel.send({ embed });
 	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));	
 }
 
 module.exports.help = {
-	name: "art"
+	name: "art",
+	aliases: ["r"]
 }

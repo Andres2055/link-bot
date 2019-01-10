@@ -1,18 +1,17 @@
 const Discord = require("discord.js");
-const fs = require('fs')
+const fs = require('fs');
 
-const commands = JSON.parse(fs.readFileSync('./Storage/commands_help.json'), 'utf8')
+const commands = JSON.parse(fs.readFileSync('./Storage/commands_help.json'), 'utf8');
 
 const checkMD = message => {
 	if (message.channel.type === "dm") {
 		return;
 	} else {
-		return 'Revisa tus Mensajes Directos <@' + message.author.id + '>'
+		return `Revisa tus Mensajes Directos <@${message.author.id}>`;
 	}
 }
 
 module.exports.run = async (client, message, args) => {
-	args.shift().toLowerCase();
 	if (args.length === 0) {
 
 		const embed = new Discord.RichEmbed()
@@ -106,7 +105,7 @@ module.exports.run = async (client, message, args) => {
 		for (var cmd in commands) { // Copy and paste
 			if (args.join(" ").trim().toUpperCase() === commands[cmd].name.toUpperCase()) {
 				commandFound = commands[cmd].name;
-				commandDesc = commands[cmd].desc;
+				commandDesc  = commands[cmd].desc;
 				commandUsage = commands[cmd].usage;
 				commandGroup = commands[cmd].group;
 				break;
@@ -137,5 +136,6 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-	name: "help"
+	name: "help",
+	aliases: ["h", "ayuda"]
 }

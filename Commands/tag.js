@@ -5,49 +5,48 @@ const api = new Scpper.Scpper({ site: 'es' });
 const all = require('./utils/allUNeed.js')
 
 module.exports.run = async (client, message, args) => {
-	args.shift().toLowerCase();
-	site = args.pop()
+	site = args.pop();
 
 	if (all.checkBranch(site)) {} 
-	else {args.push(site); site = 'es'}
+	else {args.push(site); site = 'es'};
 
-	query = args
-	console.log(query)
+	var query = args;
+	console.log(query);
 
 	const tag = api.findTag(query, {
 		site: site,
 		limit: 5,
 		random: true
-	})
-
-	tag.then(function(value) {
-		page = value['data']['pages']
-		list = ""
+	}).then(value => {
+		page = value['data']['pages'];
+		list = "";
 
 		if (page[0] === undefined) {
-			return message.channel.send('<@' + message.author.id + '>, no se encontraron artículos con la etiqueta buscada');
+			message.channel.send(`<@${message.author.id}>, no se encontraron artículos con la etiqueta buscada`);
+			return;
 		};
 
 		for (var i = 0; i < page.length; i++) {
 			queue = page[i]
 
-			response = '**' + all.checkTitle(queue['title'], queue['altTitle']) + ':** ' +
-				queue['site'] + '\\' + queue['name'] + ' (' +
-				all.checkVotes(queue['rating']) + ')\n'
+			response = `**${all.checkTitle(queue['title'], queue['altTitle'])}:** \
+						${queue['site']}\\${queue['name']} \
+						(${all.checkVotes(queue['rating'])})\n`
 
 			list += response
 		}
 
 		const embed = new Discord.RichEmbed()
-			.setTitle('Artículos con las etiquetas: ' + args + " (-" + site.toUpperCase() + ")")
+			.setTitle(`Artículos con las etiquetas: ${args} (-${site.toUpperCase()})`)
 			.setDescription(list)
 			.setAuthor(message.author.username, message.author.displayAvatarURL)
-			.setColor(0x588d9b)
+			.setColor(all.checkSiteColor(site))
 
 		message.channel.send({ embed });
 	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {
-	name: "tag"
+	name: "tag",
+	aliases: ["etiq"]
 }

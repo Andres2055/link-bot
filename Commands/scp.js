@@ -5,7 +5,7 @@ const api = new Scpper.Scpper({ site: 'es' });
 const all = require('./utils/allUNeed.js')
 
 module.exports.run = async (client, message, args) => {
-	args.shift().toLowerCase();
+	console.log(args)
 	if (args.length === 2) {
 		site = args[0]		
 		query = args[1]
@@ -14,31 +14,35 @@ module.exports.run = async (client, message, args) => {
 		query = args[0]
 	}
 
-	console.log(query)
-	console.log(site)
+	scpToSearch = `scp-${query}`
+	if(query == "4000") { scpToSearch = "taboo"; }
 
-	const scp = api.findPages('scp-' + query, { site: site })
+	const scp = api.findPages(scpToSearch, { site: site })
+		.then(value => {
+			page = value['data']['pages'][0]
 
-	scp.then(function(value) {
-		page = value['data']['pages'][0]
+			if (page === undefined) {
+				return message.channel.send(`<@${message.author.id}>, el SCP en cuestión no existe`);
+			}
 
-		if (page === undefined) {
-			return message.channel.send(`<@${message.author.id}>, el SCP en cuestión no existe`);
-		} 
+			const embed = new Discord.RichEmbed()
+				.setTitle(`${page['title']} - ${all.checkTitle(page['title'], page['altTitle'])} (${all.checkVotes(page['rating'])})`)
+				.setURL(`${page['site']}/${page['name']}`)
+				.setDescription(`${all.checkAuthors(page['status'], page['authors'])} [-${site.toUpperCase()}]`)
+				.setAuthor(message.author.username, message.author.displayAvatarURL)
+				.setColor(all.checkSiteColor(site))
 
-		const embed = new Discord.RichEmbed()
-			.setTitle(all.checkTitle(page['title'], page['altTitle']) + 
-					' (' + all.checkVotes(page['rating']) + ')')
-			.setURL(page['site'] + '\/' + page['name'])
-			.setDescription(all.checkAuthors(page['status'], page['authors']) + 
-							" [-" + site.toUpperCase() + "]")
-			.setAuthor(message.author.username, message.author.displayAvatarURL)
-			.setColor(0x588d9b)
+			if(page["name"] == "taboo") {
+				embed.setTitle(`SCP-4000 - Tabú (${all.checkVotes(page['rating'])})`)
+			}
 
-		message.channel.send({ embed });
-	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
+			
+
+			message.channel.send({ embed });
+		}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {
-	name: "scp"
+	name: "scp",
+	aliases: []
 }

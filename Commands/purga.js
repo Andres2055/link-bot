@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
-	args.shift().toLowerCase();
 	message.delete();
 
 	if (!message.member.roles.find("name", "director")) {
@@ -10,7 +9,12 @@ module.exports.run = async (client, message, args) => {
 	}
 
 	if (isNaN(args[0])) {
-		message.channel.send('Por favor, usa un número como argumento.');
+		message.channel.send('Por favor, use un número como argumento.');
+		return;
+	}
+
+	if (args[0] > 100) {
+		message.channel.send('El límite de mensajes a borrar es menor a 100.');
 		return;
 	}
 
@@ -18,9 +22,10 @@ module.exports.run = async (client, message, args) => {
 	console.log(fetched.size + ' mensajes encontrados, eliminando...');
 
 	message.channel.bulkDelete(fetched)
-		.catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
+		.catch(error => message.channel.send(`Error: ${error}`));
 }
 
 module.exports.help = {
-	name: "purga"
+	name: "purga",
+	aliases: ["delet", "elim"]
 }
