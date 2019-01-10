@@ -1,5 +1,5 @@
 module.exports.checkBranch = branch => {
-	if (branch == 'en') { return true } else if (branch == 'ru') { return true } else if (branch == 'ko') { return true } else if (branch == 'ja') { return true } else if (branch == 'fr') { return true } else if (branch == 'th') { return true } else if (branch == 'pl') { return true } else if (branch == 'de') { return true } else if (branch == 'cn') { return true } else if (branch == 'it') { return true } else if (branch == 'int') { return true } else { return false }
+	if (branch == 'en') { return true } else if (branch == 'ru') { return true } else if (branch == 'ko') { return true } else if (branch == 'ja') { return true } else if (branch == 'fr') { return true } else if (branch == 'th') { return true } else if (branch == 'pl') { return true } else if (branch == 'de') { return true } else if (branch == 'cn') { return true } else if (branch == 'it') { return true } else if (branch == 'int') { return true } else { return false };
 };
 
 module.exports.checkTitle = (title, altTitle) => {
@@ -7,7 +7,7 @@ module.exports.checkTitle = (title, altTitle) => {
 		return title;
 	} else {
 		return altTitle;
-	}
+	};
 };
 
 module.exports.checkVotes = votes => {
@@ -17,12 +17,10 @@ module.exports.checkVotes = votes => {
 		return '0';
 	} else {
 		return '+' + votes;
-	}
+	};
 };
 
 module.exports.checkAuthors = (status, authors) => {
-	console.log(status)
-	console.log(authors)
 	if (status === "Translation") {
 		return '**Traducido por:** ' + page['authors'][0]['user'];
 	} else if (page['status'] === "Original") {
@@ -70,8 +68,39 @@ module.exports.checkAuthors = (status, authors) => {
 					}
 				};
 
-				return '**Creado por:** ' + msg_o + ' :left_right_arrow:  ' + msg_re
+				return `**Creado por:** ${msg_o} :left_right_arrow: ${msg_re}`;
 			};
 		};
 	};
 };
+
+module.exports.checkSiteColor = (site) => {
+	var color = '0x';
+	switch (site) {
+		case "en":
+			color += "848484"; break;
+		case "ru":
+			color += "DF0101"; break;
+		case "ko":
+			color += "FF0080"; break;
+		case "ja":
+			color += "EFFBFB"; break;
+		case "fr":
+			color += "0040FF"; break;
+		case "th":
+			color += "0B0B61"; break;
+		case "pl":
+			color += "BE03FC"; break;
+		case "de":
+			color += "FF8000"; break;
+		case "cn":
+			color += "3B0B17"; break;
+		case "it":
+			color += "01DF01"; break;
+		case "int":
+			color += "2EFEF7"; break;
+		case "es":
+			color += "FFFF00"; break;
+	};
+	return color;
+}
