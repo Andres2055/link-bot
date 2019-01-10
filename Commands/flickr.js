@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const Flickr = require("flickrapi");
-var flickrConfig = require("./../Storage/config.json")
+const flickrConfig = require("./../Storage/config.json")
 
 /* Deviroment Variables */
 
