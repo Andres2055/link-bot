@@ -1,0 +1,11 @@
+{
+	"PREFIX": "!",
+	"SCPDIARY_TIME": 60000,
+	"VERSION": 
+	{
+		"major": 0, 
+		"minor": 5, 
+		"micro": 1,
+		"build": "beta"
+	},
+}
