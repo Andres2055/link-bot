@@ -86,7 +86,8 @@ client.on('guildBanAdd', member => {
 });*/
 
 client.on("message", message => {
-	if (message.member.roles.has("muted")) {
+	const isMuted = message.member.roles.find(rol => rol.name == "muted")
+	if (isMuted) {
 		message.delete();
 	}
 
