@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args) => {
 		list = "";
 
 		if (page[0] === undefined) {
-			message.channel.send(`<@${message.author.id}>, no se encontraron artículos con la etiqueta buscada`);
+			message.channel.send(`Lo siento <@${message.author.id}>, pero no pude encontrar nada`);
 			return;
 		};
 
@@ -43,7 +43,7 @@ module.exports.run = async (client, message, args) => {
 			.setColor(all.checkSiteColor(site))
 
 		message.channel.send({ embed });
-	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
+	}).catch(err =>console.log("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {

@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args) => {
 		page = value['data']['pages'][0]
 
 		if (page === undefined) {
-			return message.channel.send('<@' + message.author.id + '>, introduzca un artículo válido');
+			return message.channel.send('<@' + message.author.id + '>, ese artículo no es válido');
 		};
 
 		const embed = new Discord.RichEmbed()
@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args) => {
 				.setColor(all.checkSiteColor(site)) 
 
 		message.channel.send({ embed });
-	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));	
+	}).catch(err => console.log("Hubo un error de tipo: " + err));	
 }
 
 module.exports.help = {

@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args) => {
 			page = value['data']['pages'][0]
 
 			if (page === undefined) {
-				return message.channel.send(`<@${message.author.id}>, el SCP en cuestión no existe`);
+				return message.channel.send(`Ese SCP no existe, <@${message.author.id}>.`);
 			}
 
 			const embed = new Discord.RichEmbed()
@@ -36,10 +36,8 @@ module.exports.run = async (client, message, args) => {
 				embed.setTitle(`SCP-4000 - Tabú (${all.checkVotes(page['rating'])})`)
 			}
 
-			
-
 			message.channel.send({ embed });
-		}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
+		}).catch(err => console.log("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {

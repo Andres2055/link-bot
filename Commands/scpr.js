@@ -27,7 +27,7 @@ module.exports.run = async (client, message, args) => {
 			.setColor(all.checkSiteColor(site))
 
 		message.channel.send({ embed });
-	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
+	}).catch(err => console.log("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {

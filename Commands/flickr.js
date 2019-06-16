@@ -61,7 +61,7 @@ module.exports.run = async (client, message, args) => {
 				url = `https://www.flickr.com/photos/${photos[randomN]['owner']}/${photos[randomN]['id']}`;
 				message.channel.send(url);
 			} catch(err) {
-				message.channel.send("No se encontraron resultados");
+				message.channel.send("Nope, sin resultados.");
 			}
 		});
 	});

@@ -4,17 +4,17 @@ module.exports.run = async (client, message, args) => {
 	message.delete();
 
 	if (!message.member.roles.find("name", "director")) {
-		message.channel.send('Necesitas el rol "director" para utilizar este comándo.');
+		message.channel.send('No eres tu, soy yo. Si no eres "director" no podemos tener nada.');
 		return;
 	}
 
 	if (isNaN(args[0])) {
-		message.channel.send('Por favor, use un número como argumento.');
+		message.channel.send('Por favor, usa un número como argumento.');
 		return;
 	}
 
 	if (args[0] > 100) {
-		message.channel.send('El límite de mensajes a borrar es menor a 100.');
+		message.channel.send('Eh, son más de 100 mensajes, ¿qué pretendes hacer?');
 		return;
 	}
 

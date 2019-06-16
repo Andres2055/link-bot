@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args) => {
 
 	searchWiki.page(toCapitalize(args)).then(page => {
 		message.channel.send(page["raw"]["fullurl"]);
-	}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
+	}).catch(err => console.log("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {

@@ -13,13 +13,13 @@ module.exports.run = async (client, message, args) => {
 			guy = value['data']['users'][0]
 
 			if (guy === undefined) {
-				message.channel.send(`<@${message.author.id}>, el usuario no existe`);
+				message.channel.send(`Nope <@${message.author.id}>, esta persona no existe`);
 				return;
 			};
 
 			response = `**Datos de ${guy['displayName']}:** http://www.scpper.com/user/${guy['id']}`
 			message.channel.send(response);
-		}).catch(err => message.channel.send("Hubo un error de tipo: " + err));
+		}).catch(err => console.log("Hubo un error de tipo: " + err));
 }
 
 module.exports.help = {

@@ -7,7 +7,7 @@ const checkMD = message => {
 	if (message.channel.type === "dm") {
 		return;
 	} else {
-		return `Revisa tus Mensajes Directos <@${message.author.id}>`;
+		return `Y-yo... te envié un mensaje <@${message.author.id}>`;
 	}
 }
 
@@ -26,8 +26,8 @@ module.exports.run = async (client, message, args) => {
 			}
 		}
 
-		embed.setFooter(`Actualmente está viendo el grupo de comandos "usuario". Para ver otro grupo escriba !help [grupo / comando]. Para ver todos los grupos, escriba !help grupos.`)
-		embed.setDescription(`**${commandsFound} comandos encontrados** - <> significa requerimiento, [] significa opcional`)
+		embed.setFooter(`Estás viendo el grupo de comandos "usuario". Si quieres ver otro, escribe !help [grupo / comando]. Escribe !help grupos para verlos todos.`)
+		embed.setDescription(`**${commandsFound} comandos para ti** - Lo encerrado entre <> es requerido, si es [] es opcional`)
 
 		message.author.send({ embed })
 		message.channel.send({
@@ -83,8 +83,8 @@ module.exports.run = async (client, message, args) => {
 				}
 			}
 
-			embed.setFooter(`Actualmente está viendo el grupo de comandos "${groupFound}". Para ver otro grupo escriba !help [grupo / comando]. Para ver todos los grupos, escriba !help grupos.`)
-			embed.setDescription(`**${commandsFound} comandos encontrados** - <> significa requerimiento, [] significa opcional`)
+			embed.setFooter(`Estás viendo el grupo de comandos "${groupFound}". Si quieres ver otro, escribe !help [grupo / comando]. Escribe !help grupos para verlos todos.`)
+			embed.setDescription(`**${commandsFound} comandos para ti** - Lo encerrado entre <> es requerido, si es [] es opcional`)
 
 			message.author.send({ embed })
 			message.channel.send({
@@ -115,7 +115,7 @@ module.exports.run = async (client, message, args) => {
 		if (commandFound === '') {
 			message.channel.send({
 				embed: {
-					description: `**No se encotró el comando o grupo llamado \`${args.join(" ")}\`**`,
+					description: "*Definitivamente no tengo ese comando/grupo llamado **``" + args.join(" ") + "``***",
 					color: 0x1D82B6,
 				}
 			})
@@ -123,7 +123,7 @@ module.exports.run = async (client, message, args) => {
 
 		message.channel.send({
 			embed: {
-				title: '<> significa requerimiento, [] significa opcional',
+				title: 'Lo encerrado entre <> es requerido, si es [] es opcional',
 				color: 0x1D82B6,
 				fields: [{
 					name: commandFound,
