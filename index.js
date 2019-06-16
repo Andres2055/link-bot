@@ -19,7 +19,7 @@ fs.readdir("./Commands/", (err, files) => {
 	if (err) console.log(err);
 
 	let jsfile = files.filter(f => f.split(".").pop() === "js");
-	if(jsfile.length <= 0) {
+	if (jsfile.length <= 0) {
 		return console.log(">>> No se encontraron comandos");
 	}
 
@@ -40,7 +40,19 @@ fs.readdir("./Commands/", (err, files) => {
 
 client.on("ready", () => {
 	console.log("¡Estoy listo!");
-	client.user.setActivity('Cada !help ayuda a 3 desamparados')
+	var msgActivity = ["Cada !help cura mi depresión", 
+						"Un !help es igual a un abrazo", 
+						"Necesitas el !help tanto como yo a ti",
+						"Lo hago porque te quiero", 
+						"!help, ¡HELP! ¡HELP ME!"];
+
+	var msgNum = Math.floor(Math.random() * msgActivity.length);
+
+	client.user.setActivity(msgActivity[msgNum]);
+	setInterval(() => {
+		msgNum = Math.floor(Math.random() * msgActivity.length);
+		client.user.setActivity(msgActivity[msgNum]);
+	}, SCPDIARY_TIME*24)
 
 	const scpDiary = require('./scpDiary.js')
 	setInterval(() => {
@@ -50,30 +62,33 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.find(ch => ch.name === 'lobby');
-  if (!channel) return;
-  channel.send(`¡Bienvenido al Sitio-34, ${member}! Por favor, recuerda checar #reglas-leer-primero antes de escribir algo.`);
+	const channel = member.guild.channels.find(ch => ch.name === 'lobby');
+	if (!channel) return;
+	channel.send(`¡Heya ${member}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
 });
 
 client.on('guildMemberRemove', member => {
-  const channel = member.guild.channels.find(ch => ch.name === 'lobby');
-  if (!channel) return;
-  channel.send(`¡Adios, adios, ${member}! Nos vemos luego`);
+	const channel = member.guild.channels.find(ch => ch.name === 'lobby');
+	if (!channel) return;
+	channel.send(`¡Adios, ${member}! Espero que vuelvas pronto :D.`);
 });
 
 client.on('guildBanAdd', member => {
-  const channel = member.guild.channels.find(ch => ch.name === 'staff');
-  if (!channel) return;
-  channel.send(`${member} ha sido baneado del servidor.`);
+	const channel = member.guild.channels.find(ch => ch.name === 'staff');
+	if (!channel) return;
+	channel.send(`${member}. Dios, no... pensé que realmente eras una buena persona, y ser baneado... supongo que no todas son buenas personas.`);
 });
 
-/*client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.find(ch => ch.name === 'lobby');
-  if (!channel) return;
-  channel.send(`Bienvenido al Sitio-34, ${member}`);
+/*client.on('messageDelete', msg => {
+	const channel = member.guild.channels.find(ch => ch.name === 'staff');
+	if (!channel) return;
+	channel.send(`${member} ha sido baneado del servidor.`);
 });*/
 
 client.on("message", message => {
+	if (message.member.roles.has("muted")) {
+		message.delete();
+	}
 
 	var msgR = () => { //%10 de que salga
 		let msgNum = 1 + Math.floor(Math.random() * 10);
@@ -86,13 +101,13 @@ client.on("message", message => {
 			}
 
 			var orangutanes = [
-				"Nueve", "Ocho", "Siete", 
-				"Seis", "Cinco", "Cuatro", 
+				"Nueve", "Ocho", "Siete",
+				"Seis", "Cinco", "Cuatro",
 				"Tres", "Dos", "Un"
 			]
 
 			var preSendMsg = [
-				"y eso es todo lo que escribí.", 
+				"y eso es todo lo que escribí.",
 				`¿Reconoces los cuerpos en el agua, <@${message.author.id}>?`,
 				"Sexando los procedimientos de contención.",
 				"Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.",
@@ -100,7 +115,8 @@ client.on("message", message => {
 				"Si me permites... tengo que tomar un ascensor.",
 				"Todos nos hemos reído, pero ya no es gracioso.",
 				`Woowee veh i matate <@${message.author.id}>`,
-				theOrangutan(orangutan)
+				theOrangutan(orangutan),
+				'* lo lame *'
 			]
 
 			return preSendMsg[msgNum2]
@@ -117,14 +133,14 @@ client.on("message", message => {
 		msgR();
 
 
-		if(!message.content.startsWith(PREFIX)) return;
+		if (!message.content.startsWith(PREFIX)) return;
 		let commandsName = client.commands.get(cmd.slice(PREFIX.length));
-		let aliasesName  = client.commands.get(client.aliases.get(cmd.slice(PREFIX.length)));
-		let commandFile  = commandsName || aliasesName;
+		let aliasesName = client.commands.get(client.aliases.get(cmd.slice(PREFIX.length)));
+		let commandFile = commandsName || aliasesName;
 
-		if(commandFile) commandFile.run(client, message, args)
+		if (commandFile) commandFile.run(client, message, args)
 		else {
-			message.channel.send(`Introduzca un comando válido. Escriba ${PREFIX}help para más información.`);
+			message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 		}
 	}
 
@@ -141,7 +157,7 @@ client.on("message", message => {
 
 try {
 	client.login(TOKEN);
-} catch(err) {
+} catch (err) {
 	console.log(err)
 }
 
