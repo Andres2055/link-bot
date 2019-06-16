@@ -1,5 +1,30 @@
+const Branches = {
+	"es": "lafundacionscp",
+	"en": "scp-wiki",
+	"ru": "scpfoundation.ru",
+	"ko": "ko.scp-wiki.net",
+	"ja": "ja.scp-wiki.net",
+	"fr": "fondationscp",
+	"th": "scp-th",
+	"pl": "scp-wiki.net.pl",
+	"de": "scp-wiki-de",
+	"cn": "scp-wiki-cn",
+	"it": "fondazionescp",
+	"int": "scp-int",
+}
+
 module.exports.checkBranch = branch => {
-	if (branch == 'en') { return true } else if (branch == 'ru') { return true } else if (branch == 'ko') { return true } else if (branch == 'ja') { return true } else if (branch == 'fr') { return true } else if (branch == 'th') { return true } else if (branch == 'pl') { return true } else if (branch == 'de') { return true } else if (branch == 'cn') { return true } else if (branch == 'it') { return true } else if (branch == 'int') { return true } else { return false };
+	var isNotSpanish = false;
+	for(let key in Branches) {
+		if(key == branch) {
+			isNotSpanish = true;
+		}
+	}
+	return isNotSpanish;
+};
+
+module.exports.urlBranch = branch => {
+	return (Branches[branch]) ? Branches[branch] : false; 
 };
 
 module.exports.checkTitle = (title, altTitle) => {
@@ -7,7 +32,7 @@ module.exports.checkTitle = (title, altTitle) => {
 		return title;
 	} else {
 		return altTitle;
-	};
+	}
 };
 
 module.exports.checkVotes = votes => {
@@ -17,7 +42,7 @@ module.exports.checkVotes = votes => {
 		return '0';
 	} else {
 		return '+' + votes;
-	};
+	}
 };
 
 module.exports.checkAuthors = (status, authors) => {
@@ -75,32 +100,17 @@ module.exports.checkAuthors = (status, authors) => {
 };
 
 module.exports.checkSiteColor = (site) => {
-	var color = '0x';
-	switch (site) {
-		case "en":
-			color += "848484"; break;
-		case "ru":
-			color += "DF0101"; break;
-		case "ko":
-			color += "FF0080"; break;
-		case "ja":
-			color += "EFFBFB"; break;
-		case "fr":
-			color += "0040FF"; break;
-		case "th":
-			color += "0B0B61"; break;
-		case "pl":
-			color += "BE03FC"; break;
-		case "de":
-			color += "FF8000"; break;
-		case "cn":
-			color += "3B0B17"; break;
-		case "it":
-			color += "01DF01"; break;
-		case "int":
-			color += "2EFEF7"; break;
-		case "es":
-			color += "FFFF00"; break;
-	};
+	const branchAndColors = {"en": "848484", "ru": "df0101", "ko": "ff0080", 
+							"ja": "effbfb", "fr": "0040ff", "th": "0b0b61", 
+							"pl": "be03fc", "de": "ff8000", "cn": "3b0b17", 
+							"it": "01df01", "int": "2efef7", "es": "ffff00"};
+	var color;
+  
+	for(var x in branchAndColors) {
+		if(x == site) {
+			color = `0x${branchAndColors[x]}`;
+		}
+	}
+
 	return color;
 }
