@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
 
 	console.log(message.channel.permissionsFor(message.member))
 
-	if (jojo < 90) {
+	if (jojo < 5) {
 		let jojo = message.channel.guild.roles.find(role => role.name == "Jojos");
 		let newJojos = message.channel.guild.fetchMember(message.author);
 
