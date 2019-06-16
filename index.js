@@ -93,6 +93,7 @@ client.on("message", message => {
 
 	var msgR = () => { //%10 de que salga
 		let msgNum = 1 + Math.floor(Math.random() * 10);
+		console.log(msgNum)
 		if (msgNum != 10) {} else {
 			let msgNum2 = Math.floor(Math.random() * 9);
 			let orangutan = Math.floor(Math.random() * 9);
@@ -112,7 +113,7 @@ client.on("message", message => {
 				`¿Reconoces los cuerpos en el agua, <@${message.author.id}>?`,
 				"Sexando los procedimientos de contención.",
 				"Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.",
-				`asi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@${message.author.id}>`,
+				`Casi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@${message.author.id}>`,
 				"Si me permites... tengo que tomar un ascensor.",
 				"Todos nos hemos reído, pero ya no es gracioso.",
 				`Woowee veh i matate <@${message.author.id}>`,
@@ -120,27 +121,23 @@ client.on("message", message => {
 				'* lo lame *'
 			]
 
-			return preSendMsg[msgNum2]
+			message.channel.send(preSendMsg[msgNum2])
 		}
 	}
 
 	if (!message.author.bot) {
-
-
 		let messageArray = message.content.split(/ +/g);
 		let cmd = messageArray[0].toLowerCase();
 		let args = messageArray.slice(1)
-
-		msgR();
-
-
 		if (!message.content.startsWith(PREFIX)) return;
 		let commandsName = client.commands.get(cmd.slice(PREFIX.length));
 		let aliasesName = client.commands.get(client.aliases.get(cmd.slice(PREFIX.length)));
 		let commandFile = commandsName || aliasesName;
 
-		if (commandFile) commandFile.run(client, message, args)
-		else {
+		if (commandFile) { 
+			msgR();
+			commandFile.run(client, message, args);
+		} else {
 			message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 		}
 	}
