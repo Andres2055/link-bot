@@ -90,10 +90,10 @@ client.on('guildMemberRemove', member => {
 	channel.send(`¡Adios, ${member}! Espero que vuelvas pronto :D`);
 });
 
-client.on('guildBanAdd', member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'entradas');
+client.on('guildBanAdd', (guild, user) => {
+	const channel = guild.channels.find(ch => ch.name === 'entradas');
 	if (!channel) return;
-	channel.send(`${member.name} ha sido baneado`);
+	channel.send(`${user.tag} ha sido baneado`);
 });
 
 client.on("message", message => {
