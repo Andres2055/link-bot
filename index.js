@@ -97,7 +97,6 @@ client.on('guildBanAdd', member => {
 });
 
 client.on("message", message => {
-	console.log(message.channel.type)
 	if(message.channel.type != "dm") {
 		const isMuted = message.member.roles.find(rol => rol.name.toLowerCase() == "muted")
 		if (isMuted) {
