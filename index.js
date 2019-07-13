@@ -106,10 +106,10 @@ client.on("message", message => {
 			return;
 		}
 
-		let adv_roles = {}
+		/*let adv_roles = {}
 		adv_roles["n1"] = message.member.guild.roles.find(rol => rol.name === 'Advertencia de Nivel 1')
 		adv_roles["n2"] = message.member.guild.roles.find(rol => rol.name === 'Advertencia de Nivel 2')
-		adv_roles["muted"] = message.member.guild.roles.find(rol => rol.name === 'Muted')
+		adv_roles["muted"] = message.member.guild.roles.find(rol => rol.name === 'Muted')*/
 	}
 
 	var msgR = () => { //%10 de que salga
