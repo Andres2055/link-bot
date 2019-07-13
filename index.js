@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
-const antispam = require("antispam-discord")
+//const antispam = require("antispam-discord")
 const config = require("./Storage/config.json");
 
 /* Deviroment Variables */
