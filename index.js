@@ -98,13 +98,14 @@ client.on('guildBanAdd', (guild, user) => {
 
 client.on("message", message => {
 	if(message.channel.type != "dm") {
+		/* pasan cosas raras, pero ya no se le necesita
 		const isMuted = message.member.roles.find(rol => rol.name.toLowerCase() == "muted")
 		if (isMuted) {
 			message.delete()
 				.then(msg => console.log(`Mensaje de ${msg.author.username} borrado`))
 				.catch(console.error)
 			return;
-		}
+		}*/
 
 		/*let adv_roles = {}
 		adv_roles["n1"] = message.member.guild.roles.find(rol => rol.name === 'Advertencia de Nivel 1')
