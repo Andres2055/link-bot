@@ -61,18 +61,6 @@
 		"desc": "Paga tus respetos",
 		"usage": "f [usuario]"
 	},
-	"jojo": {
-		"name": "jojo / jojos",
-		"group": "Ocio",
-		"desc": "¿Sos el JoJos?",
-		"usage": "jojo"
-	},
-	"img": {
-		"name": "img / flik",
-		"group": "Ocio",
-		"desc": "Busca imágenes en Flickr. Utilice 'gato', 'perro' o 'caballo' para gatos, perros o caballos random. ",
-		"usage": "img <búsqueda>"
-	},
 	"wiki": {
 		"name": "wiki / wikipedia",
 		"group": "Ocio",
