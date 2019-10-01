@@ -85,7 +85,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('guildMemberRemove', member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'lobby');
+	const channel = member.guild.channels.find(ch => ch.name === 'entradas');
 	if (!channel) return;
 	channel.send(`¡Adios, ${member}! Espero que vuelvas pronto :D`);
 });
