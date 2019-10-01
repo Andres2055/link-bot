@@ -10,7 +10,13 @@ module.exports.run = async (client, message, args) => {
 			"https://imgur.com/jHnLBtE",
 			"https://imgur.com/t/dab/TMukmjp",
 			"https://imgur.com/t/dab/etGSF",
-			"https://imgur.com/t/dab/OOBWy"
+			"https://imgur.com/t/dab/OOBWy",
+			"https://imgur.com/uJzaCZa",
+			"https://imgur.com/qEv0r0b",
+			"https://imgur.com/pHcQatO",
+			"https://imgur.com/lVIJ78H",
+			"https://imgur.com/10IfLwb",
+			"https://imgur.com/xvNBztp",
 		]
 
 	const dabNum = 1 + Math.floor(Math.random() * (imgs.length - 1));
