@@ -4,14 +4,12 @@ const fs = require('fs');
 //const antispam = require("antispam-discord")
 const config = require("./Storage/config.json");
 
-/* Deviroment Variables */
-
+/* Environment Variables */
 const PREFIX = config['PREFIX'] || process.env.PREFIX
 const TOKEN = config['TOKEN'] || process.env.TOKEN
 const SCPDIARY_TIME = config["SCPDIARY_TIME"] || 60000
 
-/* Deviroment Variables */
-/* Commands */
+var jsfile = [];
 
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
@@ -19,7 +17,7 @@ client.aliases = new Discord.Collection()
 fs.readdir("./Commands/", (err, files) => {
 	if (err) console.log(err);
 
-	let jsfile = files.filter(f => f.split(".").pop() === "js");
+	jsfile = files.filter(f => f.split(".").pop() === "js");
 	if (jsfile.length <= 0) {
 		return console.log(">>> No se encontraron comandos");
 	}
@@ -32,6 +30,7 @@ fs.readdir("./Commands/", (err, files) => {
 			client.aliases.set(alias, props.help.name)
 		})
 	});
+	console.log(`Todos los comandos cargados`)
 });
 
 /* Commands */
@@ -97,7 +96,7 @@ client.on('guildBanAdd', (guild, user) => {
 });
 
 client.on("message", message => {
-	if(message.channel.type != "dm") {
+	if(message.channel.type != "dm") { //fixme: Necesitamos este bloque de código?
 		/* pasan cosas raras, pero ya no se le necesita
 		const isMuted = message.member.roles.find(rol => rol.name.toLowerCase() == "muted")
 		if (isMuted) {
@@ -142,7 +141,6 @@ client.on("message", message => {
 				theOrangutan(orangutan),
 				'* lo lame *'
 			]
-
 			message.channel.send(preSendMsg[msgNum2])
 		}
 	}
@@ -166,10 +164,10 @@ client.on("message", message => {
 	}
 
 	if (!message.author.bot) {
+		if (!message.content.startsWith(PREFIX)) return;
 		let messageArray = message.content.split(/ +/g);
 		let cmd = messageArray[0].toLowerCase();
 		let args = messageArray.slice(1)
-		if (!message.content.startsWith(PREFIX)) return;
 		/*if(isOcio(cmd.slice(PREFIX.length)) && message.channel.type != "dm") {
 			if(cooldown[message.author.id]) {
 				cooldown[message.author.id][0] += 1;
@@ -207,7 +205,7 @@ client.on("message", message => {
 		let commandFile = commandsName || aliasesName;
 
 		if (commandFile) { 
-			if(checkIt(cmd.slice(PREFIX.length))) { msgR(); }
+			if(jsfile.includes(cmd.slice(PREFIX.length))) { msgR(); }
 			commandFile.run(client, message, args);
 		} else {
 			message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
@@ -223,5 +221,3 @@ try {
 } catch (err) {
 	console.log(err)
 }
-
-/* Login */

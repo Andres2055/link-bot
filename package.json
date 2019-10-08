@@ -1,7 +1,7 @@
 {
-  "name": "Linker-bot",
-  "version": "0.5.3",
-  "description": "A simple NodeJS Discord bot",
+  "name": "estiben_bot",
+  "version": "1.0.0",
+  "description": "El bot oficial del sitio-34",
   "engines": {
     "node": "10.x"
   },
@@ -10,9 +10,10 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@discordjs/uws": "^10.149.0",
     "discord.js": "^11.4.2",
-    "flickrapi": "^0.6.0",
     "fs": "0.0.1-security",
+    "mathjs": "^6.2.3",
     "scpper.js": "^3.0.3",
     "wikijs": "^4.11.1"
   },

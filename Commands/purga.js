@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) => {
 	message.delete();
 
 	if (!message.member.roles.find("name", "director")) {
-		message.channel.send('No eres tu, soy yo. Si no eres "director" no podemos tener nada.');
+		message.channel.send('No eres tú, soy yo. Si no eres "director" no podemos tener nada u-u.');
 		return;
 	}
 
