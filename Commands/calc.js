@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const math = require("mathjs");
+const math = require("mathjs"); // librería para cálculo simbólico
 
 module.exports.run = async (client, message, args) => {
 	var expresion = args.join(" ");
