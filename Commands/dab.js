@@ -23,7 +23,8 @@ module.exports.run = async (client, message, args) => {
 	message.channel.send(imgs[dabNum])
 }
 
-module.exports.help = {
+module.exports.config = {
 	name: "dab",
-	aliases: []
+	aliases: [],
+	activo : true
 }

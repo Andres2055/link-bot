@@ -19,12 +19,13 @@ module.exports.run = async (client, message, args) => {
 			.setTitle(`Resultado`)
 			.setAuthor(message.author.username, message.author.displayAvatarURL)
 			.setColor("BD1800")
-			.setDescription(`Lo siento, no entendí la expresión`);
+			.setDescription(`Lo siento, no entendí la expresión. Recuerda usar punto para separar decimales`);
 		message.channel.send({ embed });
 	};
 }
 
-module.exports.help = {
+module.exports.config = {
 	name: "calc",
-	aliases: ["calcular", "clc"]
+	aliases: ["calcular", "clc"],
+	activo : true
 }

@@ -135,7 +135,8 @@ module.exports.run = async (client, message, args) => {
 	}
 }
 
-module.exports.help = {
+module.exports.config = {
 	name: "help",
-	aliases: ["h", "ayuda"]
+	aliases: ["h", "ayuda"],
+	activo : true
 }

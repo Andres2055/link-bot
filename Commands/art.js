@@ -32,7 +32,8 @@ module.exports.run = async (client, message, args) => {
 	}).catch(err => console.log("Hubo un error de tipo: " + err));	
 }
 
-module.exports.help = {
+module.exports.config = {
 	name: "art",
-	aliases: ["r"]
+	aliases: ["r"],
+	activo : false
 }

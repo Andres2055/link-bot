@@ -25,7 +25,8 @@ module.exports.run = async (client, message, args) => {
 		.catch(error => message.channel.send(`Error: ${error}`));
 }
 
-module.exports.help = {
+module.exports.config = {
 	name: "purga",
-	aliases: ["delet", "elim"]
+	aliases: ["delet", "elim"],
+	activo : true
 }

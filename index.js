@@ -22,12 +22,12 @@ fs.readdir("./Commands/", (err, files) => {
 		return console.log(">>> No se encontraron comandos");
 	}
 
-	jsfile.forEach((f, i) => {
+	jsfile.forEach(f => {
 		let props = require(`./Commands/${f}`)
 		console.log(`¡${f} cargado!`)
-		client.commands.set(props.help.name, props)
-		props.help.aliases.forEach(alias => {
-			client.aliases.set(alias, props.help.name)
+		client.commands.set(props.config.name, props)
+		props.config.aliases.forEach(alias => {
+			client.aliases.set(alias, props.config.name)
 		})
 	});
 	console.log(`Todos los comandos cargados`)
@@ -56,11 +56,11 @@ setInterval(() => {
 
 client.on("ready", () => {
 	console.log("¡Estoy listo!");
-	var msgActivity = ["Cada !help cura mi depresión", 
-						"Un !help es igual a un abrazo", 
-						"Necesitas el !help tanto como yo a ti",
-						"Lo hago porque te quiero", 
-						"!help, ¡HELP! ¡HELP ME!"];
+	var msgActivity = ["Cada !help cura mi depresión",
+		"Un !help es igual a un abrazo",
+		"Necesitas el !help tanto como yo a ti",
+		"Lo hago porque te quiero",
+		"!help, ¡HELP! ¡HELP ME!"];
 
 	var msgNum = Math.floor(Math.random() * msgActivity.length);
 
@@ -68,7 +68,7 @@ client.on("ready", () => {
 	setInterval(() => {
 		msgNum = Math.floor(Math.random() * msgActivity.length);
 		client.user.setActivity(msgActivity[msgNum]);
-	}, SCPDIARY_TIME*24)
+	}, SCPDIARY_TIME * 24)
 
 	const scpDiary = require('./scpDiary.js')
 	setInterval(() => {
@@ -96,7 +96,7 @@ client.on('guildBanAdd', (guild, user) => {
 });
 
 client.on("message", message => {
-	if(message.channel.type != "dm") { //fixme: Necesitamos este bloque de código?
+	if (message.channel.type != "dm") { //fixme: Necesitamos este bloque de código?
 		/* pasan cosas raras, pero ya no se le necesita
 		const isMuted = message.member.roles.find(rol => rol.name.toLowerCase() == "muted")
 		if (isMuted) {
@@ -115,7 +115,7 @@ client.on("message", message => {
 	var msgR = () => { //%10 de que salga
 		let msgNum = 1 + Math.floor(Math.random() * 10);
 		console.log(msgNum)
-		if (msgNum != 10) {} else {
+		if (msgNum != 10) { } else {
 			let msgNum2 = Math.floor(Math.random() * 9);
 			let orangutan = Math.floor(Math.random() * 9);
 
@@ -145,10 +145,11 @@ client.on("message", message => {
 		}
 	}
 
+	/* Declarar un arreglo global con todos los comando y usar la función includes es más eficiente
 	var checkIt = (to_check_cmd) => {
 		const alert = ["scp", "scpr", "user", "autor", "art", "artr", "tag", "etiq"]
 		for (let i = 0; i < alert.length; i++) {
-			if(to_check_cmd == alert[i]) {
+			if (to_check_cmd == alert[i]) {
 				return true;
 			}
 		}
@@ -157,11 +158,11 @@ client.on("message", message => {
 	var isOcio = (ocio_cmd) => {
 		const alert = ["bola8", "b8", "8b", "img", "f"]
 		for (let i = 0; i < alert.length; i++) {
-			if(ocio_cmd == alert[i]) {
+			if (ocio_cmd == alert[i]) {
 				return true;
 			}
 		}
-	}
+	}*/
 
 	if (!message.author.bot) {
 		if (!message.content.startsWith(PREFIX)) return;
@@ -199,14 +200,17 @@ client.on("message", message => {
 		if(cooldown[message.author.id][1] != 0) {
 			console.log("nope")
 			return;
-		}*/ 
+		}*/
 		let commandsName = client.commands.get(cmd.slice(PREFIX.length));
 		let aliasesName = client.commands.get(client.aliases.get(cmd.slice(PREFIX.length)));
 		let commandFile = commandsName || aliasesName;
-
-		if (commandFile) { 
-			if(jsfile.includes(cmd.slice(PREFIX.length))) { msgR(); }
-			commandFile.run(client, message, args);
+		if (commandFile) {
+			if (commandFile.config.activo) {
+				if (jsfile.includes(cmd.slice(PREFIX.length))) { msgR(); }
+				commandFile.run(client, message, args);
+			} else {
+				message.channel.send(`Ese comando ha sido desactivado. F`);
+			}
 		} else {
 			message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 		}
