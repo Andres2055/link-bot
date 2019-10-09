@@ -29,5 +29,6 @@ module.exports.config = {
 	name: "purga",
 	aliases: ["delet", "elim"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "ADMIN"
 }

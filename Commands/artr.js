@@ -25,5 +25,6 @@ module.exports.config = {
 	name: "artr",
 	aliases: ["rr"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

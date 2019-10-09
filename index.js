@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
 const config = require("./Storage/config.json");
+const grupos = require("./Storage/config.json").COMMMAND_GROUPS;
 //const antispam = require("antispam-discord")
 
 /* Environment Variables */
@@ -75,7 +76,7 @@ client.on('guildBanAdd', (guild, user) => {
 });
 
 client.on("message", message => {
-	
+
 	var msgR = () => { //%10 de que salga
 		let msgNum = 1 + Math.floor(Math.random() * 10);
 		console.log(msgNum)
@@ -109,10 +110,18 @@ client.on("message", message => {
 		}
 	}
 
+	var validarPermisos = (message, comando) => {
+		let v = false;
+		grupos[comando.config.grupo].ROLES.forEach(rol => {
+			if (message.member.roles.some(role => role.name === rol)) { v = true; }
+		});
+		return v;
+	}
+
 	if (!message.author.bot) {
 		if (!message.content.startsWith(PREFIX)) return;
 		let messageArray = message.content.split(/ +/g);
-		let cmd = messageArray[0].toLowerCase();
+		let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
 		let args = messageArray.slice(1)
 		/*if(isOcio(cmd.slice(PREFIX.length)) && message.channel.type != "dm") {
 			if(cooldown[message.author.id]) {
@@ -120,10 +129,10 @@ client.on("message", message => {
 			} else if(!cooldown[message.author.id]) {
 				cooldown[message.author.id] = [1, 0, 0]
 			}
-
+	
 			console.log("------------\n", cooldown)
-
-
+	
+	
 			if(cooldown[message.author.id][0] == 10) {
 				console.log("¡shut up!")
 				cooldown[message.author.id][0] = 0;
@@ -146,11 +155,16 @@ client.on("message", message => {
 			console.log("nope")
 			return;
 		}*/
-		let commandsName = client.commands.get(cmd.slice(PREFIX.length));
-		let aliasesName = client.commands.get(client.aliases.get(cmd.slice(PREFIX.length)));
+		let commandsName = client.commands.get(cmd);
+		let aliasesName = client.commands.get(client.aliases.get(cmd));
 		let commandFile = commandsName || aliasesName;
 		if (commandFile) {
 			if (commandFile.config.activo) {
+				console.log("final" + validarPermisos(message, commandFile));
+				if (!validarPermisos(message, commandFile)) {
+					message.channel.send(`Lo siento ${message.member} pero no tienes permiso para usar este comando`);
+					return
+				}
 				if (jsfile.includes(cmd.slice(PREFIX.length))) { msgR(); }
 				commandFile.run(client, message, args);
 			} else {

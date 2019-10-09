@@ -44,5 +44,6 @@ module.exports.config = {
 	name: "scp",
 	aliases: [],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

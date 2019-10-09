@@ -28,5 +28,6 @@ module.exports.config = {
 	name: "calc",
 	aliases: ["calcular", "clc"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

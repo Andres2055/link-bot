@@ -25,5 +25,6 @@ module.exports.config = {
 	name: "wiki",
 	aliases: ["wikipedia"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

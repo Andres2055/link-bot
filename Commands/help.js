@@ -139,5 +139,6 @@ module.exports.config = {
 	name: "help",
 	aliases: ["h", "ayuda"],
 	activo : true,
-	configurable: false
+	configurable: false,
+	grupo: "GENERAL"
 }

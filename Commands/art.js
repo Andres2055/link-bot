@@ -36,5 +36,6 @@ module.exports.config = {
 	name: "art",
 	aliases: ["r"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

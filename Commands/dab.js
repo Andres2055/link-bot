@@ -27,5 +27,6 @@ module.exports.config = {
 	name: "dab",
 	aliases: [],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

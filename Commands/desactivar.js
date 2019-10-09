@@ -25,5 +25,6 @@ module.exports.config = {
     name: "desactivar",
     aliases: ["dact", "deactivate"],
     activo: true,
-    configurable: false
+    configurable: false,
+    grupo: "ADMIN"
 }

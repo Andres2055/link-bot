@@ -13,15 +13,17 @@
 		"GENERAL": {
 			"GROUP": "GENERAL",
 			"ROLES": [
-				"miembros",
-				"everyone"
+				"Miembros",
+				"@everyone"
 			]
 		},
 		"ADMIN": {
 			"GROUP": "ADMIN",
 			"ROLES": [
-				"miembros",
-				"everyone"
+				"Admin",
+				"Moderadores",
+				"director", 
+				"Junio Staff"
 			]
 		}
 	}

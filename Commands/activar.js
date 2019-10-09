@@ -25,5 +25,6 @@ module.exports.config = {
     name: "activar",
     aliases: ["act", "activate"],
     activo: true,
-    configurable: false
+    configurable: false, 
+    grupo: "ADMIN"
 }

@@ -26,5 +26,6 @@ module.exports.config = {
 	name: "user",
 	aliases: ["autor"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

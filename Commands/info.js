@@ -22,5 +22,6 @@ module.exports.config = {
 	name: "info",
 	aliases: ["inf"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

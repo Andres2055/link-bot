@@ -50,5 +50,6 @@ module.exports.config = {
 	name: "tag",
 	aliases: ["etiq"],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }

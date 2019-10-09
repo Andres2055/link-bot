@@ -34,5 +34,6 @@ module.exports.config = {
 	name: "scpr",
 	aliases: [],
 	activo : true,
-	configurable: true
+	configurable: true,
+	grupo: "GENERAL"
 }
