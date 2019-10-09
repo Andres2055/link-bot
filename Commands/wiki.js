@@ -24,5 +24,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.config = {
 	name: "wiki",
 	aliases: ["wikipedia"],
-	activo : true
+	activo : true,
+	configurable: true
 }

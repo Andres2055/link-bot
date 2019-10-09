@@ -1,11 +1,28 @@
 {
 	"PREFIX": "!",
 	"SCPDIARY_TIME": 60000,
-	"VERSION": 
-	{
-		"major": 0, 
-		"minor": 5, 
+	"VERSION": {
+		"major": 0,
+		"minor": 5,
 		"micro": 4,
 		"build": "beta"
+	},
+	"CHANNEL_WELCOME": "lobby",
+	"CHANNEL_FARAWELL": "entradas",
+	"COMMMAND_GROUPS": {
+		"GENERAL": {
+			"GROUP": "GENERAL",
+			"ROLES": [
+				"miembros",
+				"everyone"
+			]
+		},
+		"ADMIN": {
+			"GROUP": "ADMIN",
+			"ROLES": [
+				"miembros",
+				"everyone"
+			]
+		}
 	}
 }

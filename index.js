@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
-//const antispam = require("antispam-discord")
 const config = require("./Storage/config.json");
+//const antispam = require("antispam-discord")
 
 /* Environment Variables */
 const PREFIX = config['PREFIX'] || process.env.PREFIX
@@ -33,27 +33,6 @@ fs.readdir("./Commands/", (err, files) => {
 	console.log(`Todos los comandos cargados`)
 });
 
-/* Commands */
-/* Anti Spam */
-
-/*let cooldown = {};
-
-setInterval(() => {
-	if(!cooldown) return;
-	for(let x in cooldown) {
-		now = Date.now()
-		console.log(">>>", cooldown)
-		console.log(cooldown[x][1] - 30000)
-		console.log((cooldown[x][1] - 30000) < now)
-		if((cooldown[x][1] - 30000) < now) {
-			cooldown[x][1] = 0;
-		}
-	}
-}, 10000)*/
-
-/* Anti Spam */
-/* Client */
-
 client.on("ready", () => {
 	console.log("¡Estoy listo!");
 	var msgActivity = ["Cada !help cura mi depresión",
@@ -78,40 +57,25 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'lobby');
+	const channel = member.guild.channels.find(ch => ch.name === config.CHANNEL_WELCOME);
 	if (!channel) return;
 	channel.send(`¡Heya ${member}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
 });
 
 client.on('guildMemberRemove', member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'entradas');
+	const channel = member.guild.channels.find(ch => ch.name === config.CHANNEL_FARAWELL);
 	if (!channel) return;
 	channel.send(`¡Adios, ${member}! Espero que vuelvas pronto :D`);
 });
 
 client.on('guildBanAdd', (guild, user) => {
-	const channel = guild.channels.find(ch => ch.name === 'entradas');
+	const channel = guild.channels.find(ch => ch.name === config.CHANNEL_FARAWELL);
 	if (!channel) return;
 	channel.send(`${user.tag} ha sido baneado`);
 });
 
 client.on("message", message => {
-	if (message.channel.type != "dm") { //fixme: Necesitamos este bloque de código?
-		/* pasan cosas raras, pero ya no se le necesita
-		const isMuted = message.member.roles.find(rol => rol.name.toLowerCase() == "muted")
-		if (isMuted) {
-			message.delete()
-				.then(msg => console.log(`Mensaje de ${msg.author.username} borrado`))
-				.catch(console.error)
-			return;
-		}*/
-
-		/*let adv_roles = {}
-		adv_roles["n1"] = message.member.guild.roles.find(rol => rol.name === 'Advertencia de Nivel 1')
-		adv_roles["n2"] = message.member.guild.roles.find(rol => rol.name === 'Advertencia de Nivel 2')
-		adv_roles["muted"] = message.member.guild.roles.find(rol => rol.name === 'Muted')*/
-	}
-
+	
 	var msgR = () => { //%10 de que salga
 		let msgNum = 1 + Math.floor(Math.random() * 10);
 		console.log(msgNum)
@@ -144,25 +108,6 @@ client.on("message", message => {
 			message.channel.send(preSendMsg[msgNum2])
 		}
 	}
-
-	/* Declarar un arreglo global con todos los comando y usar la función includes es más eficiente
-	var checkIt = (to_check_cmd) => {
-		const alert = ["scp", "scpr", "user", "autor", "art", "artr", "tag", "etiq"]
-		for (let i = 0; i < alert.length; i++) {
-			if (to_check_cmd == alert[i]) {
-				return true;
-			}
-		}
-	}
-
-	var isOcio = (ocio_cmd) => {
-		const alert = ["bola8", "b8", "8b", "img", "f"]
-		for (let i = 0; i < alert.length; i++) {
-			if (ocio_cmd == alert[i]) {
-				return true;
-			}
-		}
-	}*/
 
 	if (!message.author.bot) {
 		if (!message.content.startsWith(PREFIX)) return;

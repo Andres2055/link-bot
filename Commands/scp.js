@@ -43,5 +43,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.config = {
 	name: "scp",
 	aliases: [],
-	activo : true
+	activo : true,
+	configurable: true
 }

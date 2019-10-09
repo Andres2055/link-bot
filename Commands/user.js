@@ -25,5 +25,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.config = {
 	name: "user",
 	aliases: ["autor"],
-	activo : true
+	activo : true,
+	configurable: true
 }

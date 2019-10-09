@@ -49,5 +49,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.config = {
 	name: "tag",
 	aliases: ["etiq"],
-	activo : true
+	activo : true,
+	configurable: true
 }

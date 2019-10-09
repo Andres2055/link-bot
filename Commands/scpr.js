@@ -33,5 +33,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.config = {
 	name: "scpr",
 	aliases: [],
-	activo : true
+	activo : true,
+	configurable: true
 }

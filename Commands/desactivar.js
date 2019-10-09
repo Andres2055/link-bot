@@ -6,23 +6,24 @@ module.exports.run = async (client, message, args) => {
     let aliasesName = client.commands.get(client.aliases.get(command));
     let commandFile = commandsName || aliasesName;
     if (commandFile) {
-        if (commandFile.name == this.config.name) {
-            message.channel.send(`No puedes cambiar la configuración de este comando ¿Qué pretendes? -___-`);
-        } else {
+        if (commandFile.config.configurable) {
             if (!commandFile.config.activo) {
                 message.channel.send(`Este comando ya está desactivado -___-`);
             } else {
                 commandFile.config.activo = false;
                 message.channel.send(`**${commandFile.config.name}** fue desactivado _press F_`);
             }
+        } else {
+            message.channel.send(`No puedes cambiar la configuración de este comando ¿Qué pretendes? -___-`);
         }
     } else {
-        message.channel.send(`Uh, ese comando no existe wn`);
+        message.channel.send(`Uh, el comando **${command}** no existe wn`);
     }
 }
 
 module.exports.config = {
     name: "desactivar",
     aliases: ["dact", "deactivate"],
-    activo: true
+    activo: true,
+    configurable: false
 }

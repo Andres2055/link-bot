@@ -13,5 +13,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.config = {
 	name: "f",
 	aliases: ["pay"],
-	activo : true
+	activo : true,
+	configurable: true
 }

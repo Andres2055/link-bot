@@ -27,5 +27,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.config = {
 	name: "calc",
 	aliases: ["calcular", "clc"],
-	activo : true
+	activo : true,
+	configurable: true
 }
