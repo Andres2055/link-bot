@@ -4,7 +4,7 @@ const api = new Scpper.Scpper({ site: 'es' });
 
 const all = require('./utils/allUNeed.js')
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	rran = api.findTag('relato', { random: true })
 
 	rran.then(function(value) {
@@ -26,5 +26,6 @@ module.exports.config = {
 	aliases: ["rr"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL"
+	grupo: "GENERAL",
+	mensaje_espera : true
 }

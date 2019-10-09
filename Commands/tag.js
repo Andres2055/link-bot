@@ -4,7 +4,7 @@ const api = new Scpper.Scpper({ site: 'es' });
 
 const all = require('./utils/allUNeed.js')
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	site = args.pop();
 
 	if (all.checkBranch(site)) {} 
@@ -51,5 +51,6 @@ module.exports.config = {
 	aliases: ["etiq"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL"
+	grupo: "GENERAL",
+	mensaje_espera : true
 }

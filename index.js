@@ -160,13 +160,12 @@ client.on("message", message => {
 		let commandFile = commandsName || aliasesName;
 		if (commandFile) {
 			if (commandFile.config.activo) {
-				console.log("final" + validarPermisos(message, commandFile));
 				if (!validarPermisos(message, commandFile)) {
 					message.channel.send(`Lo siento ${message.member} pero no tienes permiso para usar este comando`);
 					return
 				}
-				if (jsfile.includes(cmd.slice(PREFIX.length))) { msgR(); }
-				commandFile.run(client, message, args);
+				if (commandFile.config.mensaje_espera) { msgR(); }//fixme mandar mensaje cuando sea un comando de SCP
+				commandFile(client, message, args);
 			} else {
 				message.channel.send(`Ese comando ha sido desactivado. F`);
 			}

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	const imgs = [ "",
 			"https://imgur.com/fMnphdh", 
 			"https://imgur.com/5R5CGat", 

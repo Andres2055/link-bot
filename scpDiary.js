@@ -17,7 +17,7 @@ var getChannel = (client) => {
 module.exports.postSCPDiary = client => {
 	const date = new Date();
 	const dateString = `${date.getUTCHours()}:${date.getUTCMinutes()}`
-	console.log(dateString)
+	//console.log(dateString)
 	
 	if(dateString == "12:0") {
 		const channel = getChannel(client);
@@ -86,6 +86,6 @@ module.exports.postSCPDiary = client => {
 		})
 		.catch(err => console.log('taleESDiary' + err));
 	} else {
-		console.log('Aún no es hora');
+		//console.log('Aún no es hora');
 	};
 };

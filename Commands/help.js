@@ -11,7 +11,7 @@ const checkMD = message => {
 	}
 }
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	if (args.length === 0) {
 
 		const embed = new Discord.RichEmbed()

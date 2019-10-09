@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
-    var command = args[0].toString().trim();
+module.exports = async (client, message, args) => {
+    var command = args[0].toString().trim().toLowerCase();
     let commandsName = client.commands.get(command);
     let aliasesName = client.commands.get(client.aliases.get(command));
     let commandFile = commandsName || aliasesName;

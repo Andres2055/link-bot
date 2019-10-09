@@ -4,7 +4,7 @@ const api = new Scpper.Scpper({ site: 'es' });
 
 const all = require('./utils/allUNeed.js')
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	args.push('-')
 	query = args.slice(0, -1).join("-")
 
@@ -27,5 +27,6 @@ module.exports.config = {
 	aliases: ["autor"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL"
+	grupo: "GENERAL",
+	mensaje_espera : true
 }

@@ -4,7 +4,7 @@ const api = new Scpper.Scpper({ site: 'es' });
 
 const all = require('./utils/allUNeed.js')
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	console.log(args)
 	if (args.length === 2) {
 		site = args[0]		
@@ -45,5 +45,6 @@ module.exports.config = {
 	aliases: [],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL"
+	grupo: "GENERAL",
+	mensaje_espera : true
 }

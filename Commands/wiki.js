@@ -13,7 +13,7 @@ var toCapitalize = array => {
 	return strCapitalized;
 }
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	const searchWiki = Wiki({ apiUrl: `https://es.wikipedia.org/w/api.php` });
 
 	searchWiki.page(toCapitalize(args)).then(page => {

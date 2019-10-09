@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
 	message.delete();
 
 	if (!message.member.roles.find("name", "director")) {

@@ -13,8 +13,12 @@ Segundo intento de bot. Press F to pay respects, bye bye, [Kiwi](http://github.c
 
 - `discord.js`: Para la conexión con la API de Discord. 
 - `scpper.js`: Como conector con la Base de Datos SCPper. Gracias a [HelloEdit](https://github.com/HelloEdit) por crear este maravilloso paquete.
+- `mathjs`: Como librería de cálculo simbólico para el comando calc.
 
 ## TODO
 
 - [ ] Crear los comandos ``kick`` y ``ban``.
+- [ ] Implementar protocolo antispam de comandos
+- [ ] Estandarizar configuraciones default y métodos de configuración
+- [ ] HAcer configurables los mensajes enviados por Estiben
 - [ ] Implementar comandos de Kiwi en Estiben.
