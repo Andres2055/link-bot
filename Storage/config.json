@@ -8,7 +8,7 @@
 		"build": "beta"
 	},
 	"SERVER" : {
-		"NAME" : "Merlin",
+		"NAME" : "Sitio-34Dev",
 		"CHANNEL_WELCOME": "lobby",
 		"CHANNEL_FARAWELL": "entradas",
 		"CHANNEL_DIARY" : "scpverso",

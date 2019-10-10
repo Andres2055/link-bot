@@ -1,0 +1,47 @@
+module.exports = async (client, message, args) => {
+    const user = message.mentions.users.first();
+    const razon = args.slice(1).join(" ");
+    if (user) {
+        const member = message.guild.member(user);
+        if (member) {
+            if (member.user === message.author) { //valida que no se banear así mismo
+                message.channel.send(`Ba-baka, no puedes banearte a tí mismo ${member.user.username}-sempai `);
+                return
+            }
+            if (member.user.username === client.user.username) { //valida que no intente banear al bot
+                message.channel.send(`Con que queriendo darme Banamex alv. Entrále prro :dagger: `);
+                return
+            }
+            if (!member.bannable) {//valida que el bot tenga permisos para banear al usuario
+                message.channel.send(`jejeje Qué crees? No tengo permisos para banear a este vatillo`);
+                return
+            }
+            if(razon.trim() === "") { //valida que se haya proporcionado una razón de kickeo
+                message.channel.send(`Debes darme una razón para hacerle esto`);
+                return
+            }
+            //Se enviará un mensaje pribado al usuario justo antes de ser baneado para informarle la razón de su baneo
+            await member.send(`Saludos **${member.user.username}** se le informa que ha sido baneado debido a: **${razon}**`);
+            
+            member.ban({reason: razon}).then(() => {
+                message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
+            }).catch(err => {
+                console.log(err);
+                message.channel.send(`No pude darle ban **${member.user.username}** debido a **${err}**. No me mates :c`);
+            })
+        } else {
+            message.channel.send("Ese usuario no se encuentra en el server -__-");
+        }
+    } else {
+        message.channel.send("No has mencionado a ningún usuario para kickear");
+    }
+}
+
+
+module.exports.config = {
+    name: "ban",
+    aliases: ["banear" , "banamex"],
+    activo: true,
+    configurable: false,
+    grupo: "ADMIN"
+}

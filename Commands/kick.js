@@ -1,7 +1,6 @@
 module.exports = async (client, message, args) => {
     const user = message.mentions.users.first();
     const razon = args.slice(1).join(" ");
-    console.log(razon);
     if (user) {
         const member = message.guild.member(user);
         if (member) {
@@ -41,7 +40,7 @@ module.exports = async (client, message, args) => {
 
 module.exports.config = {
     name: "kick",
-    aliases: ["kickear"],
+    aliases: ["kickear", "patear"],
     activo: true,
     configurable: false,
     grupo: "ADMIN"

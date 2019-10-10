@@ -21,11 +21,6 @@ module.exports.postSCPDiary = client => {
 	options_date = {timeZone: config.TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric'};
 	options_time = {timeZone: config.TIME_ZONE, hour12: false, hour: "2-digit", minute : "2-digit"};
 	dateString = date.toLocaleTimeString(config.LOCALE, options_time);
-	//console.log("localDateString: " + date.toLocaleDateString(config.LOCALE, options_date))
-	//console.log("LocalTimeString: " +  date.toLocaleTimeString(config.LOCALE, options_time))
-	//const dateString = `${date.getUTCHours()}:${date.getUTCMinutes()}`
-	//console.log(dateString);
-	const channel = getChannel(client);
 
 	if(dateString == config.HOUR_DIARY) {
 		const channel = getChannel(client);
