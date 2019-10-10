@@ -7,8 +7,16 @@
 		"micro": 4,
 		"build": "beta"
 	},
-	"CHANNEL_WELCOME": "lobby",
-	"CHANNEL_FARAWELL": "entradas",
+	"SERVER" : {
+		"NAME" : "Merlin",
+		"CHANNEL_WELCOME": "lobby",
+		"CHANNEL_FARAWELL": "entradas",
+		"CHANNEL_DIARY" : "scpverso",
+		"TIME_ZONE" : "America/Mexico_City",
+		"LOCALE" : "es-MX",
+		"HOUR_DIARY" : "06:00",
+		"ACTIVITY_INTERVAL" : 25
+	},
 	"COMMMAND_GROUPS": {
 		"GENERAL": {
 			"GROUP": "GENERAL",

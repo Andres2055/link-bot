@@ -48,7 +48,7 @@ client.on("ready", () => {
 	setInterval(() => {
 		msgNum = Math.floor(Math.random() * msgActivity.length);
 		client.user.setActivity(msgActivity[msgNum]);
-	}, SCPDIARY_TIME * 24)
+	}, SCPDIARY_TIME * config.SERVER.ACTIVITY_INTERVAL)
 
 	const scpDiary = require('./scpDiary.js')
 	setInterval(() => {
@@ -58,13 +58,13 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find(ch => ch.name === config.CHANNEL_WELCOME);
+	const channel = member.guild.channels.find(ch => ch.name === config.SERVER.CHANNEL_WELCOME);
 	if (!channel) return;
 	channel.send(`¡Heya ${member}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
 });
 
 client.on('guildMemberRemove', member => {
-	const channel = member.guild.channels.find(ch => ch.name === config.CHANNEL_FARAWELL);
+	const channel = member.guild.channels.find(ch => ch.name === config.SERVER.CHANNEL_FARAWELL);
 	if (!channel) return;
 	channel.send(`¡Adios, ${member}! Espero que vuelvas pronto :D`);
 });

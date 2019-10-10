@@ -1,5 +1,3 @@
-const Discord = require("discord.js");
-
 module.exports = async (client, message, args) => {
     var command = args[0].toString().trim().toLowerCase();
     let commandsName = client.commands.get(command);
@@ -25,6 +23,7 @@ module.exports.config = {
     name: "activar",
     aliases: ["act", "activate"],
     activo: true,
-    configurable: false, 
-    grupo: "ADMIN"
+    configurable: false,
+    grupo: "ADMIN",
+    mensaje_espera : false
 }
