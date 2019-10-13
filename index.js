@@ -77,41 +77,18 @@ client.on('guildBanAdd', (guild, user) => {
 
 client.on("message", message => {
 
-	var msgR = () => { //%10 de que salga
-		let msgNum = 1 + Math.floor(Math.random() * 10);
-		console.log(msgNum)
-		if (msgNum != 10) { } else {
-			let msgNum2 = Math.floor(Math.random() * 9);
-			let orangutan = Math.floor(Math.random() * 9);
-
-			var theOrangutan = (ora) => {
-				return (ora > 7) ? `${orangutanes[ora]} orangután` : `${orangutanes[ora]} orangutanes`
-			}
-
-			var orangutanes = [
-				"Nueve", "Ocho", "Siete",
-				"Seis", "Cinco", "Cuatro",
-				"Tres", "Dos", "Un"
-			]
-
-			var preSendMsg = [
-				"y eso es todo lo que escribí.",
-				`¿Reconoces los cuerpos en el agua, <@${message.author.id}>?`,
-				"Sexando los procedimientos de contención.",
-				"Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.",
-				`Casi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@${message.author.id}>`,
-				"Si me permites... tengo que tomar un ascensor.",
-				"Todos nos hemos reído, pero ya no es gracioso.",
-				`Woowee veh i matate <@${message.author.id}>`,
-				theOrangutan(orangutan),
-				'* lo lame *'
-			]
-			message.channel.send(preSendMsg[msgNum2])
-		}
-	}
-
 	var validarPermisos = (message, comando) => {
 		let v = false;
+		//Si el comando es del grupo General, entonces no es necesario validar roles
+		if (comando.config.grupo == config.SERVER.GENERAL_GROUP) {
+			return true;
+		}
+		//Valida que no se intente usar comandos administrativos por mensaje privado
+		if (config.SERVER.ADMIN_GROUPS.includes(comando.config.grupo) && message.channel.type === "dm") {
+			message.channel.send("Oye, oye, oye, las acciones administrativas van en el canal de #staff (」゜ロ゜)」");
+			return false;
+		}
+		//validación de roles de acuerdo con el grupo correspondiente del comando
 		grupos[comando.config.grupo].ROLES.forEach(rol => {
 			if (message.member.roles.some(role => role.name === rol)) { v = true; }
 		});
@@ -119,61 +96,72 @@ client.on("message", message => {
 	}
 
 	if (!message.author.bot) {
-		if (!message.content.startsWith(PREFIX)) return;
-		let messageArray = message.content.split(/ +/g);
-		let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
-		let args = messageArray.slice(1)
-		/*if(isOcio(cmd.slice(PREFIX.length)) && message.channel.type != "dm") {
-			if(cooldown[message.author.id]) {
-				cooldown[message.author.id][0] += 1;
-			} else if(!cooldown[message.author.id]) {
-				cooldown[message.author.id] = [1, 0, 0]
-			}
-	
-			console.log("------------\n", cooldown)
-	
-	
-			if(cooldown[message.author.id][0] == 10) {
-				console.log("¡shut up!")
-				cooldown[message.author.id][0] = 0;
-				cooldown[message.author.id][1] = Date.now() + 30000;
-				cooldown[message.author.id][2] += 1;
-				console.log(cooldown)
-				if(cooldown[message.author.id][2] == 3) {
-					message.member.addRole(adv_roles.n1)
-				} else if(cooldown[message.author.id][2] == 6) {
-					message.member.removeRole(adv_roles.n1)
-					message.member.addRole(adv_roles.n2)
-				} else if(cooldown[message.author.id][2] > 7) {
-					message.member.removeRole(adv_roles.n2)
-					message.member.addRole(adv_roles.muted)
+		try {
+			if (!message.content.startsWith(PREFIX)) return;
+			let messageArray = message.content.split(/ +/g);
+			let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
+			let args = messageArray.slice(1)
+			
+			let commandsName = client.commands.get(cmd);
+			let aliasesName = client.commands.get(client.aliases.get(cmd));
+			let commandFile = commandsName || aliasesName;
+			if (commandFile) {
+				if (commandFile.config.activo) {
+					if (!validarPermisos(message, commandFile)) {
+						message.channel.send(`Lo siento ${message.author} pero no tienes permiso para usar este comando`);
+						return
+					}
+					if (commandFile.config.mensaje_espera) { msgR(message); }//fixme mandar mensaje cuando sea un comando de SCP
+					commandFile(client, message, args);
+				} else {
+					message.channel.send(`Ese comando ha sido desactivado. F`);
 				}
-			}
-		}
-		console.log(cooldown[message.author.id])
-		if(cooldown[message.author.id][1] != 0) {
-			console.log("nope")
-			return;
-		}*/
-		let commandsName = client.commands.get(cmd);
-		let aliasesName = client.commands.get(client.aliases.get(cmd));
-		let commandFile = commandsName || aliasesName;
-		if (commandFile) {
-			if (commandFile.config.activo) {
-				if (!validarPermisos(message, commandFile)) {
-					message.channel.send(`Lo siento ${message.member} pero no tienes permiso para usar este comando`);
-					return
-				}
-				if (commandFile.config.mensaje_espera) { msgR(); }//fixme mandar mensaje cuando sea un comando de SCP
-				commandFile(client, message, args);
 			} else {
-				message.channel.send(`Ese comando ha sido desactivado. F`);
+				message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 			}
-		} else {
-			message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
+		} catch {
+			error => {
+				console.log("Error: " + error);
+				const guild = client.guilds.find(guild => guild.name === config.NAME);
+				let developer = guild.members.find(mem => mem.name == config.SERVER.DEVELOPER);
+				developer.send(`Oye, acaba de pasar algo en el server ${guild.name} revisa mi log. El error es: ${error}`)
+			}
 		}
 	}
 });
+
+var msgR = (message) => { //%10 de que salga
+	let msgNum = 1 + Math.floor(Math.random() * 10);
+	console.log(msgNum)
+	if (msgNum != 10) { } else {
+		let msgNum2 = Math.floor(Math.random() * 9);
+		let orangutan = Math.floor(Math.random() * 9);
+
+		var theOrangutan = (ora) => {
+			return (ora > 7) ? `${orangutanes[ora]} orangután` : `${orangutanes[ora]} orangutanes`
+		}
+
+		var orangutanes = [
+			"Nueve", "Ocho", "Siete",
+			"Seis", "Cinco", "Cuatro",
+			"Tres", "Dos", "Un"
+		]
+
+		var preSendMsg = [
+			"y eso es todo lo que escribí.",
+			`¿Reconoces los cuerpos en el agua, <@${message.author.id}>?`,
+			"Sexando los procedimientos de contención.",
+			"Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.",
+			`Casi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@${message.author.id}>`,
+			"Si me permites... tengo que tomar un ascensor.",
+			"Todos nos hemos reído, pero ya no es gracioso.",
+			`Woowee veh i matate <@${message.author.id}>`,
+			theOrangutan(orangutan),
+			'* lo lame *'
+		]
+		message.channel.send(preSendMsg[msgNum2])
+	}
+}
 
 /* Client */
 /* Login */

@@ -14,13 +14,13 @@ module.exports = async (client, message, args) => {
                     message.channel.send(`Sumimasen no pude quitarle el rol ${role} a ${member.user.username}`);
                 })
             } else {
-                message.channel.send(`El rol ${role_name} no existe no mames`);
+                message.channel.send(`El rol ${role_name} no existe no mames ┐(‘～\` )┌ `);
             }
         } else {
             message.channel.send("Ese usuario no se encuentra en el server -__-");
         }
     } else {
-        message.channel.send("No has mencionado a ningún usuario para retirar un rol");
+        message.channel.send("No has mencionado a ningún usuario para retirar un rol (ノ_<。)");
     }
 }
 

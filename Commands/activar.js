@@ -6,16 +6,16 @@ module.exports = async (client, message, args) => {
     if (commandFile) {
         if (commandFile.config.configurable) {
             if (commandFile.config.activo) {
-                message.channel.send(`Este comando ya está activo -___-`);
+                message.channel.send("Este comando ya está activo (→_→)");
             } else {
                 commandFile.config.activo = true;
-                message.channel.send(`**${commandFile.config.name}** fue activado owo`);
+                message.channel.send(`**${commandFile.config.name}** fue activado ヽ(o w o)ﾉ`);
             }
         } else {
-            message.channel.send(`No puedes cambiar la configuración de este comando ¿Qué pretendes? -___-`);
+            message.channel.send(`No puedes cambiar la configuración de este comando _¿Qué pretendes?_ (＃\`Д\´) `);
         }
     } else {
-        message.channel.send(`Uh, el comando **${command}** no existe wn`);
+        message.channel.send(`Uh, el comando **${command}** no existe (o_O)`);
     }
 }
 

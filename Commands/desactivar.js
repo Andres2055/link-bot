@@ -8,22 +8,22 @@ module.exports = async (client, message, args) => {
     if (commandFile) {
         if (commandFile.config.configurable) {
             if (!commandFile.config.activo) {
-                message.channel.send(`Este comando ya está desactivado -___-`);
+                message.channel.send(`Este comando ya está desactivado (→_→)`);
             } else {
                 commandFile.config.activo = false;
                 message.channel.send(`**${commandFile.config.name}** fue desactivado _press F_`);
             }
         } else {
-            message.channel.send(`No puedes cambiar la configuración de este comando ¿Qué pretendes? -___-`);
+            message.channel.send(`No puedes cambiar la configuración de este comando ¿Qué pretendes? (＃\`Д\´)`);
         }
     } else {
-        message.channel.send(`Uh, el comando **${command}** no existe wn`);
+        message.channel.send(`Uh, el comando **${command}** no existe :eyes:`);
     }
 }
 
 module.exports.config = {
     name: "desactivar",
-    aliases: ["dact", "deactivate"],
+    aliases: ["deact", "deactivate"],
     activo: true,
     configurable: false,
     grupo: "ADMIN"

@@ -1,5 +1,5 @@
 const Branches = {
-	"es": "lafundacionscp",
+	"es": "scp-es",
 	"en": "scp-wiki",
 	"ru": "scpfoundation.ru",
 	"ko": "ko.scp-wiki.net",

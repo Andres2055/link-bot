@@ -43,7 +43,10 @@ module.exports = async (client, message, args) => {
 			.setColor(all.checkSiteColor(site))
 
 		message.channel.send({ embed });
-	}).catch(err =>console.log("Hubo un error de tipo: " + err));
+	}).catch(err => {
+		console.log("Hubo un error de tipo: " + err);
+		message.channel.send("Σ(°△°|||)  hay problema consultado a Scpper, inténtalo luego");
+	});
 }
 
 module.exports.config = {

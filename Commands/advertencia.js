@@ -1,7 +1,7 @@
 const config_server = require("../Storage/config.json").SERVER;
 
 module.exports = async (client, message, args) => {
-    let rol = client.commands.get("rol");
+    const rol = client.commands.get("rol");
     if (rol  && rol.config.activo) {
         const user = message.mentions.users.first();
         if (user) {
@@ -15,7 +15,7 @@ module.exports = async (client, message, args) => {
                         //Si ya tiene toca poner mute
                         let mute = member.roles.find(rol => rol.name.toLowerCase() == config_server["MUTED"].toLowerCase());
                         if(mute){
-                            message.channel.send(`El usuario ${member.user.username} ya tiene un mute, hay que tomar otras sanciones`);
+                            message.channel.send(`El usuario ${member.user.username} ya tiene un mute, hay que tomar otras sanciones  (╬ Ò﹏Ó)`);
                         } else {
                             rol(client, message, getMessage(args, config_server["MUTED"]));        
                         }
@@ -26,13 +26,13 @@ module.exports = async (client, message, args) => {
                     rol(client, message, getMessage(args, config_server["ROL_ADVERTENCIA_L1"]));
                 }
             } else {
-                message.channel.send("Ese usuario no se encuentra en el server -__-");
+                message.channel.send("Ese usuario no se encuentra en el server  (￢_￢)");
             }
         } else {
-            message.channel.send("No has mencionado a ningún usuario para agregar una advertencia");
+            message.channel.send("No has mencionado a ningún usuario para agregar una advertencia (ノ_<。) ");
         }
     } else {
-        message.channel.send(`Lo siento, no encontré los comandos de rol, por favor revisa que estén activos`)
+        message.channel.send("Lo siento, no encontré los comandos de rol, por favor revisa que estén activos (*μ_μ)")
     }
 };
 

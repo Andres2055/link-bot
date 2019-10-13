@@ -8,19 +8,19 @@ module.exports = async (client, message, args) => {
         const member = message.guild.member(user);
         if (member) {
             if (member.user === message.author) { //valida que no se banear así mismo
-                message.channel.send(`Ba-baka, no puedes banearte a tí mismo ${member.user.username}-sempai `);
+                message.channel.send(`Ba-baka, no puedes banearte a tí mismo ${member.user.username}-sempai ヽ('﹏')ノ`);
                 return;
             }
             if (member.user.username === client.user.username) { //valida que no intente banear al bot
-                message.channel.send(`Con que queriendo darme Banamex alv. Entrále prro :dagger: `);
+                message.channel.send(`Con que queriendo darme Banamex alv. Entrále prro :dagger: ٩(╬ʘ益ʘ╬)۶ `);
                 return;
             }
             if (!member.bannable) {//valida que el bot tenga permisos para banear al usuario
-                message.channel.send(`jejeje Qué crees? No tengo permisos para banear a este vatillo`);
+                message.channel.send(`jejeje Qué crees? No tengo permisos para banear a este vatillo w(ﾟｏﾟ)w`);
                 return;
             }
             if (razon.trim() === "") { //valida que se haya proporcionado una razón de kickeo
-                message.channel.send(`Debes darme una razón para hacerle esto`);
+                message.channel.send(`Debes darme una razón para hacerle esto  (シ. .)シ`);
                 return;
             }
 
@@ -34,17 +34,17 @@ module.exports = async (client, message, args) => {
                     message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
                 }).catch(err => {
                     console.log(err);
-                    message.channel.send(`No pude darle ban **${member.user.username}** debido a **${err}**. No me mates :c`);
+                    message.channel.send(`No pude darle ban **${member.user.username}** debido a **${err}**. No me mates  m;_ _)m`);
                 })
             } else {
-                message.channel.send(`**${message.author}** no confirmaste el baneo, así que no lo haré `);
+                message.channel.send(`**${message.author}** no confirmaste el baneo, así que no lo haré ┐(‘～\` )┌ `);
                 return
             }
         } else {
-            message.channel.send("Ese usuario no se encuentra en el server -__-");
+            message.channel.send("Ese usuario no se encuentra en el server  (￢_￢)");
         }
     } else {
-        message.channel.send("No has mencionado a ningún usuario para kickear");
+        message.channel.send("No has mencionado a ningún usuario para banear una advertencia (ノ_<。)");
     }
 }
 

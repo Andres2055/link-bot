@@ -11,9 +11,42 @@
 		"desc": "Información sobre mi",
 		"usage": "info"
 	},
-
-
-
+	"activar": {
+		"name": "activar / act / activate",
+		"group": "Admin",
+		"desc": "Activa un comando que esté desactivado, uso para staff",
+		"usage": "activar <nombre del comando>"
+	},
+	"desactivar": {
+		"name": "desactivar / deact / deactivate",
+		"group": "Admin",
+		"desc": "Desactiva un comando que esté desactivado, uso para staff",
+		"usage": "desactiva <nombre del comando>"
+	},
+	"kick": {
+		"name": "kick / kickear / patear",
+		"group": "Admin",
+		"desc": "Kickea a un miembro del server",
+		"usage": "kick <@miembro> <razón>.  El comando envía un mp informando al usuario de su Kick"
+	},
+	"ban": {
+		"name": "ban / banear ",
+		"group": "Admin",
+		"desc": "Banea a un miembro del server",
+		"usage": "ban <@miembro> <razón>. Después de eso se te pedirá confirmación. El comando envía un mp informando al usuario de su baneo"
+	},
+	"rol": {
+		"name": "rol / role / add_role ",
+		"group": "Admin",
+		"desc": "Agregar un rol a miembro del server",
+		"usage": "rol <@miembro> <nombre_rol> | [razón]. El comando guarda en el registro de auditoria la razón"
+	},
+	"unrol": {
+		"name": "unrol / unrole / remove_rol ",
+		"group": "Admin",
+		"desc": "Elimina un rol a miembro del server",
+		"usage": "unrol <@miembro> <nombre_rol> | [razón]. El comando guarda en el registro de auditoria la razón"
+	},
 
 
 	"scp": {
@@ -67,14 +100,19 @@
 		"desc": "Busca artículos en Wikipedia.",
 		"usage": "wikipedia <búsqueda>"
 	},
-
+	"calc": {
+		"name": "calc / calcular / clc",
+		"group": "Ocio",
+		"desc": "Resuelve operaciones matemáticas como sumas, potencias, trigonométricas, determinantes de matrices, etc. Usa punto decimal para separa decimales",
+		"usage": "cacl <expresion>"
+	},
 
 
 
 
 	"purga": {
 		"name": "purga / delet / elim",
-		"group": "Mod",
+		"group": "Admin",
 		"desc": "Elimina mensajes",
 		"usage": "purga <número de mensajes a eliminar>"		
 	}

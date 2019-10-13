@@ -31,6 +31,7 @@
 		]
 	},
 	"SERVER" : {
+		"DEVELOPER" : "Merlin-VI",
 		"NAME" : "Sitio-34Dev",
 		"CHANNEL_WELCOME": "lobby",
 		"CHANNEL_FARAWELL": "entradas",
@@ -41,7 +42,13 @@
 		"ACTIVITY_INTERVAL" : 25,
 		"ROL_ADVERTENCIA_L1" : "Advertencia Nivel 1",
 		"ROL_ADVERTENCIA_L2" : "Advertencia Nivel 2",
-		"MUTED" : "muted"
+		"MUTED" : "muted", 
+		"GENERAL_GROUP" : "GENERAL",
+		"ADMIN_GROUPS" : [
+			"ADMIN",
+			"MODERADORES",
+			"JR_STAFF"
+		]
 	},
 	"COMMMAND_GROUPS": {
 		"GENERAL": {

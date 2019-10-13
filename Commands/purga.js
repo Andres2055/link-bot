@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const roles = require("../Storage/config.json").COMMMAND_GROUPS.ADMIN.ROLES;
 
 module.exports = async (client, message, args) => {
 	message.delete();
 
-	if (!message.member.roles.find("name", "director")) {
+	if (!message.member.roles.find(role => roles.includes(role.name))) {
 		message.channel.send('No eres tú, soy yo. Si no eres "director" no podemos tener nada u-u.');
 		return;
 	}
@@ -14,7 +14,7 @@ module.exports = async (client, message, args) => {
 	}
 
 	if (args[0] > 100) {
-		message.channel.send('Eh, son más de 100 mensajes, ¿qué pretendes hacer?');
+		message.channel.send('Eh, son más de 100 mensajes, ¿qué pretendes hacer?  (ﾟロﾟ) ! ');
 		return;
 	}
 
