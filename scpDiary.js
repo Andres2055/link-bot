@@ -3,35 +3,41 @@ const Scpper = require("scpper.js");
 const all = require('./Commands/utils/allUNeed.js');
 const config = require("./Storage/config.json").SERVER;
 
-const api = new Scpper.Scpper({site: 'es'});
+const api = new Scpper.Scpper({ site: 'es' });
 
 var getChannel = (client) => {
 	try {
 		//console.log(client.guilds);
 		const guild = client.guilds.find(guild => guild.name === config.NAME);
+		/*guild.fetchBans().then(bans => {
+            bans.forEach(user => {
+				console.log(user)
+                console.log(user.username + '#' + user.tag);
+            });
+        });*/
 		const channel = guild['channels'].find(ch => ch.name === config.CHANNEL_DIARY);
 		return channel;
-	} catch(err) {
+	} catch (err) {
 		console.log('Aún no se ha logeado');
 	}
 }
 
 module.exports.postSCPDiary = client => {
 	const date = new Date();
-	options_date = {timeZone: config.TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric'};
-	options_time = {timeZone: config.TIME_ZONE, hour12: false, hour: "2-digit", minute : "2-digit"};
+	options_date = { timeZone: config.TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric' };
+	options_time = { timeZone: config.TIME_ZONE, hour12: false, hour: "2-digit", minute: "2-digit" };
 	dateString = date.toLocaleTimeString(config.LOCALE, options_time);
-
-	if(dateString == config.HOUR_DIARY) {
+	getChannel(client);
+	if (dateString == config.HOUR_DIARY) {
 		const channel = getChannel(client);
 		channel.send('**Estas son las recomendaciones del día:**');
 
 		scpDiary = api.findTag('scp', { random: true });
-		scpESDiary = api.findTag(['+scp', '+es'], { random:true });
-		taleDiary = api.findTag('relato', { random:true });
-		taleESDiary = api.findTag(['+relato', '+es'], { random:true });
+		scpESDiary = api.findTag(['+scp', '+es'], { random: true });
+		taleDiary = api.findTag('relato', { random: true });
+		taleESDiary = api.findTag(['+relato', '+es'], { random: true });
 
-		scpDiary.then(function(value) {
+		scpDiary.then(function (value) {
 			page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
@@ -43,9 +49,9 @@ module.exports.postSCPDiary = client => {
 
 			channel.send({ embed });
 		})
-		.catch(err => console.log('scpDiary' + err));
+			.catch(err => console.log('scpDiary' + err));
 
-		scpESDiary.then(function(value) {
+		scpESDiary.then(function (value) {
 			page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
@@ -57,9 +63,9 @@ module.exports.postSCPDiary = client => {
 
 			channel.send({ embed });
 		})
-		.catch(err => console.log('scpESDiary' + err));
+			.catch(err => console.log('scpESDiary' + err));
 
-		taleDiary.then(function(value) {
+		taleDiary.then(function (value) {
 			page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
@@ -71,9 +77,9 @@ module.exports.postSCPDiary = client => {
 
 			channel.send({ embed });
 		})
-		.catch(err => console.log('taleDiary' + err));
+			.catch(err => console.log('taleDiary' + err));
 
-		taleESDiary.then(function(value) {
+		taleESDiary.then(function (value) {
 			page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
@@ -85,7 +91,7 @@ module.exports.postSCPDiary = client => {
 
 			channel.send({ embed });
 		})
-		.catch(err => console.log('taleESDiary' + err));
+			.catch(err => console.log('taleESDiary' + err));
 	} else {
 		//console.log('Aún no es hora');
 	};

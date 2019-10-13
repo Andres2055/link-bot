@@ -20,7 +20,7 @@ module.exports = async (client, message, args) => {
                 message.channel.send(`Debes darme una razón para hacerle esto`);
                 return
             }
-            //Se enviará un mensaje pribado al usuario justo antes de ser kickeado para informarle la razón de su baneo
+            //Se enviará un mensaje privado al usuario justo antes de ser kickeado para informarle la razón de su baneo
             await member.send(`Saludos **${member.user.username}** se le informa que ha sido kickeado debido a: **${razon}**`);
             
             member.kick(razon).then(() => {

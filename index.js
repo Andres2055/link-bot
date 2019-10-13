@@ -60,13 +60,13 @@ client.on("ready", () => {
 client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find(ch => ch.name === config.SERVER.CHANNEL_WELCOME);
 	if (!channel) return;
-	channel.send(`¡Heya ${member}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
+	channel.send(`¡Heya ${member.user}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
 });
 
 client.on('guildMemberRemove', member => {
 	const channel = member.guild.channels.find(ch => ch.name === config.SERVER.CHANNEL_FARAWELL);
 	if (!channel) return;
-	channel.send(`¡Adios, ${member}! Espero que vuelvas pronto :D`);
+	channel.send(`¡Adios, **${member.user}**! Espero que vuelvas pronto :D`);
 });
 
 client.on('guildBanAdd', (guild, user) => {

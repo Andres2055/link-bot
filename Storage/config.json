@@ -7,6 +7,29 @@
 		"micro": 4,
 		"build": "beta"
 	},
+	"ADMIN": {
+		"R_AFIRMATIVAS" : [
+			"sí",
+			"sis",
+			"si",
+			"claro",
+			"confirmar",
+			"confirmado",
+			"yeah",
+			"dale",
+			"sip"
+		],
+		"R_NEGATIVAS" : [
+			"no",
+			"nel",
+			"ño",
+			"cancelar",
+			"olvidalo",
+			"nop",
+			"perate",
+			"nel prro"
+		]
+	},
 	"SERVER" : {
 		"NAME" : "Sitio-34Dev",
 		"CHANNEL_WELCOME": "lobby",
@@ -15,7 +38,10 @@
 		"TIME_ZONE" : "America/Mexico_City",
 		"LOCALE" : "es-MX",
 		"HOUR_DIARY" : "06:00",
-		"ACTIVITY_INTERVAL" : 25
+		"ACTIVITY_INTERVAL" : 25,
+		"ROL_ADVERTENCIA_L1" : "Advertencia Nivel 1",
+		"ROL_ADVERTENCIA_L2" : "Advertencia Nivel 2",
+		"MUTED" : "muted"
 	},
 	"COMMMAND_GROUPS": {
 		"GENERAL": {
