@@ -27,7 +27,7 @@ module.exports.postSCPDiary = client => {
 	options_date = { timeZone: config.TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric' };
 	options_time = { timeZone: config.TIME_ZONE, hour12: false, hour: "2-digit", minute: "2-digit" };
 	dateString = date.toLocaleTimeString(config.LOCALE, options_time);
-	getChannel(client);
+	//getChannel(client);
 	if (dateString == config.HOUR_DIARY) {
 		const channel = getChannel(client);
 		channel.send('**Estas son las recomendaciones del día:**');
@@ -48,8 +48,10 @@ module.exports.postSCPDiary = client => {
 				.setColor(0x588d9b);
 
 			channel.send({ embed });
-		})
-			.catch(err => console.log('scpDiary' + err));
+		}).catch(err => {
+			console.log('scpDiary' + err),
+			channel.send("Σ(°△°|||)  hay problema consultado a Scpper")
+		});
 
 		scpESDiary.then(function (value) {
 			page = value['data']['pages'][0];
@@ -62,8 +64,10 @@ module.exports.postSCPDiary = client => {
 				.setColor(0x588d9b);
 
 			channel.send({ embed });
-		})
-			.catch(err => console.log('scpESDiary' + err));
+		}).catch(err => {
+			console.log('scpESDiary' + err),
+			channel.send("Σ(°△°|||)  hay problema consultado a Scpper")
+		});
 
 		taleDiary.then(function (value) {
 			page = value['data']['pages'][0];
@@ -76,8 +80,10 @@ module.exports.postSCPDiary = client => {
 				.setColor(0x588d9b);
 
 			channel.send({ embed });
-		})
-			.catch(err => console.log('taleDiary' + err));
+		}).catch(err => {
+			console.log('taleDiary' + err),
+			channel.send("Σ(°△°|||)  hay problema consultado a Scpper")
+		});
 
 		taleESDiary.then(function (value) {
 			page = value['data']['pages'][0];
@@ -90,8 +96,10 @@ module.exports.postSCPDiary = client => {
 				.setColor(0x588d9b);
 
 			channel.send({ embed });
-		})
-			.catch(err => console.log('taleESDiary' + err));
+		}).catch(err => {
+			console.log('taleESDiary' + err),
+			channel.send("Σ(°△°|||)  hay problema consultado a Scpper")
+		});
 	} else {
 		//console.log('Aún no es hora');
 	};
