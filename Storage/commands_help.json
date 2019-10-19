@@ -106,6 +106,12 @@
 		"desc": "Resuelve operaciones matemáticas como sumas, potencias, trigonométricas, determinantes de matrices, etc. Usa punto decimal para separa decimales",
 		"usage": "cacl <expresion>"
 	},
+	"generate": {
+		"name": "generate / gen_scp / scp_generator",
+		"group": "Ocio",
+		"desc": "Genera una idea random para un scp. Gracias a la página https://scp-generator.herokuapp.com",
+		"usage": "generate"
+	},
 
 
 
