@@ -41,7 +41,7 @@
 		"CHANNEL_DIARY" : "scpverso",
 		"TIME_ZONE" : "America/Mexico_City",
 		"LOCALE" : "es-MX",
-		"HOUR_DIARY" : "06:00",
+		"HOUR_DIARY" : "06:30",
 		"ACTIVITY_INTERVAL" : 25,
 		"ROL_ADVERTENCIA_L1" : "Advertencia Nivel 1",
 		"ROL_ADVERTENCIA_L2" : "Advertencia Nivel 2",
