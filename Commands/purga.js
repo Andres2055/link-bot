@@ -30,5 +30,5 @@ module.exports.config = {
 	aliases: ["delet", "elim"],
 	activo : true,
 	configurable: true,
-	grupo: "ADMIN"
+	grupo: "MODERADORES"
 }

@@ -29,5 +29,5 @@ module.exports.config = {
     aliases: ["add_role", "role"],
     activo: true,
     configurable: false,
-    grupo: "ADMIN"
+    grupo: "MODERADORES"
 }

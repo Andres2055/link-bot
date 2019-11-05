@@ -13,5 +13,5 @@ module.exports.config = {
 	aliases: ["pay"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL"
+	grupo: "OCIO"
 }

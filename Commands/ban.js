@@ -71,5 +71,5 @@ module.exports.config = {
     aliases: ["banear", "banamex"],
     activo: true,
     configurable: false,
-    grupo: "ADMIN"
+    grupo: "MODERADORES"
 }

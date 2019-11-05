@@ -7,5 +7,5 @@ module.exports.config = {
     aliases: ["trece", "i-57", "trato"],
     activo: true,
     configurable: false,
-    grupo: "ADMIN"
+    grupo: "OCIO"
 }

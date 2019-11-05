@@ -32,5 +32,5 @@ module.exports.config = {
     aliases: ["gen_scp", "scp_generator"],
     activo: true,
     configurable: true,
-    grupo: "GENERAL"
+    grupo: "OCIO"
 }

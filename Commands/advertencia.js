@@ -46,5 +46,5 @@ module.exports.config = {
     aliases: ["adv", "warn"],
     activo: true,
     configurable: false,
-    grupo: "ADMIN"
+    grupo: "MODERADORES"
 }

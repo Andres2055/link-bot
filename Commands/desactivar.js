@@ -26,5 +26,5 @@ module.exports.config = {
     aliases: ["deact", "deactivate"],
     activo: true,
     configurable: false,
-    grupo: "ADMIN"
+    grupo: "MODERADORES"
 }

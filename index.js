@@ -66,7 +66,7 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
 	const channel = member.guild.channels.find(ch => ch.name === config.SERVER.CHANNEL_FARAWELL);
 	if (!channel) return;
-	channel.send(`¡Adios, **${member.user}**! Espero que vuelvas pronto :D`);
+	channel.send(`¡Adios, **${member.user.username}**! Espero que vuelvas pronto :D`);
 });
 
 client.on('guildBanAdd', (guild, user) => {
@@ -84,10 +84,10 @@ client.on("message", message => {
 			return true;
 		}
 		//Valida que no se intente usar comandos administrativos por mensaje privado
-		if (config.SERVER.ADMIN_GROUPS.includes(comando.config.grupo) && message.channel.type === "dm") {
+		/*if (config.SERVER.ADMIN_GROUPS.includes(comando.config.grupo) && message.channel.type === "dm") {
 			message.channel.send("Oye, oye, oye, las acciones administrativas van en el canal de #staff (」゜ロ゜)」");
 			return false;
-		}
+		}*/
 		//validación de roles de acuerdo con el grupo correspondiente del comando
 		grupos[comando.config.grupo].ROLES.forEach(rol => {
 			if (message.member.roles.some(role => role.name === rol)) { v = true; }
@@ -101,7 +101,7 @@ client.on("message", message => {
 			let messageArray = message.content.split(/ +/g);
 			let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
 			let args = messageArray.slice(1)
-			
+
 			let commandsName = client.commands.get(cmd);
 			let aliasesName = client.commands.get(client.aliases.get(cmd));
 			let commandFile = commandsName || aliasesName;
@@ -119,13 +119,10 @@ client.on("message", message => {
 			} else {
 				message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 			}
-		} catch {
-			error => {
-				console.log("Error: " + error);
-				const guild = client.guilds.find(guild => guild.name === config.NAME);
-				let developer = guild.members.find(mem => mem.name == config.SERVER.DEVELOPER);
-				developer.send(`Oye, acaba de pasar algo en el server ${guild.name} revisa mi log. El error es: ${error}`)
-			}
+		} catch (error) {
+			const guild = client.guilds.find(guild => guild.name == config.SERVER.NAME);
+			let developer = guild.members.find(mem => mem.user.username == config.SERVER.DEVELOPER);
+			developer.send(`Oye, acaba de pasar algo en el server ${guild.name} revisa mi log. El error es: ${error}`)
 		}
 	}
 });

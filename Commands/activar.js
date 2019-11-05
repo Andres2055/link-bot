@@ -24,6 +24,6 @@ module.exports.config = {
     aliases: ["act", "activate"],
     activo: true,
     configurable: false,
-    grupo: "ADMIN",
+    grupo: "MODERADORES",
     mensaje_espera : false
 }
