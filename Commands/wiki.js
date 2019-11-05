@@ -13,7 +13,7 @@ var toCapitalize = array => {
 }
 
 module.exports = async (client, message, args) => {
-	const searchWiki = Wiki({ apiUrl: `https://es.wikipedia.org/w/api.php` });
+	const searchWiki = Wiki({ apiUrl: client.config.get("SERVICES").WIKIPEDIA });
 
 	searchWiki.page(toCapitalize(args)).then(page => {
 		message.channel.send(page["raw"]["fullurl"]);
@@ -28,5 +28,6 @@ module.exports.config = {
 	aliases: ["wikipedia"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL"
+	grupo: "GENERAL",
+	contador : 0
 }

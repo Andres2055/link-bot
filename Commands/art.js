@@ -40,6 +40,6 @@ module.exports.config = {
 	aliases: ["r", "tale"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL",
-	mensaje_espera : true
+	grupo: "SCP",
+	contador : 0
 }

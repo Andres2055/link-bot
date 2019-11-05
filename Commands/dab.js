@@ -28,5 +28,6 @@ module.exports.config = {
 	aliases: [],
 	activo : true,
 	configurable: true,
-	grupo: "OCIO"
+	grupo: "OCIO",
+	contador : 0
 }

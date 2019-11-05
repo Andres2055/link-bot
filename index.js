@@ -1,28 +1,26 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
-const config = require("./Storage/config.json");
-const grupos = require("./Storage/config.json").COMMMAND_GROUPS;
-//const antispam = require("antispam-discord")
+const config_json = new Map(Object.entries(require("./Storage/config.json")));
+const config_var = require("./Storage/config.json");
 
 /* Environment Variables */
-const PREFIX = config['PREFIX'] || process.env.PREFIX
-const TOKEN = config['TOKEN'] || process.env.TOKEN
-const SCPDIARY_TIME = config["SCPDIARY_TIME"] || 60000
+const PREFIX = config_var['PREFIX'] || process.env.PREFIX
+const TOKEN = config_var['TOKEN'] || process.env.TOKEN
+const SCPDIARY_TIME = config_var["SCPDIARY_TIME"] || 60000
 
 var jsfile = [];
 
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
+client.config = new Discord.Collection();
 
 fs.readdir("./Commands/", (err, files) => {
 	if (err) console.log(err);
-
 	jsfile = files.filter(f => f.split(".").pop() === "js");
 	if (jsfile.length <= 0) {
 		return console.log(">>> No se encontraron comandos");
 	}
-
 	jsfile.forEach(f => {
 		let props = require(`./Commands/${f}`)
 		console.log(`¡${f} cargado!`)
@@ -31,7 +29,13 @@ fs.readdir("./Commands/", (err, files) => {
 			client.aliases.set(alias, props.config.name)
 		})
 	});
-	console.log(`Todos los comandos cargados`)
+	console.log("¡Todos los comandos cargados!")
+	for (let [key, value] of config_json.entries()) {
+		console.log(`¡Configuración para ${key} cargada!`)
+		client.config.set(key, value);
+	}
+	console.log("Configuración cargada");
+
 });
 
 client.on("ready", () => {
@@ -48,9 +52,9 @@ client.on("ready", () => {
 	setInterval(() => {
 		msgNum = Math.floor(Math.random() * msgActivity.length);
 		client.user.setActivity(msgActivity[msgNum]);
-	}, SCPDIARY_TIME * config.SERVER.ACTIVITY_INTERVAL)
+	}, SCPDIARY_TIME * client.config.get("SERVER").ACTIVITY_INTERVAL);
 
-	const scpDiary = require('./scpDiary.js')
+	const scpDiary = require('./scpDiary.js');
 	setInterval(() => {
 		scpDiary.postSCPDiary(client)
 	}, SCPDIARY_TIME)
@@ -58,19 +62,19 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find(ch => ch.name === config.SERVER.CHANNEL_WELCOME);
+	const channel = member.guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_WELCOME);
 	if (!channel) return;
 	channel.send(`¡Heya ${member.user}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
 });
 
 client.on('guildMemberRemove', member => {
-	const channel = member.guild.channels.find(ch => ch.name === config.SERVER.CHANNEL_FARAWELL);
+	const channel = member.guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_FARAWELL);
 	if (!channel) return;
 	channel.send(`¡Adios, **${member.user.username}**! Espero que vuelvas pronto :D`);
 });
 
 client.on('guildBanAdd', (guild, user) => {
-	const channel = guild.channels.find(ch => ch.name === config.CHANNEL_FARAWELL);
+	const channel = guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_FARAWELL);
 	if (!channel) return;
 	channel.send(`${user.tag} ha sido baneado`);
 });
@@ -80,16 +84,16 @@ client.on("message", message => {
 	var validarPermisos = (message, comando) => {
 		let v = false;
 		//Si el comando es del grupo General, entonces no es necesario validar roles
-		if (comando.config.grupo == config.SERVER.GENERAL_GROUP) {
+		if (comando.config.grupo == client.config.get("SERVER").GENERAL_GROUP) {
 			return true;
 		}
 		//Valida que no se intente usar comandos administrativos por mensaje privado
-		/*if (config.SERVER.ADMIN_GROUPS.includes(comando.config.grupo) && message.channel.type === "dm") {
+		if (client.config.get("SERVER").ADMIN_GROUPS.includes(comando.config.grupo) && message.channel.type === "dm") {
 			message.channel.send("Oye, oye, oye, las acciones administrativas van en el canal de #staff (」゜ロ゜)」");
 			return false;
-		}*/
+		}
 		//validación de roles de acuerdo con el grupo correspondiente del comando
-		grupos[comando.config.grupo].ROLES.forEach(rol => {
+		client.config.get("COMMMAND_GROUPS")[comando.config.grupo].ROLES.forEach(rol => {
 			if (message.member.roles.some(role => role.name === rol)) { v = true; }
 		});
 		return v;
@@ -107,11 +111,19 @@ client.on("message", message => {
 			let commandFile = commandsName || aliasesName;
 			if (commandFile) {
 				if (commandFile.config.activo) {
+					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
+						console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
+					}
+					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS && commandFile.config.contador >= client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
+						bloqueaComandoSpam(commandFile, message);
+						return
+					}
 					if (!validarPermisos(message, commandFile)) {
 						message.channel.send(`Lo siento ${message.author} pero no tienes permiso para usar este comando`);
 						return
 					}
-					if (commandFile.config.mensaje_espera) { msgR(message); }//fixme mandar mensaje cuando sea un comando de SCP
+					if (commandFile.config.grupo == 'SCP') { msgR(message); }
+					commandFile.config.contador += 1;
 					commandFile(client, message, args);
 				} else {
 					message.channel.send(`Ese comando ha sido desactivado. F`);
@@ -120,12 +132,28 @@ client.on("message", message => {
 				message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 			}
 		} catch (error) {
-			const guild = client.guilds.find(guild => guild.name == config.SERVER.NAME);
-			let developer = guild.members.find(mem => mem.user.username == config.SERVER.DEVELOPER);
-			developer.send(`Oye, acaba de pasar algo en el server ${guild.name} revisa mi log. El error es: ${error}`)
+			console.log("Error no controlado: " + error);
+			console.trace(); //En caso de un error no controlado, se podrá seguir el origen de este
+			const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
+			client.config.get("SERVER").DEVELOPERS.forEach(dev => {
+				let developer = guild.members.find(mem => mem.user.username == dev);
+				if (developer) { developer.send(`Oye, acaba de pasar algo en el server ${guild.name} revisa mi log. El error es: ${error}`) }
+			});
 		}
 	}
 });
+
+var bloqueaComandoSpam = async (commandFile, message) => {
+	message.channel.send(`Se está abusando del comando **${commandFile.config.name}**. El comando será bloqueado temporalmente`);
+	commandFile.config.activo = false;
+	client.setTimeout(() => {
+		commandFile.config.activo = true;
+		commandFile.config.contador = 0;
+		const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
+		const channel = guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_LOG);
+		channel.send(`El comando **${commandFile.config.name}** ha sido reactivado`);
+	}, SCPDIARY_TIME * client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].BLOQUEO_TIME_OUT);
+}
 
 var msgR = (message) => { //%10 de que salga
 	let msgNum = 1 + Math.floor(Math.random() * 10);

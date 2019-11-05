@@ -1,17 +1,15 @@
-const config_server = require("../Storage/config.json").SERVICES;
+//const config_server = require("../Storage/config.json").SERVICES;
 const Discord = require("discord.js");
 const https = require('https');
 
 module.exports = async (client, message, args) => {
-    https.get(config_server.SCP_GENERATOR, (response) => {
+    https.get(client.config.get("SERVICES").SCP_GENERATOR, (response) => {
         let scp_generado = '';
         response.on("data", (dat) => {
             scp_generado += dat;
         })
-        console.log(response.statusCode);
         response.on("end", () => {
             if (response.statusCode == 200) {
-                console.log(scp_generado);
                 const embed = new Discord.RichEmbed()
                     .setDescription(`Hey intenta escribir sobre ${scp_generado}`)
                     .setAuthor(message.author.username, message.author.displayAvatarURL)
@@ -32,5 +30,6 @@ module.exports.config = {
     aliases: ["gen_scp", "scp_generator"],
     activo: true,
     configurable: true,
-    grupo: "OCIO"
+    grupo: "OCIO",
+    contador : 0
 }

@@ -1,12 +1,5 @@
-const roles = require("../Storage/config.json").COMMMAND_GROUPS.ADMIN.ROLES;
-
 module.exports = async (client, message, args) => {
 	message.delete();
-
-	if (!message.member.roles.find(role => roles.includes(role.name))) {
-		message.channel.send('No eres tú, soy yo. Si no eres "director" no podemos tener nada u-u.');
-		return;
-	}
 
 	if (isNaN(args[0])) {
 		message.channel.send('Por favor, usa un número como argumento.');
@@ -30,5 +23,6 @@ module.exports.config = {
 	aliases: ["delet", "elim"],
 	activo : true,
 	configurable: true,
-	grupo: "MODERADORES"
+	grupo: "JR_STAFF",
+	contador : 0
 }

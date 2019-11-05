@@ -9,5 +9,5 @@ module.exports.config = {
 	activo: true,
 	configurable: true,
 	grupo: "OCIO",
-	mensaje_espera: false
+	contador : 0
 }

@@ -1,21 +1,20 @@
 const Discord = require('discord.js');
 const Scpper = require("scpper.js");
 const all = require('./Commands/utils/allUNeed.js');
-const config = require("./Storage/config.json").SERVER;
 
 const api = new Scpper.Scpper({ site: 'es' });
 
 var getChannel = (client) => {
 	try {
 		//console.log(client.guilds);
-		const guild = client.guilds.find(guild => guild.name === config.NAME);
+		const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
 		/*guild.fetchBans().then(bans => {
             bans.forEach(user => {
 				console.log(user)
                 console.log(user.username + '#' + user.tag);
             });
         });*/
-		const channel = guild['channels'].find(ch => ch.name === config.CHANNEL_DIARY);
+		const channel = guild['channels'].find(ch => ch.name === client.config.get("SERVER").CHANNEL_DIARY);
 		return channel;
 	} catch (err) {
 		console.log('Aún no se ha logeado');
@@ -24,11 +23,11 @@ var getChannel = (client) => {
 
 module.exports.postSCPDiary = client => {
 	const date = new Date();
-	options_date = { timeZone: config.TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric' };
-	options_time = { timeZone: config.TIME_ZONE, hour12: false, hour: "2-digit", minute: "2-digit" };
-	dateString = date.toLocaleTimeString(config.LOCALE, options_time);
+	options_date = { timeZone: client.config.get("SERVER").TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric' };
+	options_time = { timeZone: client.config.get("SERVER").TIME_ZONE, hour12: false, hour: "2-digit", minute: "2-digit" };
+	dateString = date.toLocaleTimeString(client.config.get("SERVER").LOCALE, options_time);
 	//getChannel(client);
-	if (dateString == config.HOUR_DIARY) {
+	if (dateString == client.config.get("SERVER").HOUR_DIARY) {
 		const channel = getChannel(client);
 		channel.send('**Estas son las recomendaciones del día:**');
 

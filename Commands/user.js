@@ -29,6 +29,6 @@ module.exports.config = {
 	aliases: ["autor"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL",
-	mensaje_espera : true
+	grupo: "SCP",
+	contador : 0
 }

@@ -29,5 +29,6 @@ module.exports.config = {
 	aliases: ["calcular", "clc"],
 	activo : true,
 	configurable: true,
-	grupo: "GENERAL"
+	grupo: "GENERAL",
+	contador : 0
 }

@@ -140,5 +140,6 @@ module.exports.config = {
 	aliases: ["h", "ayuda"],
 	activo : true,
 	configurable: false,
-	grupo: "GENERAL"
+	grupo: "GENERAL",
+	contador : 0
 }

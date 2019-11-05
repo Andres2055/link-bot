@@ -25,5 +25,5 @@ module.exports.config = {
     activo: true,
     configurable: false,
     grupo: "MODERADORES",
-    mensaje_espera : false
+    contador : 0
 }

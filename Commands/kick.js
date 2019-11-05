@@ -43,5 +43,6 @@ module.exports.config = {
     aliases: ["kickear", "patear"],
     activo: true,
     configurable: false,
-    grupo: "MODERADORES"
+    grupo: "JR_STAFF",
+    contador : 0
 }

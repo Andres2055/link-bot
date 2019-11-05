@@ -1,5 +1,3 @@
-const config_server = require("../Storage/config.json").SERVER;
-
 module.exports = async (client, message, args) => {
     const rol = client.commands.get("rol");
     if (rol  && rol.config.activo) {
@@ -7,23 +5,23 @@ module.exports = async (client, message, args) => {
         if (user) {
             const member = message.guild.member(user);
             if (member) {
-                let advL1 = member.roles.find(rol => rol.name.toLowerCase() == config_server["ROL_ADVERTENCIA_L1"].toLowerCase()); 
+                let advL1 = member.roles.find(rol => rol.name.toLowerCase() == client.config.get("SERVER")["ROL_ADVERTENCIA_L1"].toLowerCase()); 
                 if(advL1){
                     //Si tiene advertencia entonces debemos retirarla y agregar una advertencia nivel 2
-                    let advL2 = member.roles.find(rol => rol.name.toLowerCase() == config_server["ROL_ADVERTENCIA_L2"].toLowerCase());
+                    let advL2 = member.roles.find(rol => rol.name.toLowerCase() == client.config.get("SERVER")["ROL_ADVERTENCIA_L2"].toLowerCase());
                     if(advL2){
                         //Si ya tiene toca poner mute
-                        let mute = member.roles.find(rol => rol.name.toLowerCase() == config_server["MUTED"].toLowerCase());
+                        let mute = member.roles.find(rol => rol.name.toLowerCase() == client.config.get("SERVER")["MUTED"].toLowerCase());
                         if(mute){
                             message.channel.send(`El usuario ${member.user.username} ya tiene un mute, hay que tomar otras sanciones  (╬ Ò﹏Ó)`);
                         } else {
-                            rol(client, message, getMessage(args, config_server["MUTED"]));        
+                            rol(client, message, getMessage(args, client.config.get("SERVER")["MUTED"]));        
                         }
                     } else {
-                        rol(client, message, getMessage(args, config_server["ROL_ADVERTENCIA_L2"]));    
+                        rol(client, message, getMessage(args, client.config.get("SERVER")["ROL_ADVERTENCIA_L2"]));    
                     }
                 } else {
-                    rol(client, message, getMessage(args, config_server["ROL_ADVERTENCIA_L1"]));
+                    rol(client, message, getMessage(args, client.config.get("SERVER")["ROL_ADVERTENCIA_L1"]));
                 }
             } else {
                 message.channel.send("Ese usuario no se encuentra en el server  (￢_￢)");
@@ -46,5 +44,6 @@ module.exports.config = {
     aliases: ["adv", "warn"],
     activo: true,
     configurable: false,
-    grupo: "MODERADORES"
+    grupo: "JR_STAFF",
+    contador : 0
 }

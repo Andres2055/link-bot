@@ -31,14 +31,17 @@
 		]
 	},
 	"SERVICES" : {
-		"SCP_GENERATOR" : "https://scp-generator.herokuapp.com/newscp"
+		"SCP_GENERATOR" : "https://scp-generator.herokuapp.com/newscp", 
+		"WIKIPEDIA" : "https://es.wikipedia.org/w/api.php"
 	},
 	"SERVER" : {
-		"DEVELOPER" : "Merlin-VI",
+		"DEVELOPERS" : ["Merlin-VI"],
+		"_DEVELOPERS" : ["Merlin-VI", "LazyLasagne"],
 		"NAME" : "Sitio-34Dev",
 		"CHANNEL_WELCOME": "lobby",
 		"CHANNEL_FARAWELL": "entradas",
 		"CHANNEL_DIARY" : "scpverso",
+		"CHANNEL_LOG" : "lobby",
 		"TIME_ZONE" : "America/Mexico_City",
 		"LOCALE" : "es-MX",
 		"HOUR_DIARY" : "06:30",
@@ -56,7 +59,7 @@
 	"COMMMAND_GROUPS": {
 		"GENERAL": {
 			"INTERVAL": 60,
-			"NO_USOS" : 100,
+			"NUM_USOS" : 100,
 			"BLOQUEO_TIME_OUT" : 60,
 			"ROLES": [
 				"Miembros",
@@ -65,7 +68,7 @@
 		},
 		"SCP" : {
 			"INTERVAL": 60,
-			"NO_USOS" : 100,
+			"NUM_USOS" : 100,
 			"BLOQUEO_TIME_OUT" : 60,
 			"ROLES": [
 				"Miembros",
@@ -74,8 +77,8 @@
 		},
 		"OCIO" : {
 			"INTERVAL": 60,
-			"NO_USOS" : 50,
-			"BLOQUEO_TIME_OUT" : 60,
+			"NUM_USOS" : 5,
+			"BLOQUEO_TIME_OUT" : 1,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
@@ -85,7 +88,7 @@
 			"ROLES": [
 				"Admin",
 				"Moderadores",
-				"JunioR Staff"
+				"Junior Staff"
 			]
 		},
 		"MODERADORES" : {

@@ -29,5 +29,6 @@ module.exports.config = {
     aliases: ["remove_rol", "unrole"],
     activo: true,
     configurable: false,
-    grupo: "MODERADORES"
+    grupo: "JR_STAFF",
+    contador : 0
 }

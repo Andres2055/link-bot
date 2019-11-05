@@ -1,5 +1,4 @@
 const prompter = require('discordjs-prompter');
-const config_admin = require("../Storage/config.json").ADMIN;
 
 module.exports = async (client, message, args) => {
     const user = message.mentions.users.first();
@@ -24,7 +23,7 @@ module.exports = async (client, message, args) => {
                 return;
             }
 
-            var confirmar = await confirmacion(message, member.user.username, razon);
+            var confirmar = await confirmacion(message, member.user.username, razon, client);
 
             if (confirmar) {
                 //Se enviará un mensaje privado al usuario justo antes de ser baneado para informarle la razón de su baneo
@@ -48,7 +47,7 @@ module.exports = async (client, message, args) => {
     }
 }
 
-const confirmacion = (message, username, razon) => {
+const confirmacion = (message, username, razon, client) => {
     return new Promise((resolve, reject) =>{
         prompter.message(message.channel, {
             question: `Por favor confirma que deseas banear a **${username}** debido a **${razon}** : `,
@@ -60,7 +59,7 @@ const confirmacion = (message, username, razon) => {
                 return resolve(false);
             }
             const response = responses.first()
-            return resolve(config_admin["R_AFIRMATIVAS"].includes(response.toString().toLowerCase().trim()));
+            return resolve(client.config.get("ADMIN")["R_AFIRMATIVAS"].includes(response.toString().toLowerCase().trim()));
         })
     })
 };
@@ -71,5 +70,6 @@ module.exports.config = {
     aliases: ["banear", "banamex"],
     activo: true,
     configurable: false,
-    grupo: "MODERADORES"
+    grupo: "MODERADORES",
+    contador : 0
 }

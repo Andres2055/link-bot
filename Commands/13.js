@@ -6,6 +6,7 @@ module.exports.config = {
     name: "13",
     aliases: ["trece", "i-57", "trato"],
     activo: true,
-    configurable: false,
-    grupo: "OCIO"
+    configurable: true,
+    grupo: "OCIO",
+    contador : 0
 }
