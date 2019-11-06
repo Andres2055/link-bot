@@ -78,7 +78,7 @@
 		"OCIO" : {
 			"INTERVAL": 60,
 			"NUM_USOS" : 5,
-			"BLOQUEO_TIME_OUT" : 1,
+			"BLOQUEO_TIME_OUT" : 60,
 			"ROLES": [
 				"Miembros",
 				"@everyone"

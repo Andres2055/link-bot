@@ -11,9 +11,65 @@ const SCPDIARY_TIME = config_var["SCPDIARY_TIME"] || 60000
 
 var jsfile = [];
 
-client.commands = new Discord.Collection()
-client.aliases = new Discord.Collection()
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 client.config = new Discord.Collection();
+client.functions = new Discord.Collection();
+
+var bloqueaComandoSpam = async (commandFile, message) => {
+	message.channel.send(`Se está abusando del comando **${commandFile.config.name}**. El comando será bloqueado temporalmente`);
+	commandFile.config.activo = false;
+	client.setTimeout(() => {
+		commandFile.config.activo = true;
+		commandFile.config.contador = 0;
+		const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
+		const channel = guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_LOG);
+		channel.send(`El comando **${commandFile.config.name}** ha sido reactivado`);
+	}, SCPDIARY_TIME * client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].BLOQUEO_TIME_OUT);
+}
+
+var msgR = (message) => { //%10 de que salga
+	let msgNum = 1 + Math.floor(Math.random() * 10);
+	console.log(msgNum)
+	if (msgNum != 10) { } else {
+		let msgNum2 = Math.floor(Math.random() * 9);
+		let orangutan = Math.floor(Math.random() * 9);
+
+		var theOrangutan = (ora) => {
+			return (ora > 7) ? `${orangutanes[ora]} orangután` : `${orangutanes[ora]} orangutanes`
+		}
+
+		var orangutanes = [
+			"Nueve", "Ocho", "Siete",
+			"Seis", "Cinco", "Cuatro",
+			"Tres", "Dos", "Un"
+		]
+
+		var preSendMsg = [
+			"y eso es todo lo que escribí.",
+			`¿Reconoces los cuerpos en el agua, <@${message.author.id}>?`,
+			"Sexando los procedimientos de contención.",
+			"Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.",
+			`Casi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@${message.author.id}>`,
+			"Si me permites... tengo que tomar un ascensor.",
+			"Todos nos hemos reído, pero ya no es gracioso.",
+			`Woowee veh i matate <@${message.author.id}>`,
+			theOrangutan(orangutan),
+			'* lo lame *'
+		]
+		message.channel.send(preSendMsg[msgNum2])
+	}
+}
+
+var notificar = (error) => {
+	console.log("Error no controlado: " + error);
+	console.trace(); //En caso de un error no controlado, se podrá seguir el origen de este
+	const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
+	client.config.get("SERVER").DEVELOPERS.forEach(dev => {
+		let developer = guild.members.find(mem => mem.user.username == dev);
+		if (developer) { developer.send(`Oye, acaba de pasar algo en el server ${guild.name} revisa mi log. El error es: ${error}`) }
+	});
+}
 
 fs.readdir("./Commands/", (err, files) => {
 	if (err) console.log(err);
@@ -38,6 +94,24 @@ fs.readdir("./Commands/", (err, files) => {
 
 });
 
+var agregarIntervalos = (client) => {
+	var mapGrupos = new Map(Object.entries(client.config.get("COMMMAND_GROUPS")));
+	for (let [key, value] of mapGrupos.entries()) {
+		if (value.INTERVAL && !isNaN(value.INTERVAL)) {
+			console.log(`Grupo ${key} tendrá un intervalo de reinicio de ${value.INTERVAL} minutos`);
+			client.setInterval(() => {
+				client.commands.filter(command => command.config.grupo == key).forEach(com => {
+					console.log(`reseteando contador del comando ${com.config.name}`);
+					if (com.config.activo) {
+						com.config.contador = 0;
+					}
+					console.log(`contador actual: ${com.config.contador}`);
+				});
+			}, value.INTERVAL * SCPDIARY_TIME);
+		}
+	}
+};
+
 client.on("ready", () => {
 	console.log("¡Estoy listo!");
 	var msgActivity = ["Cada !help cura mi depresión",
@@ -57,8 +131,9 @@ client.on("ready", () => {
 	const scpDiary = require('./scpDiary.js');
 	setInterval(() => {
 		scpDiary.postSCPDiary(client)
-	}, SCPDIARY_TIME)
-
+	}, SCPDIARY_TIME);
+	client.functions.set("NOTIFY", notificar);
+	agregarIntervalos(client);
 });
 
 client.on('guildMemberAdd', member => {
@@ -132,61 +207,11 @@ client.on("message", message => {
 				message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 			}
 		} catch (error) {
-			console.log("Error no controlado: " + error);
-			console.trace(); //En caso de un error no controlado, se podrá seguir el origen de este
-			const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
-			client.config.get("SERVER").DEVELOPERS.forEach(dev => {
-				let developer = guild.members.find(mem => mem.user.username == dev);
-				if (developer) { developer.send(`Oye, acaba de pasar algo en el server ${guild.name} revisa mi log. El error es: ${error}`) }
-			});
+			let notify = client.functions.get("NOTIFY");
+			notify(error);
 		}
 	}
 });
-
-var bloqueaComandoSpam = async (commandFile, message) => {
-	message.channel.send(`Se está abusando del comando **${commandFile.config.name}**. El comando será bloqueado temporalmente`);
-	commandFile.config.activo = false;
-	client.setTimeout(() => {
-		commandFile.config.activo = true;
-		commandFile.config.contador = 0;
-		const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
-		const channel = guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_LOG);
-		channel.send(`El comando **${commandFile.config.name}** ha sido reactivado`);
-	}, SCPDIARY_TIME * client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].BLOQUEO_TIME_OUT);
-}
-
-var msgR = (message) => { //%10 de que salga
-	let msgNum = 1 + Math.floor(Math.random() * 10);
-	console.log(msgNum)
-	if (msgNum != 10) { } else {
-		let msgNum2 = Math.floor(Math.random() * 9);
-		let orangutan = Math.floor(Math.random() * 9);
-
-		var theOrangutan = (ora) => {
-			return (ora > 7) ? `${orangutanes[ora]} orangután` : `${orangutanes[ora]} orangutanes`
-		}
-
-		var orangutanes = [
-			"Nueve", "Ocho", "Siete",
-			"Seis", "Cinco", "Cuatro",
-			"Tres", "Dos", "Un"
-		]
-
-		var preSendMsg = [
-			"y eso es todo lo que escribí.",
-			`¿Reconoces los cuerpos en el agua, <@${message.author.id}>?`,
-			"Sexando los procedimientos de contención.",
-			"Si no podemos ir al Paraíso, haré que el Paraíso venga a nosotros. Todo por ~~Nuestro Señor~~ Nuestra Estrella.",
-			`Casi puedo sentir los gritos, gritos en fila, o curvándose. En la oscuridad de la irrealidad. No quiero gritar en patrones, por favor, <@${message.author.id}>`,
-			"Si me permites... tengo que tomar un ascensor.",
-			"Todos nos hemos reído, pero ya no es gracioso.",
-			`Woowee veh i matate <@${message.author.id}>`,
-			theOrangutan(orangutan),
-			'* lo lame *'
-		]
-		message.channel.send(preSendMsg[msgNum2])
-	}
-}
 
 /* Client */
 /* Login */
