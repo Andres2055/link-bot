@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const Scpper = require("scpper.js");
-const all = require('./Commands/utils/allUNeed.js');
+const all = require('../Commands/utils/allUNeed.js');
 
 const api = new Scpper.Scpper({ site: 'es' });
 

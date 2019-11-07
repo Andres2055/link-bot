@@ -35,6 +35,8 @@
 		"WIKIPEDIA" : "https://es.wikipedia.org/w/api.php"
 	},
 	"SERVER" : {
+		"REGISTRO_EVENTOS" : ["SANCION", "CONFIGURACION", "ABUSO_COMANDO"],
+		"SANCIONES" : ["ADVERTENCIA", "KICK", "BANEO"],
 		"DEVELOPERS" : ["Merlin-VI"],
 		"_DEVELOPERS" : ["Merlin-VI", "LazyLasagne"],
 		"NAME" : "Sitio-34Dev",
@@ -58,27 +60,27 @@
 	},
 	"COMMMAND_GROUPS": {
 		"GENERAL": {
-			"INTERVAL": 60,
+			"INTERVAL": 1,
 			"NUM_USOS" : 100,
-			"BLOQUEO_TIME_OUT" : 60,
+			"BLOQUEO_TIME_OUT" : 2,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
 		"SCP" : {
-			"INTERVAL": 60,
+			"INTERVAL": 1,
 			"NUM_USOS" : 100,
-			"BLOQUEO_TIME_OUT" : 60,
+			"BLOQUEO_TIME_OUT" : 2,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
 		"OCIO" : {
-			"INTERVAL": 60,
+			"INTERVAL": 1,
 			"NUM_USOS" : 5,
-			"BLOQUEO_TIME_OUT" : 60,
+			"BLOQUEO_TIME_OUT" : 2,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
