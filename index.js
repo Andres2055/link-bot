@@ -14,6 +14,7 @@ client.aliases = new Discord.Collection(); //Guarda una colección con los coman
 client.config = new Discord.Collection(); //Guarda una colección con las configuraciones tomadas del jsonConfig para su acceso global
 client.functions = new Discord.Collection(); //Guarda una coleción con funciones de utilidad que pueden ser usadas por cualquier comando
 client.registros = new Discord.Collection(); //Guarda una colección de los registros auditables de acciones
+sanciones = new Discord.Collection();
 
 //========================================================
 // Inicializa comandos, configuración, funciones internas 
@@ -41,11 +42,19 @@ fs.readdir("./Commands/", (err, files) => {
 		client.config.set(key, value);
 	}
 	console.log("¡Settings setteadas!");
-	
+	sanciones.set("ADVERTENCIA", []);
+	sanciones.set("KICK", []);
+	sanciones.set("BANEO", []);
 	const internal_function = require("./Functions/internal.js");
 	client.functions.set("NOTIFY", internal_function.notificar);
 	client.functions.set("BLOQUEO_COMANDO", internal_function.bloqueaComandoSpam);
 	client.functions.set("MSN_R", internal_function.msgR);
+	client.functions.set("NOTIFICA_SANCION", internal_function.notificar_sancion);
+	client.functions.set("EMBED_NOTIFY", internal_function.getRegistroDisciplinario);
+	client.registros.set("SANCION", sanciones);
+	client.registros.set("CONFIGURACION", []);
+	client.registros.set("ADVERTENCIAABUSO_COMANDO", []);
+
 	internal_function.agregarIntervalos(client);
 	console.log("¡Funciones internas listas!");
 });
@@ -77,19 +86,19 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_WELCOME);
+	const channel = member.guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_WELCOME);
 	if (!channel) return;
 	channel.send(`¡Heya ${member.user}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
 });
 
 client.on('guildMemberRemove', member => {
-	const channel = member.guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_FARAWELL);
+	const channel = member.guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_FARAWELL);
 	if (!channel) return;
 	channel.send(`¡Adios, **${member.user.username}**! Espero que vuelvas pronto :D`);
 });
 
 client.on('guildBanAdd', (guild, user) => {
-	const channel = guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_FARAWELL);
+	const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_FARAWELL);
 	if (!channel) return;
 	channel.send(`${user.tag} ha sido baneado`);
 });

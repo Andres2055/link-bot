@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 //Bloquea el comando según su número de usos y setea un timeout para reactivarlo luego de esto
 module.exports.bloqueaComandoSpam = async (commandFile, message, client) => {
     message.channel.send(`Se está abusando del comando **${commandFile.config.name}**. El comando será bloqueado temporalmente`);
@@ -6,7 +8,7 @@ module.exports.bloqueaComandoSpam = async (commandFile, message, client) => {
         commandFile.config.activo = true;
         commandFile.config.contador = 0;
         const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
-        const channel = guild.channels.find(ch => ch.name === client.config.get("SERVER").CHANNEL_LOG);
+        const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_LOG);
         channel.send(`El comando **${commandFile.config.name}** ha sido reactivado`);
     }, client.config.get("SCPDIARY_TIME") * client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].BLOQUEO_TIME_OUT);
 };
@@ -46,7 +48,7 @@ module.exports.msgR = async (message) => { //%10 de que salga
 };
 
 //Envía una notificación a los usuarios configurados como desarrolladores
-module.exports.notificar = (error, client) => {
+module.exports.notificar = async (error, client) => {
     console.log("Error no controlado: " + error);
     console.trace(); //En caso de un error no controlado, se podrá seguir el origen de este
     const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
@@ -73,4 +75,27 @@ module.exports.agregarIntervalos = (client) => {
             }, value.INTERVAL * client.config.get("SCPDIARY_TIME"));
         }
     }
+};
+
+//Función que agrega envía un mensaje notificando una nueva ejecución de sanción
+module.exports.notificar_sancion = async (client, embed) => {
+    const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
+    const channel = guild.channels.find(ch => ch.id == client.config.get("SERVER").CHANNEL_LOG);
+	if (!channel) return;
+	channel.send({embed});
+}
+
+//Función que genera un mensaje Rich Embed para notificar una sanción
+module.exports.getRegistroDisciplinario = (message, member, accion, razon, color, vigencia, notas) => {
+    const notficacion = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.displayAvatarURL)
+        .addField("**Sujeto**", member.nickname ? member.nickname : member.user.username)
+        .addField("**Procedimiento**", accion)
+        .addField("**Razón:**", razon)
+        .addField("**Vigencia:**", vigencia)
+        .setColor(color);
+    if (notas && notas.trim() != "") {
+        notficacion.addField("**Notas:**", notas);
+    }
+    return notficacion;
 };

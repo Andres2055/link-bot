@@ -30,7 +30,7 @@ module.exports = async (client, message, args) => {
 				.setURL(`${page['site']}/${page['name']}`)
 				.setDescription(`${all.checkAuthors(page['status'], page['authors'])} [-${site.toUpperCase()}]`)
 				.setAuthor(message.author.username, message.author.displayAvatarURL)
-				.setColor(all.checkSiteColor(site))
+				.setColor(all.checkSiteColor(site));
 
 			if (page["name"] == "taboo") {
 				embed.setTitle(`SCP-4000 - Tabú (${all.checkVotes(page['rating'])})`)

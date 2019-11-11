@@ -2,8 +2,11 @@ const prompter = require('discordjs-prompter');
 
 module.exports = async (client, message, args) => {
     const user = message.mentions.users.first();
-    const razon = args.slice(1).join(" ");
     if (user) {
+        const mensaje = args.slice(1).join(" ").split("|");
+        var razon = mensaje[0];
+        var vigencia = mensaje[1];
+        var notas = mensaje[2];
         const member = message.guild.member(user);
         if (member) {
             if (member.user === message.author) { //valida que no se banear así mismo
@@ -18,8 +21,12 @@ module.exports = async (client, message, args) => {
                 message.channel.send(`jejeje Qué crees? No tengo permisos para banear a este vatillo w(ﾟｏﾟ)w`);
                 return;
             }
-            if (razon.trim() === "") { //valida que se haya proporcionado una razón de kickeo
-                message.channel.send(`Debes darme una razón para hacerle esto  (シ. .)シ`);
+            if (!razon || razon.trim() == "") {//valida que se proporcione una razón para el baneo
+                message.channel.send(`Debes darme una razón para darle una advertencia esto  (シ. .)シ`);
+                return;
+            }
+            if (!vigencia || vigencia.trim() == "") {//valida que se proporcione la vigencia del baneo
+                message.channel.send(`Debes darme la vigencia del ban. "| <vigencia>" `);
                 return;
             }
 
@@ -31,6 +38,9 @@ module.exports = async (client, message, args) => {
 
                 member.ban({ reason: razon }).then(() => {
                     message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
+                    let notify = client.functions.get("NOTIFICA_SANCION");
+                    let embed = client.functions.get("EMBED_NOTIFY");
+                    notify(client, embed(message, member, "Ban", razon, "010F1E", vigencia, notas));
                 }).catch(err => {
                     console.log(err);
                     message.channel.send(`No pude darle ban **${member.user.username}** debido a **${err}**. No me mates  m;_ _)m`);
@@ -45,10 +55,10 @@ module.exports = async (client, message, args) => {
     } else {
         message.channel.send("No has mencionado a ningún usuario para banear una advertencia (ノ_<。)");
     }
-}
+};
 
 const confirmacion = (message, username, razon, client) => {
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) => {
         prompter.message(message.channel, {
             question: `Por favor confirma que deseas banear a **${username}** debido a **${razon}** : `,
             userId: message.author.id,
@@ -64,12 +74,11 @@ const confirmacion = (message, username, razon, client) => {
     })
 };
 
-
 module.exports.config = {
     name: "ban",
     aliases: ["banear", "banamex"],
     activo: true,
     configurable: false,
     grupo: "MODERADORES",
-    contador : 0
+    contador: 0
 }

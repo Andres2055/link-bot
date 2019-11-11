@@ -5,7 +5,7 @@
 
 Estiben es un bot realizado primariamente para satisfacer progresivamente las necesidades básicas del chat de la Fundación SCP, rama en Español.
 
-Actualmente sirve como un buscador bien equipado de enlaces.
+Actualmente sirve como un buscador bien equipado de enlaces y apoyo en la supervisión del uso de comandos así como de proveer de las herramientas de moderación básicas y registro de éstas.
 
 Segundo intento de bot. Press F to pay respects, bye bye, [Kiwi](http://github.com/Andres2055/Kiwi-bot).
 
@@ -17,8 +17,9 @@ Segundo intento de bot. Press F to pay respects, bye bye, [Kiwi](http://github.c
 
 ## TODO
 
-- [ ] Crear los comandos ``kick`` y ``ban``.
-- [ ] Implementar protocolo antispam de comandos
-- [ ] Estandarizar configuraciones default y métodos de configuración
-- [ ] HAcer configurables los mensajes enviados por Estiben
+- [x] Crear los comandos ``kick`` y ``ban``.
+- [x] Implementar protocolo antispam de comandos
+- [x] Estandarizar configuraciones default y métodos de configuración
+- [ ] Agregar registro de auditoria
+- [ ] Hacer configurables los mensajes enviados por Estiben
 - [ ] Implementar comandos de Kiwi en Estiben.
