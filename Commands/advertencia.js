@@ -9,7 +9,7 @@ module.exports = async (client, message, args) => {
         var vigencia = mensaje[1];
         var notas = mensaje[2];
         if (!razon || razon.trim() == "") {
-            message.channel.send(`Debes darme una razón para darle una advertencia esto  (シ. .)シ`);
+            message.channel.send(`Debes darme una razón para darle una advertencia  (シ. .)シ`);
             return;
         }
         if (!vigencia || vigencia.trim() == "") {
@@ -57,20 +57,6 @@ module.exports = async (client, message, args) => {
         message.channel.send("Lo siento, no encontré los comandos de rol, por favor revisa que estén activos (*μ_μ)")
     }
 };
-
-/*getRegistroDisciplinario = (message, member, accion, razon, color, vigencia, notas) => {
-    const notficacion = new Discord.RichEmbed()
-        .setAuthor(message.author.username, message.author.displayAvatarURL)
-        .addField("**Sujeto**", member.nickname ? member.nickname : member.user.username, true)
-        .addField("**Procedimiento**", accion, true)
-        .addField("**Razón:**", razon, true)
-        .addField("**Vigencia:**", vigencia, true)
-        .setColor(color);
-    if (notas && notas.trim() != "") {
-        notficacion.addField("**Notas:**", notas);
-    }
-    return notficacion;
-};*/
 
 getMessage = (args, adv) => {
     mensaje = [args[0], adv, "|", args.slice(1)];

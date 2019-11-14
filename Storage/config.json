@@ -8,6 +8,7 @@
 		"build": "Epsilón-0"
 	},
 	"ADMIN": {
+		"TIME_OUT_CONFIRMACION" : 1,
 		"R_AFIRMATIVAS" : [
 			"sí",
 			"sis",
@@ -60,27 +61,27 @@
 	},
 	"COMMMAND_GROUPS": {
 		"GENERAL": {
-			"INTERVAL": 1,
+			"INTERVAL": 60,
 			"NUM_USOS" : 100,
-			"BLOQUEO_TIME_OUT" : 2,
+			"BLOQUEO_TIME_OUT" : 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
 		"SCP" : {
-			"INTERVAL": 1,
+			"INTERVAL": 60,
 			"NUM_USOS" : 100,
-			"BLOQUEO_TIME_OUT" : 2,
+			"BLOQUEO_TIME_OUT" : 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
 		"OCIO" : {
-			"INTERVAL": 1,
-			"NUM_USOS" : 5,
-			"BLOQUEO_TIME_OUT" : 2,
+			"INTERVAL": 60,
+			"NUM_USOS" : 50,
+			"BLOQUEO_TIME_OUT" : 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"

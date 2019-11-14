@@ -112,8 +112,12 @@
 		"desc": "Genera una idea random para un scp. Gracias a la página https://scp-generator.herokuapp.com",
 		"usage": "generate"
 	},
-
-
+	"encuesta": {
+		"name": "encuesta / votacion / voten / votar",
+		"group": "Ocio",
+		"desc": "Genera una encuesta donde los usuarios podrán votar, al finalizar el tiempo anunciará la opción ganadora usando emojis owo",
+		"usage": "encuesta <pregunta para la encuesta> | <duracion> (en minutos) | <emoji> , <nombre opcion> (puedes insertar varias opciones de esta misma forma usando '|' como separador entre cada una)"
+	},
 
 
 	"purga": {

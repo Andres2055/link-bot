@@ -22,7 +22,7 @@ module.exports = async (client, message, args) => {
                 return;
             }
             if (!razon || razon.trim() == "") {//valida que se proporcione una razón para el baneo
-                message.channel.send(`Debes darme una razón para darle una advertencia esto  (シ. .)シ`);
+                message.channel.send(`Debes darme una razón para banearlo de aquí  (シ. .)シ`);
                 return;
             }
             if (!vigencia || vigencia.trim() == "") {//valida que se proporcione la vigencia del baneo
@@ -37,7 +37,7 @@ module.exports = async (client, message, args) => {
                 await member.send(`Saludos **${member.user.username}** se le informa que ha sido baneado debido a: **${razon}**`);
 
                 member.ban({ reason: razon }).then(() => {
-                    message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
+                    //message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
                     let notify = client.functions.get("NOTIFICA_SANCION");
                     let embed = client.functions.get("EMBED_NOTIFY");
                     notify(client, embed(message, member, "Ban", razon, "010F1E", vigencia, notas));
@@ -63,7 +63,7 @@ const confirmacion = (message, username, razon, client) => {
             question: `Por favor confirma que deseas banear a **${username}** debido a **${razon}** : `,
             userId: message.author.id,
             max: 1,
-            timeout: 60000,
+            timeout: client.config.get("ADMIN").TIME_OUT_CONFIRMACION * client.config.get("SCPDIARY_TIME"),
         }).then(responses => {
             if (!responses || !responses.size) {
                 return resolve(false);

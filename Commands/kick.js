@@ -20,7 +20,7 @@ module.exports = async (client, message, args) => {
                 return
             }
             if (razon.trim() === "") { //valida que se haya proporcionado una razón de kickeo
-                message.channel.send(`Debes darme una razón para hacerle esto (シ. .)シ`);
+                message.channel.send(`Debes darme una razón para expulsarlo un ratico (シ. .)シ`);
                 return
             }
             if (!vigencia || vigencia.trim() == "") {//valida que se proporcione la vigencia del baneo
@@ -31,7 +31,7 @@ module.exports = async (client, message, args) => {
             await member.send(`Saludos **${member.user.username}** se le informa que ha sido kickeado debido a: **${razon}**`);
 
             member.kick(razon).then(() => {
-                message.channel.send(`El usuario **${member.user.username}** fue kickeado debido a **${razon}**`);
+                //message.channel.send(`El usuario **${member.user.username}** fue kickeado debido a **${razon}**`);
                 let notify = client.functions.get("NOTIFICA_SANCION");
                 let embed = client.functions.get("EMBED_NOTIFY");
                 notify(client, embed(message, member, "Kick", razon, "DFE51B", vigencia, notas));
