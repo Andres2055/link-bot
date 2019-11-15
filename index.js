@@ -113,7 +113,7 @@ client.on("message", message => {
 		let v = false;
 		//Si el comando es del grupo General, entonces no es necesario validar roles
 		if (client.config.get("SERVER").GENERAL_GROUP.includes(comando.config.grupo)) {
-			return true;
+			return comando.config.mp
 		}
 		//Valida que no se intente usar comandos administrativos por mensaje privado
 		if (client.config.get("SERVER").ADMIN_GROUPS.includes(comando.config.grupo) && message.channel.type === "dm") {

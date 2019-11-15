@@ -141,5 +141,6 @@ module.exports.config = {
 	activo : true,
 	configurable: false,
 	grupo: "GENERAL",
-	contador : 0
+	contador : 0, 
+	mp : true
 }
