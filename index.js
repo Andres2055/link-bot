@@ -1,3 +1,4 @@
+'use strict'
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
@@ -14,7 +15,9 @@ client.aliases = new Discord.Collection(); //Guarda una colección con los coman
 client.config = new Discord.Collection(); //Guarda una colección con las configuraciones tomadas del jsonConfig para su acceso global
 client.functions = new Discord.Collection(); //Guarda una coleción con funciones de utilidad que pueden ser usadas por cualquier comando
 client.registros = new Discord.Collection(); //Guarda una colección de los registros auditables de acciones
-sanciones = new Discord.Collection();
+client.cache_message = []; //Guarda una caché limitado de mensajes para la validación del spam
+const sanciones = new Discord.Collection();
+
 
 //========================================================
 // Inicializa comandos, configuración, funciones internas 
@@ -104,11 +107,12 @@ client.on('guildBanAdd', (guild, user) => {
 });
 
 client.on("message", message => {
+	console.log(message.attachments)
 
 	var validarPermisos = (message, comando) => {
 		let v = false;
 		//Si el comando es del grupo General, entonces no es necesario validar roles
-		if (comando.config.grupo == client.config.get("SERVER").GENERAL_GROUP) {
+		if (client.config.get("SERVER").GENERAL_GROUP.includes(comando.config.grupo)) {
 			return true;
 		}
 		//Valida que no se intente usar comandos administrativos por mensaje privado

@@ -52,7 +52,7 @@
 		"ROL_ADVERTENCIA_L1" : "Advertencia Nivel 1",
 		"ROL_ADVERTENCIA_L2" : "Advertencia Nivel 2",
 		"MUTED" : "muted", 
-		"GENERAL_GROUP" : "GENERAL",
+		"GENERAL_GROUP" : ["GENERAL", "OCIO", "SCP"],
 		"ADMIN_GROUPS" : [
 			"ADMIN",
 			"MODERADORES",

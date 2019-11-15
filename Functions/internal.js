@@ -81,8 +81,8 @@ module.exports.agregarIntervalos = (client) => {
 module.exports.notificar_sancion = async (client, embed) => {
     const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
     const channel = guild.channels.find(ch => ch.id == client.config.get("SERVER").CHANNEL_LOG);
-	if (!channel) return;
-	channel.send({embed});
+    if (!channel) return;
+    channel.send({ embed });
 }
 
 //Función que genera un mensaje Rich Embed para notificar una sanción
