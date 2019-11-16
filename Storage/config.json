@@ -35,6 +35,10 @@
 		"SCP_GENERATOR" : "https://scp-generator.herokuapp.com/newscp", 
 		"WIKIPEDIA" : "https://es.wikipedia.org/w/api.php"
 	},
+	"ANTISPAM" : {
+		"FLOOD" : 5,
+		"MIN_INTERVAL" : 10	
+	},
 	"SERVER" : {
 		"REGISTRO_EVENTOS" : ["SANCION", "CONFIGURACION", "ABUSO_COMANDO"],
 		"SANCIONES" : ["ADVERTENCIA", "KICK", "BANEO"],

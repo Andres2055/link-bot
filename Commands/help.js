@@ -102,7 +102,7 @@ module.exports = async (client, message, args) => {
 		let commandUsage = '';
 		let commandGroup = '';
 
-		for (var cmd in commands) { // Copy and paste
+		for (var cmd in commands) { 
 			if (args.join(" ").trim().toUpperCase() === commands[cmd].name.toUpperCase()) {
 				commandFound = commands[cmd].name;
 				commandDesc  = commands[cmd].desc;

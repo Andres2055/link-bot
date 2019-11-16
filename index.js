@@ -112,7 +112,8 @@ client.on("message", message => {
 	var validarPermisos = (message, comando) => {
 		let v = false;
 		//Si el comando es del grupo General, entonces no es necesario validar roles
-		if (client.config.get("SERVER").GENERAL_GROUP.includes(comando.config.grupo)) {
+		//Si se está usando por mp, el comando validará que solo puedan usarse los comandos configurados para ello
+		if (client.config.get("SERVER").GENERAL_GROUP.includes(comando.config.grupo) && message.channel.type === "dm") {
 			return comando.config.mp
 		}
 		//Valida que no se intente usar comandos administrativos por mensaje privado
