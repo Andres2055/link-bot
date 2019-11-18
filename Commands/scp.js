@@ -1,3 +1,4 @@
+'use strict';
 const Discord = require("discord.js");
 const Scpper = require("scpper.js");
 const api = new Scpper.Scpper({ site: 'es' });
@@ -5,21 +6,22 @@ const api = new Scpper.Scpper({ site: 'es' });
 const all = require('./utils/allUNeed.js')
 
 module.exports = async (client, message, args) => {
-	//console.log(args)
+	var site;
+	var query;
 	if (args.length === 2) {
-		site = args[0]
-		query = args[1]
+		site = args[0];
+		query = args[1];
 	} else {
-		site = "es"
-		query = args[0]
+		site = "es";
+		query = args[0];
 	}
 
-	scpToSearch = `scp-${query}`
+	var scpToSearch = `scp-${query}`;
 	if (query == "4000") { scpToSearch = "taboo"; }
 
 	const scp = api.findPages(scpToSearch, { site: site })
 		.then(value => {
-			page = value['data']['pages'][0]
+			let page = value['data']['pages'][0];
 
 			if (page === undefined) {
 				return message.channel.send(`Ese SCP no existe, <@${message.author.id}>.`);
@@ -28,7 +30,7 @@ module.exports = async (client, message, args) => {
 			const embed = new Discord.RichEmbed()
 				.setTitle(`${page['title']} - ${all.checkTitle(page['title'], page['altTitle'])} (${all.checkVotes(page['rating'])})`)
 				.setURL(`${page['site']}/${page['name']}`)
-				.setDescription(`${all.checkAuthors(page['status'], page['authors'])} [-${site.toUpperCase()}]`)
+				.setDescription(`${all.checkAuthors(page['status'], page['authors'], page)} [-${site.toUpperCase()}]`)
 				.setAuthor(message.author.username, message.author.displayAvatarURL)
 				.setColor(all.checkSiteColor(site));
 

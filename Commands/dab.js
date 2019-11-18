@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+'use strict';
 
 module.exports = async (client, message, args) => {
 	const imgs = [ "",

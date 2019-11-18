@@ -1,3 +1,4 @@
+'use strict';
 module.exports = async (client, message, args) => {
 	var name = message.member.nickname ? message.member.nickname : message.member.name;
 	if (args[0] != undefined) {

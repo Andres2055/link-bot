@@ -1,3 +1,4 @@
+'use strict';
 const Branches = {
 	"es": "scp-es",
 	"en": "scp-wiki",
@@ -15,8 +16,8 @@ const Branches = {
 
 module.exports.checkBranch = branch => {
 	var isNotSpanish = false;
-	for(let key in Branches) {
-		if(key == branch) {
+	for (let key in Branches) {
+		if (key == branch) {
 			isNotSpanish = true;
 		}
 	}
@@ -24,15 +25,16 @@ module.exports.checkBranch = branch => {
 };
 
 module.exports.urlBranch = branch => {
-	return (Branches[branch]) ? Branches[branch] : false; 
+	return (Branches[branch]) ? Branches[branch] : false;
 };
 
 module.exports.checkTitle = (title, altTitle) => {
-	if (altTitle === null) {
+	return altTitle ? altTitle : title;
+	/*if (altTitle === null) {
 		return title;
 	} else {
 		return altTitle;
-	}
+	}*/
 };
 
 module.exports.checkVotes = votes => {
@@ -45,7 +47,7 @@ module.exports.checkVotes = votes => {
 	}
 };
 
-module.exports.checkAuthors = (status, authors) => {
+module.exports.checkAuthors = (status, authors, page) => {
 	if (status === "Translation") {
 		return '**Traducido por:** ' + page['authors'][0]['user'];
 	} else if (page['status'] === "Original") {
@@ -66,8 +68,8 @@ module.exports.checkAuthors = (status, authors) => {
 			if (st_re.length == 0) {
 				let msg = '';
 
-				for (var i = 0; i < st_o.length; i++) { 
-					if (i < (st_o.length - 1)) { msg += st_o[i] + ', ';} 
+				for (var i = 0; i < st_o.length; i++) {
+					if (i < (st_o.length - 1)) { msg += st_o[i] + ', '; }
 					else { msg += st_o[i]; }
 				};
 
@@ -76,20 +78,20 @@ module.exports.checkAuthors = (status, authors) => {
 				let msg_o = '';
 				let msg_re = '';
 
-				for (var i = 0; i < st_o.length; i++) { 
-					if (i < (st_o.length - 1)) { 
+				for (var i = 0; i < st_o.length; i++) {
+					if (i < (st_o.length - 1)) {
 						msg_o += st_o[i] + ', ';
-					} 
-					else { 
-						msg_o += st_o[i] + ' (Autor/@s)'; 
+					}
+					else {
+						msg_o += st_o[i] + ' (Autor/@s)';
 					}
 				};
-				for (var i = 0; i < st_re.length; i++) { 
-					if (i < (st_re.length - 1)) { 
+				for (var i = 0; i < st_re.length; i++) {
+					if (i < (st_re.length - 1)) {
 						msg_re += st_re[i] + ', ';
-					} 
-					else { 
-						msg_re += st_re[i] + ' (Reescritor/@s)'; 
+					}
+					else {
+						msg_re += st_re[i] + ' (Reescritor/@s)';
 					}
 				};
 
@@ -100,14 +102,16 @@ module.exports.checkAuthors = (status, authors) => {
 };
 
 module.exports.checkSiteColor = (site) => {
-	const branchAndColors = {"en": "848484", "ru": "df0101", "ko": "ff0080", 
-							"ja": "effbfb", "fr": "0040ff", "th": "0b0b61", 
-							"pl": "be03fc", "de": "ff8000", "cn": "3b0b17", 
-							"it": "01df01", "int": "2efef7", "es": "ffff00"};
+	const branchAndColors = {
+		"en": "848484", "ru": "df0101", "ko": "ff0080",
+		"ja": "effbfb", "fr": "0040ff", "th": "0b0b61",
+		"pl": "be03fc", "de": "ff8000", "cn": "3b0b17",
+		"it": "01df01", "int": "2efef7", "es": "ffff00"
+	};
 	var color;
-  
-	for(var x in branchAndColors) {
-		if(x == site) {
+
+	for (var x in branchAndColors) {
+		if (x == site) {
 			color = `0x${branchAndColors[x]}`;
 		}
 	}

@@ -1,6 +1,6 @@
+'use strict';
 const Discord = require("discord.js");
 const fs = require('fs');
-
 const commands = JSON.parse(fs.readFileSync('./Storage/commands_help.json'), 'utf8');
 
 const checkMD = message => {

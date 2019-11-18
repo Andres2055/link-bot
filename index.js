@@ -1,4 +1,5 @@
 'use strict'
+
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
@@ -107,7 +108,7 @@ client.on('guildBanAdd', (guild, user) => {
 });
 
 client.on("message", message => {
-	console.log(message.attachments)
+	//console.log(message.attachments)
 
 	var validarPermisos = (message, comando) => {
 		let v = false;

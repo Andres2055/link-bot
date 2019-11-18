@@ -1,6 +1,6 @@
+'use strict';
 const Discord = require("discord.js");
 const all = require('./utils/allUNeed.js')
-
 
 module.exports = async (client, message, args) => {
 	const ver = client.config.get("VERSION");

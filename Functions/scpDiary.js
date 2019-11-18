@@ -1,7 +1,7 @@
+'use strict'
 const Discord = require('discord.js');
 const Scpper = require("scpper.js");
 const all = require('../Commands/utils/allUNeed.js');
-
 const api = new Scpper.Scpper({ site: 'es' });
 
 var getChannel = (client) => {
@@ -14,7 +14,7 @@ var getChannel = (client) => {
                 console.log(user.username + '#' + user.tag);
             });
         });*/
-		const channel = guild['channels'].find(ch => ch.name === client.config.get("SERVER").CHANNEL_DIARY);
+		const channel = guild['channels'].find(ch => ch.id === client.config.get("SERVER").CHANNEL_DIARY);
 		return channel;
 	} catch (err) {
 		console.log('Aún no se ha logeado');
@@ -23,42 +23,42 @@ var getChannel = (client) => {
 
 module.exports.postSCPDiary = client => {
 	const date = new Date();
-	options_date = { timeZone: client.config.get("SERVER").TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric' };
-	options_time = { timeZone: client.config.get("SERVER").TIME_ZONE, hour12: false, hour: "2-digit", minute: "2-digit" };
-	dateString = date.toLocaleTimeString(client.config.get("SERVER").LOCALE, options_time);
+	let options_date = { timeZone: client.config.get("SERVER").TIME_ZONE, year: 'numeric', month: 'numeric', day: 'numeric' };
+	let options_time = { timeZone: client.config.get("SERVER").TIME_ZONE, hour12: false, hour: "2-digit", minute: "2-digit" };
+	let dateString = date.toLocaleTimeString(client.config.get("SERVER").LOCALE, options_time);
 	//getChannel(client);
 	if (dateString == client.config.get("SERVER").HOUR_DIARY) {
 		const channel = getChannel(client);
 		channel.send('**Estas son las recomendaciones del día:**');
 
-		scpDiary = api.findTag('scp', { random: true });
-		scpESDiary = api.findTag(['+scp', '+es'], { random: true });
-		taleDiary = api.findTag('relato', { random: true });
-		taleESDiary = api.findTag(['+relato', '+es'], { random: true });
+		let scpDiary = api.findTag('scp', { random: true });
+		let scpESDiary = api.findTag(['+scp', '+es'], { random: true });
+		let taleDiary = api.findTag('relato', { random: true });
+		let taleESDiary = api.findTag(['+relato', '+es'], { random: true });
 
 		scpDiary.then(function (value) {
-			page = value['data']['pages'][0];
+			let page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
-				.setTitle(all.checkTitle(page['title'], page['altTitle']) + ' (' + all.checkVotes(page['rating']) + ')')
+				.setTitle(`${page['title']} - ${all.checkTitle(page['title'], page['altTitle'])} (${all.checkVotes(page['rating'])})`)
 				.setURL(page['site'] + '\/' + page['name'])
-				.setDescription(all.checkAuthors(page['status'], page['authors']))
+				.setDescription(all.checkAuthors(page['status'], page['authors'], page))
 				.setAuthor('SCP del Día')
 				.setColor(0x588d9b);
 
 			channel.send({ embed });
 		}).catch(err => {
-			console.log('scpDiary' + err),
+			console.log('scpDiary' + err.stack),
 			channel.send("Σ(°△°|||)  hay problema consultado a Scpper")
 		});
 
 		scpESDiary.then(function (value) {
-			page = value['data']['pages'][0];
+			let page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
-				.setTitle(all.checkTitle(page['title'], page['altTitle']) + ' (' + all.checkVotes(page['rating']) + ')')
+				.setTitle(`${page['title']} - ${all.checkTitle(page['title'], page['altTitle'])} (${all.checkVotes(page['rating'])})`)
 				.setURL(page['site'] + '\/' + page['name'])
-				.setDescription(all.checkAuthors(page['status'], page['authors']))
+				.setDescription(all.checkAuthors(page['status'], page['authors'], page))
 				.setAuthor('SCP-ES del Día')
 				.setColor(0x588d9b);
 
@@ -69,12 +69,12 @@ module.exports.postSCPDiary = client => {
 		});
 
 		taleDiary.then(function (value) {
-			page = value['data']['pages'][0];
+			let page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
 				.setTitle(all.checkTitle(page['title'], page['altTitle']) + ' (' + all.checkVotes(page['rating']) + ')')
 				.setURL(page['site'] + '\/' + page['name'])
-				.setDescription(all.checkAuthors(page['status'], page['authors']))
+				.setDescription(all.checkAuthors(page['status'], page['authors'], page))
 				.setAuthor('Relato del Día')
 				.setColor(0x588d9b);
 
@@ -85,12 +85,12 @@ module.exports.postSCPDiary = client => {
 		});
 
 		taleESDiary.then(function (value) {
-			page = value['data']['pages'][0];
+			let page = value['data']['pages'][0];
 
 			const embed = new Discord.RichEmbed()
 				.setTitle(all.checkTitle(page['title'], page['altTitle']) + ' (' + all.checkVotes(page['rating']) + ')')
 				.setURL(page['site'] + '\/' + page['name'])
-				.setDescription(all.checkAuthors(page['status'], page['authors']))
+				.setDescription(all.checkAuthors(page['status'], page['authors'], page))
 				.setAuthor('Relato-ES del Día')
 				.setColor(0x588d9b);
 

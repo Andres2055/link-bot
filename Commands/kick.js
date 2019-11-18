@@ -1,3 +1,4 @@
+'use strict';
 module.exports = async (client, message, args) => {
     const user = message.mentions.users.first();
     if (user) {

@@ -1,4 +1,4 @@
-//const config_server = require("../Storage/config.json").SERVICES;
+'use strict';
 const Discord = require("discord.js");
 const https = require('https');
 

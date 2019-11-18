@@ -1,22 +1,21 @@
+'use strict';
 const Scpper = require("scpper.js");
 const api = new Scpper.Scpper({ site: 'es' });
 
-const all = require('./utils/allUNeed.js')
-
 module.exports = async (client, message, args) => {
-	args.push('-')
-	query = args.slice(0, -1).join("-")
+	args.push('-');
+	let query = args.slice(0, -1).join("-");
 
 	api.findUsers(query)
 		.then(function(value) {
-			guy = value['data']['users'][0]
+			let guy = value['data']['users'][0]
 
 			if (guy === undefined) {
 				message.channel.send(`Nope <@${message.author.id}>, esta persona no existe`);
 				return;
 			};
 
-			response = `**Datos de ${guy['displayName']}:** http://www.scpper.com/user/${guy['id']}`
+			let response = `**Datos de ${guy['displayName']}:** http://www.scpper.com/user/${guy['id']}`
 			message.channel.send(response);
 		}).catch(err => {
 			console.log("Hubo un error de tipo: " + err);

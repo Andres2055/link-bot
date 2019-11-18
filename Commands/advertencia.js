@@ -1,10 +1,10 @@
-const Discord = require("discord.js");
+'use strict';
 
 module.exports = async (client, message, args) => {
     const rol = client.commands.get("rol");
     if (rol && rol.config.activo) {
-        const user = message.mentions.users.first();
-        const mensaje = args.slice(1).join(" ").split("|");
+        let user = message.mentions.users.first();
+        let mensaje = args.slice(1).join(" ").split("|");
         var razon = mensaje[0];
         var vigencia = mensaje[1];
         var notas = mensaje[2];
@@ -58,8 +58,8 @@ module.exports = async (client, message, args) => {
     }
 };
 
-getMessage = (args, adv) => {
-    mensaje = [args[0], adv, "|", args.slice(1)];
+var getMessage = (args, adv) => {
+    let mensaje = [args[0], adv, "|", args.slice(1)];
     return mensaje;
 };
 

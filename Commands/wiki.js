@@ -1,3 +1,4 @@
+'use strict';
 const Wiki = require('wikijs').default;
 
 var toCapitalize = array => {

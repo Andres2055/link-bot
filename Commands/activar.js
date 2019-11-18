@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = async (client, message, args) => {
     var command = args[0].toString().trim().toLowerCase();
     let commandsName = client.commands.get(command);

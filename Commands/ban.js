@@ -1,3 +1,4 @@
+'use strict';
 const prompter = require('discordjs-prompter');
 
 module.exports = async (client, message, args) => {
@@ -57,7 +58,7 @@ module.exports = async (client, message, args) => {
     }
 };
 
-const confirmacion = (message, username, razon, client) => {
+var confirmacion = (message, username, razon, client) => {
     return new Promise((resolve, reject) => {
         prompter.message(message.channel, {
             question: `Por favor confirma que deseas banear a **${username}** debido a **${razon}** : `,

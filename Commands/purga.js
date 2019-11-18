@@ -1,5 +1,6 @@
+'use strict';
 module.exports = async (client, message, args) => {
-	message.delete();
+	await message.delete();
 
 	if (isNaN(args[0])) {
 		message.channel.send('Por favor, usa un número como argumento.');

@@ -1,3 +1,4 @@
+'use strict'
 module.exports = async (client, message, args) => {
     const user = message.mentions.users.first();
     const arg = args.slice(1).join(" ").split("|", 2);
@@ -6,15 +7,15 @@ module.exports = async (client, message, args) => {
     if (user) {
         const member = message.guild.member(user);
         if (member) {
-            role = message.guild.roles.find(role => role.name.toLowerCase() == role_name.toLowerCase().trim());
+            const role = message.guild.roles.find(role => role.name.toLowerCase() == role_name.toLowerCase().trim());
             if (role) {
                 member.removeRoles([role], razon ? razon : "").then( () => {
-                    message.channel.send(`Se eliminó el rol ${role} a ${member.user.username}`)
+                    message.channel.send(`Se eliminó el rol **${role}** a **${member.user.username}**`);
                 }).catch((error) => {
-                    message.channel.send(`Sumimasen no pude quitarle el rol ${role} a ${member.user.username}`);
+                    message.channel.send(`Sumimasen no pude quitarle el rol **${role}** a **${member.user.username}**`);
                 })
             } else {
-                message.channel.send(`El rol ${role_name} no existe no mames ┐(‘～\` )┌ `);
+                message.channel.send(`El rol **${role_name}** no existe no mames ┐(‘～\` )┌ `);
             }
         } else {
             message.channel.send("Ese usuario no se encuentra en el server -__-");

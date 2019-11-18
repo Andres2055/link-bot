@@ -1,3 +1,4 @@
+'use strict'
 const Discord = require("discord.js");
 
 //Bloquea el comando según su número de usos y setea un timeout para reactivarlo luego de esto
@@ -17,12 +18,12 @@ module.exports.bloqueaComandoSpam = async (commandFile, message, client) => {
 module.exports.msgR = async (message) => { //%10 de que salga
     let msgNum = 1 + Math.floor(Math.random() * 10);
     console.log(msgNum)
-    if (msgNum > 5) { } else {
+    if (msgNum < 5) {
         let msgNum2 = Math.floor(Math.random() * 9);
         let orangutan = Math.floor(Math.random() * 9);
 
         var theOrangutan = (ora) => {
-            return (ora > 7) ? `${orangutanes[ora]} orangután` : `${orangutanes[ora]} orangutanes`
+            return (ora > 1) ? `${orangutanes[ora]} orangután` : `${orangutanes[ora]} orangutanes`
         }
 
         var orangutanes = [
@@ -50,7 +51,8 @@ module.exports.msgR = async (message) => { //%10 de que salga
 //Envía una notificación a los usuarios configurados como desarrolladores
 module.exports.notificar = async (error, client) => {
     console.log("Error no controlado: " + error);
-    console.trace(); //En caso de un error no controlado, se podrá seguir el origen de este
+    console.log(error.stack); //En caso de un error no controlado, se podrá seguir el origen de este
+    //console.trace(); 
     const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
     client.config.get("SERVER").DEVELOPERS.forEach(dev => {
         let developer = guild.members.find(mem => mem.user.username == dev);
