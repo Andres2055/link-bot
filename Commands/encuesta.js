@@ -29,9 +29,9 @@ module.exports = async (client, message, args) => {
     opciones.forEach(opcion => {
         if (opcion) {
             let op = opcion.split(",");
-            if (op.length == 2) {
+            if (op.length >= 2) {
                 if (op[0].match(regx_emoji)) {
-                    map_opciones.set(op[0].trim(), op[1]);
+                    map_opciones.set(op[0].trim(), op.slice(1).join(","));
                     emojis.push(op[0].trim());
                 } else {
                     let custom = op[0].split(":");
@@ -40,7 +40,7 @@ module.exports = async (client, message, args) => {
                             emoji.name == custom[1].replace(/:/g, ""));
                         if (custom_emoji) {
                             emojis.push(custom_emoji);
-                            map_opciones.set(custom_emoji, op[1]);
+                            map_opciones.set(custom_emoji, op.slice(1).join(","));
                         } else {
                             message.channel.send(`${op[0]} no es un emoji, al menos no uno que yo conozca :thonk:`);
                             validar_opciones = false;
