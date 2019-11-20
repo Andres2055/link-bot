@@ -17,6 +17,7 @@ client.config = new Discord.Collection(); //Guarda una colección con las config
 client.functions = new Discord.Collection(); //Guarda una coleción con funciones de utilidad que pueden ser usadas por cualquier comando
 client.registros = new Discord.Collection(); //Guarda una colección de los registros auditables de acciones
 client.cache_message = []; //Guarda una caché limitado de mensajes para la validación del spam
+client.warned_users = [];
 const sanciones = new Discord.Collection();
 
 
@@ -50,16 +51,19 @@ fs.readdir("./Commands/", (err, files) => {
 	sanciones.set("KICK", []);
 	sanciones.set("BANEO", []);
 	const internal_function = require("./Functions/internal.js");
-	client.functions.set("NOTIFY", internal_function.notificar);
-	client.functions.set("BLOQUEO_COMANDO", internal_function.bloqueaComandoSpam);
-	client.functions.set("MSN_R", internal_function.msgR);
-	client.functions.set("NOTIFICA_SANCION", internal_function.notificar_sancion);
-	client.functions.set("EMBED_NOTIFY", internal_function.getRegistroDisciplinario);
-	client.registros.set("SANCION", sanciones);
-	client.registros.set("CONFIGURACION", []);
-	client.registros.set("ADVERTENCIAABUSO_COMANDO", []);
-
-	internal_function.agregarIntervalos(client);
+	const validaciones = require("./Functions/validacion.js");
+	client.functions.set("INFORMAR_ERROR", internal_function.notificar);//Función que notifica de un error a los desarrolladores
+	client.functions.set("BLOQUEO_COMANDO", internal_function.bloqueaComandoSpam);//Función que bloquea comandos que han sido spameados
+	client.functions.set("MSN_R", internal_function.msgR);//Función que genera un mensaje aleatorio de espera
+	client.functions.set("REGISTAR_SANCION", internal_function.registrar_sancion);//Función que registra la sanción en el canal de registro disciplinario
+	client.functions.set("EMBED_NOTIFY", internal_function.getRegistroDisciplinario);//Función que genera el mensaje que irá al canal de registro disciplinario
+	client.functions.set("SPAM", validaciones.validarSpam);//Función que valida si el mensaje entrante está clasificado como spam
+	client.functions.set("HANDLE_SPAM", validaciones.handleSpam);//Función que procesa los mensajes marcados como spam
+	//Estos registros serán usaos más adelante
+	//client.registros.set("SANCION", sanciones);
+	//client.registros.set("CONFIGURACION", []);
+	//client.registros.set("ADVERTENCIAABUSO_COMANDO", []);
+	internal_function.agregarIntervalos(client); 
 	console.log("¡Funciones internas listas!");
 });
 
@@ -108,7 +112,6 @@ client.on('guildBanAdd', (guild, user) => {
 });
 
 client.on("message", message => {
-	//console.log(message.attachments)
 
 	var validarPermisos = (message, comando) => {
 		let v = false;
@@ -131,6 +134,17 @@ client.on("message", message => {
 
 	if (!message.author.bot) {
 		try {
+			let spam = client.functions.get("SPAM");
+			let response = spam(client, message);
+			console.log("response de validacion de spam");
+			console.log(response);
+			if(response.length) {
+				let handle = client.functions.get("HANDLE_SPAM");
+				handle(client, response, message);
+				return;
+			} else {
+				console.log(`No hay spam de momento`);
+			}
 			if (!message.content.startsWith(PREFIX)) return;
 			let messageArray = message.content.split(/ +/g);
 			let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
@@ -142,7 +156,7 @@ client.on("message", message => {
 			if (commandFile) {
 				if (commandFile.config.activo) {
 					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
-						console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
+						//console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
 					}
 					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS && commandFile.config.contador >= client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
 						let bloqueaComandoSpam = client.functions.get("BLOQUEO_COMANDO");
@@ -166,7 +180,7 @@ client.on("message", message => {
 				message.channel.send(`Uh, ese no es un comando válido. Revisa los comandos con ${PREFIX}help.`);
 			}
 		} catch (error) {
-			let notify = client.functions.get("NOTIFY");
+			let notify = client.functions.get("INFORMAR_ERROR");
 			notify(error, client);
 		}
 	}

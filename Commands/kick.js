@@ -29,13 +29,13 @@ module.exports = async (client, message, args) => {
                 return;
             }
             //Se enviará un mensaje privado al usuario justo antes de ser kickeado para informarle la razón de su baneo
-            await member.send(`Saludos **${member.user.username}** se le informa que ha sido kickeado debido a: **${razon}**`);
+            await member.send(`Saludos **${member.user.username}** se le informa que ha sido kickeado debido a: **${razon}**, con vigencia **${vigencia}**`);
 
             member.kick(razon).then(() => {
                 //message.channel.send(`El usuario **${member.user.username}** fue kickeado debido a **${razon}**`);
-                let notify = client.functions.get("NOTIFICA_SANCION");
+                let log = client.functions.get("REGISTAR_SANCION");
                 let embed = client.functions.get("EMBED_NOTIFY");
-                notify(client, embed(message, member, "Kick", razon, "DFE51B", vigencia, notas));
+                log(client, embed(message, member, "Kick", razon, "DFE51B", vigencia, notas));
             }).catch(err => {
                 console.log(err);
                 message.channel.send(`No pude darle kick **${member.user.username}** debido a **${err}**. No me mates :c`);

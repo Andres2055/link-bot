@@ -35,13 +35,13 @@ module.exports = async (client, message, args) => {
 
             if (confirmar) {
                 //Se enviará un mensaje privado al usuario justo antes de ser baneado para informarle la razón de su baneo
-                await member.send(`Saludos **${member.user.username}** se le informa que ha sido baneado debido a: **${razon}**`);
+                await member.send(`Saludos **${member.user.username}** se le informa que ha sido baneado debido a: **${razon}**, con vigencia **${vigencia}**`);
 
                 member.ban({ reason: razon }).then(() => {
                     //message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
-                    let notify = client.functions.get("NOTIFICA_SANCION");
+                    let log = client.functions.get("REGISTAR_SANCION");
                     let embed = client.functions.get("EMBED_NOTIFY");
-                    notify(client, embed(message, member, "Ban", razon, "010F1E", vigencia, notas));
+                    log(client, embed(message, member, "Ban", razon, "010F1E", vigencia, notas));
                 }).catch(err => {
                     console.log(err);
                     message.channel.send(`No pude darle ban **${member.user.username}** debido a **${err}**. No me mates  m;_ _)m`);
