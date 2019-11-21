@@ -33,7 +33,7 @@ module.exports = async (client, message, args) => {
     } else if (pro_grupos > 91) {
         mensaje = grupo9[i];
     }
-    message.channel.send(mensaje);
+    message.edit(mensaje);
 }
 
 module.exports.config = {
