@@ -14,7 +14,9 @@ Segundo intento de bot. Press F to pay respects, bye bye, [Kiwi](http://github.c
 - `discord.js`: Para la conexión con la API de Discord. 
 - `scpper.js`: Como conector con la Base de Datos SCPper. Gracias a [HelloEdit](https://github.com/HelloEdit) por crear este maravilloso paquete.
 - `mathjs`: Como librería de cálculo simbólico para el comando calc.
-- `discordjs-prompter`: com librería para realizar confirmaciones y crear miniencuestas
+- `discordjs-prompter`: Como librería para realizar confirmaciones y crear miniencuestas
+- `flickr-sdk`: Como librería para realizar búsqueda de imágenes en Flickr
+- `googleapis`: Cliente YouTube V3 para realizar búsqueda de videos
 
 ## TODO
 

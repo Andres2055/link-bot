@@ -12,6 +12,7 @@ const TOKEN = config_var['TOKEN'] || process.env.TOKEN
 const SCPDIARY_TIME = config_var["SCPDIARY_TIME"] || 60000
 const FLICKR_SECRET = process.env.FLICKR_SECRET;
 const FLICKR_TOKEN = process.env.FLICKR_TOKEN;
+const KEY_YOUTUBE = process.env.KEY_YOUTUBE;
 
 client.commands = new Discord.Collection(); //Guarda una colección con los comandos disponibles para el bot
 client.aliases = new Discord.Collection(); //Guarda una colección con los comandos disponibles para el bot accesibles mediante el alias
@@ -55,6 +56,12 @@ fs.readdir("./Commands/", (err, files) => {
 		console.log("Configuraciones para flickr seteadas");
 	} else {
 		console.log("No se encontraron las configuraciones para Flicrk, el comando no puede ser usado");
+	}
+	if(KEY_YOUTUBE){
+		client.config.set("KEY_YOUTUBE", KEY_YOUTUBE);
+		console.log("Configuración para el Api Youtube Lista");
+	} else {
+		console.log("No se encontró el token del Api de Google-Youtube");
 	}
 	//sanciones.set("ADVERTENCIA", []);
 	//sanciones.set("KICK", []);

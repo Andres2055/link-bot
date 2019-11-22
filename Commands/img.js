@@ -46,7 +46,7 @@ module.exports = async (client, message, args) => {
         per_page: n,
         safe_search: 1
     }).then(response => {
-        console.log(response.body.photos.photo);
+        //console.log(response.body.photos.photo);
         let photos = response.body.photos.photo;
         console.log(photos.length);
         let url = `https://www.flickr.com/photos/${photos[randomN]['owner']}/${photos[randomN]['id']}`;

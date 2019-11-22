@@ -11,6 +11,7 @@ module.exports = async (client, message, args) => {
                 message.channel.send("Este comando ya está activo (→_→)");
             } else {
                 commandFile.config.activo = true;
+                commandFile.config.contador = 0;
                 message.channel.send(`**${commandFile.config.name}** fue activado ヽ(o w o)ﾉ`);
             }
         } else {
@@ -27,5 +28,5 @@ module.exports.config = {
     activo: true,
     configurable: false,
     grupo: "MODERADORES",
-    contador : 0
+    contador: 0
 }
