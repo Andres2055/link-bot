@@ -32,11 +32,11 @@ module.exports = async (client, message, args) => {
         else if (args[0].toLowerCase() == "perro" || args[0].toLowerCase() == "dog") { textSearch = "funny+dog"; }
         else {
             textSearch = args.join("+");
-            randomN = 0;
+            //randomN = 0;
         }
     } else {
         textSearch = args.join("+");
-        randomN = 0;
+        //randomN = 0;
     }
     console.log(textSearch);
     flickr.photos.search({
