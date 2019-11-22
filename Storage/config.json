@@ -8,8 +8,8 @@
 		"build": "Epsilón-0"
 	},
 	"ADMIN": {
-		"TIME_OUT_CONFIRMACION" : 1,
-		"R_AFIRMATIVAS" : [
+		"TIME_OUT_CONFIRMACION": 1,
+		"R_AFIRMATIVAS": [
 			"sí",
 			"sis",
 			"si",
@@ -20,7 +20,7 @@
 			"dale",
 			"sip"
 		],
-		"R_NEGATIVAS" : [
+		"R_NEGATIVAS": [
 			"no",
 			"nel",
 			"ño",
@@ -31,37 +31,119 @@
 			"nel prro"
 		]
 	},
-	"SERVICES" : {
-		"SCP_GENERATOR" : "https://scp-generator.herokuapp.com/newscp", 
-		"WIKIPEDIA" : "https://es.wikipedia.org/w/api.php"
+	"SERVICES": {
+		"SCP_GENERATOR": "https://scp-generator.herokuapp.com/newscp",
+		"WIKIPEDIA": "https://es.wikipedia.org/w/api.php",
+		"FLICKR": "https://www.flickr.com/photos/",
+		"FLICKR_FILTER": [
+			"dick",
+			"pito",
+			"tula",
+			"verga",
+			"ñonga",
+			"vagina",
+			"pussy",
+			"coño",
+			"panocha",
+			"panosha",
+			"concha",
+			"nopor",
+			"porno",
+			"pornografia",
+			"porn",
+			"pornography",
+			"pornografico",
+			"pornográfico",
+			"ponro",
+			"sexo",
+			"sex",
+			"culo",
+			"culos",
+			"teta",
+			"tetas",
+			"chicis",
+			"bubis",
+			"bubi",
+			"sheshe",
+			"sheshes",
+			"shemale",
+			"lesbian",
+			"futanari",
+			"bdsm",
+			"hentai",
+			"agehao",
+			"bondage",
+			"midget",
+			"fuck",
+			"fucker",
+			"nsfw",
+			"rape",
+			"cp",
+			"bastard",
+			"milf",
+			"teen",
+			"loli",
+			"lolicon",
+			"coger",
+			"culear",
+			"culeo",
+			"follar",
+			"follando",
+			"follacion",
+			"follado",
+			"follada",
+			"ass",
+			"lolita",
+			"qlo",
+			"qlos"
+		]
 	},
-	"ANTISPAM" : {
-		"FLOOD" : 5,
-		"MIN_INTERVAL" : 5,
-		"INTERVAL" : 10,
-		"MAX_ATTACHMENT" : 5,
-		"MAX_MESSAGE_CHANNEL" : 10,
-		"EXCEPCIONES" : ["631624436688093244"]
+	"ANTISPAM": {
+		"FLOOD": 5,
+		"MIN_INTERVAL": 5,
+		"INTERVAL": 10,
+		"MAX_ATTACHMENT": 5,
+		"MAX_MESSAGE_CHANNEL": 10,
+		"EXCEPCIONES": [
+			"631624436688093244"
+		]
 	},
-	"SERVER" : {
-		"REGISTRO_EVENTOS" : ["SANCION", "CONFIGURACION", "ABUSO_COMANDO"],
-		"SANCIONES" : ["ADVERTENCIA", "KICK", "BANEO"],
-		"DEVELOPERS" : ["Merlin-VI"],
-		"_DEVELOPERS" : ["Merlin-VI", "LazyLasagne"],
-		"NAME" : "Sitio-34Dev",
+	"SERVER": {
+		"REGISTRO_EVENTOS": [
+			"SANCION",
+			"CONFIGURACION",
+			"ABUSO_COMANDO"
+		],
+		"SANCIONES": [
+			"ADVERTENCIA",
+			"KICK",
+			"BANEO"
+		],
+		"DEVELOPERS": [
+			"Merlin-VI"
+		],
+		"_DEVELOPERS": [
+			"Merlin-VI",
+			"LazyLasagne"
+		],
+		"NAME": "Sitio-34Dev",
 		"CHANNEL_WELCOME": "493515602460409886",
 		"CHANNEL_FARAWELL": "631289352634236949",
-		"CHANNEL_DIARY" : "631619489028374558",
-		"CHANNEL_LOG" : "631624097524219914",
-		"TIME_ZONE" : "America/Mexico_City",
-		"LOCALE" : "es-MX",
-		"HOUR_DIARY" : "00:23",
-		"ACTIVITY_INTERVAL" : 25,
-		"ROL_ADVERTENCIA_L1" : "Advertencia Nivel 1",
-		"ROL_ADVERTENCIA_L2" : "Advertencia Nivel 2",
-		"MUTED" : "muted", 
-		"GENERAL_GROUP" : ["GENERAL", "OCIO", "SCP"],
-		"ADMIN_GROUPS" : [
+		"CHANNEL_DIARY": "631619489028374558",
+		"CHANNEL_LOG": "631624097524219914",
+		"TIME_ZONE": "America/Mexico_City",
+		"LOCALE": "es-MX",
+		"HOUR_DIARY": "00:23",
+		"ACTIVITY_INTERVAL": 25,
+		"ROL_ADVERTENCIA_L1": "Advertencia Nivel 1",
+		"ROL_ADVERTENCIA_L2": "Advertencia Nivel 2",
+		"MUTED": "muted",
+		"GENERAL_GROUP": [
+			"GENERAL",
+			"OCIO",
+			"SCP"
+		],
+		"ADMIN_GROUPS": [
 			"ADMIN",
 			"MODERADORES",
 			"JR_STAFF"
@@ -70,39 +152,39 @@
 	"COMMMAND_GROUPS": {
 		"GENERAL": {
 			"INTERVAL": 60,
-			"NUM_USOS" : 100,
-			"BLOQUEO_TIME_OUT" : 120,
+			"NUM_USOS": 100,
+			"BLOQUEO_TIME_OUT": 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
-		"SCP" : {
+		"SCP": {
 			"INTERVAL": 60,
-			"NUM_USOS" : 100,
-			"BLOQUEO_TIME_OUT" : 120,
+			"NUM_USOS": 100,
+			"BLOQUEO_TIME_OUT": 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
-		"OCIO" : {
+		"OCIO": {
 			"INTERVAL": 60,
-			"NUM_USOS" : 50,
-			"BLOQUEO_TIME_OUT" : 120,
+			"NUM_USOS": 50,
+			"BLOQUEO_TIME_OUT": 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
-		"JR_STAFF" : {
+		"JR_STAFF": {
 			"ROLES": [
 				"Admin",
 				"Moderadores",
 				"Junior Staff"
 			]
 		},
-		"MODERADORES" : {
+		"MODERADORES": {
 			"ROLES": [
 				"Admin",
 				"Moderadores"

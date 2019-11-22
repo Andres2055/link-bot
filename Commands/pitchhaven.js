@@ -1,6 +1,6 @@
 'use strict';
 module.exports.config = {
-    name: "pitchhave",
+    name: "pitch_haven",
     aliases: [],
     activo: false,
     configurable: true,

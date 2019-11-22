@@ -10,15 +10,17 @@ const config_var = require("./Storage/config.json");
 const PREFIX = config_var['PREFIX'] || process.env.PREFIX
 const TOKEN = config_var['TOKEN'] || process.env.TOKEN
 const SCPDIARY_TIME = config_var["SCPDIARY_TIME"] || 60000
+const FLICKR_SECRET = process.env.FLICKR_SECRET;
+const FLICKR_TOKEN = process.env.FLICKR_TOKEN;
 
 client.commands = new Discord.Collection(); //Guarda una colección con los comandos disponibles para el bot
 client.aliases = new Discord.Collection(); //Guarda una colección con los comandos disponibles para el bot accesibles mediante el alias
 client.config = new Discord.Collection(); //Guarda una colección con las configuraciones tomadas del jsonConfig para su acceso global
 client.functions = new Discord.Collection(); //Guarda una coleción con funciones de utilidad que pueden ser usadas por cualquier comando
-client.registros = new Discord.Collection(); //Guarda una colección de los registros auditables de acciones
+//client.registros = new Discord.Collection(); //Guarda una colección de los registros auditables de acciones
 client.cache_message = []; //Guarda una caché limitado de mensajes para la validación del spam
 client.warned_users = [];
-const sanciones = new Discord.Collection();
+//const sanciones = new Discord.Collection();
 
 
 //========================================================
@@ -47,9 +49,16 @@ fs.readdir("./Commands/", (err, files) => {
 		client.config.set(key, value);
 	}
 	console.log("¡Settings setteadas!");
-	sanciones.set("ADVERTENCIA", []);
-	sanciones.set("KICK", []);
-	sanciones.set("BANEO", []);
+	if (FLICKR_SECRET && FLICKR_SECRET) {
+		client.config.set("FLICKR_SECRET", FLICKR_SECRET);
+		client.config.set("FLICKR_TOKEN", FLICKR_TOKEN);
+		console.log("Configuraciones para flickr seteadas");
+	} else {
+		console.log("No se encontraron las configuraciones para Flicrk, el comando no puede ser usado");
+	}
+	//sanciones.set("ADVERTENCIA", []);
+	//sanciones.set("KICK", []);
+	//sanciones.set("BANEO", []);
 	const internal_function = require("./Functions/internal.js");
 	const validaciones = require("./Functions/validacion.js");
 	client.functions.set("INFORMAR_ERROR", internal_function.notificar);//Función que notifica de un error a los desarrolladores
@@ -63,7 +72,7 @@ fs.readdir("./Commands/", (err, files) => {
 	//client.registros.set("SANCION", sanciones);
 	//client.registros.set("CONFIGURACION", []);
 	//client.registros.set("ADVERTENCIAABUSO_COMANDO", []);
-	internal_function.agregarIntervalos(client); 
+	internal_function.agregarIntervalos(client);
 	console.log("¡Funciones internas listas!");
 });
 
@@ -138,7 +147,7 @@ client.on("message", message => {
 			let response = spam(client, message);
 			console.log("response de validacion de spam");
 			console.log(response);
-			if(response.length) {
+			if (response.length) {
 				let handle = client.functions.get("HANDLE_SPAM");
 				handle(client, response, message);
 				return;

@@ -11,7 +11,7 @@ module.exports = async (client, message, args) => {
         response.on("end", () => {
             if (response.statusCode == 200) {
                 const embed = new Discord.RichEmbed()
-                    .setDescription(`Hey intenta escribir sobre ${scp_generado}`)
+                    .setDescription(`Idea for SCP: ${scp_generado}`)
                     .setAuthor(message.author.username, message.author.displayAvatarURL)
                     .setColor("0040ff");
                 message.channel.send({ embed });
