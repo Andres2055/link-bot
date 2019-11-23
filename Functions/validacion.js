@@ -92,11 +92,11 @@ module.exports.handleSpam = async (client, response, message) => {
                 });
                 break;
             case "FLOOD":
-                let mflood = `${resp.user} debido a hacer _Flood_ en el canal ${channel} | 1 día`
+                let mflood = `${resp.user} hacer _Flood_ en el canal ${channel} | 1 día`
                 warn(client, message, mflood.split(" "));
                 break;
             case "ATTACHMENT":
-                let matt = `${resp.user} debido a hacer _enviar demasiados archivos adjuntos_ en el canal ${channel} | 1 día`
+                let matt = `${resp.user}  enviar demasiados archivos adjuntos en el canal ${channel} | 1 día`
                 warn(client, message, matt.split(" "));
                 break;
         }
