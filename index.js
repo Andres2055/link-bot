@@ -152,15 +152,16 @@ client.on("message", message => {
 		try {
 			let spam = client.functions.get("SPAM");
 			let response = spam(client, message);
-			console.log("response de validacion de spam");
-			console.log(response);
+			//console.log("response de validacion de spam");
+			//console.log(response);
 			if (response.length) {
 				let handle = client.functions.get("HANDLE_SPAM");
 				handle(client, response, message);
 				return;
-			} else {
-				console.log(`No hay spam de momento`);
-			}
+			} 
+			//else {
+				//console.log(`No hay spam de momento`);
+			//}
 			if (!message.content.startsWith(PREFIX)) return;
 			let messageArray = message.content.split(/ +/g);
 			let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);

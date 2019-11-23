@@ -2,7 +2,6 @@
 
 module.exports = (client, message, args) => {
     var m = args.join(" ").split("|");
-    console.log(m);
     if (m.length < 2) {
         message.channel.send(`No has enviado los argumentos necesarios para este comando`);
         return;
@@ -13,15 +12,12 @@ module.exports = (client, message, args) => {
         return;
     }
     var text = m[1].trim().split(" ").map(p => { return getPalabra(p.trim().toUpperCase(), map) }).join(" ").toLowerCase();
-    console.log(`Mensaje traducido ${text}`);
     message.channel.send(text);
 };
 
 var getPalabra = (palabra, map) => {
-    console.log(`Traduciendo ${palabra}`);
-    var acumulador = {p:""};
+    var acumulador = { p: "" };
     getCifrado(acumulador, palabra, map, palabra.length);
-    console.log(`${palabra}: ${acumulador.p}`);
     return acumulador.p;
 };
 
@@ -54,26 +50,31 @@ module.exports.config = {
 
 const cifrar = {
     "A": "Æ",
+    "Á": "Æ",
     "B": "P",
     "C": "A",
     "D": "K",
     "E": "Y",
+    "É": "Y",
     "F": "S",
     "G": "J",
     "H": "O",
     "I": "LA",
+    "Í": "LA",
     "J": "U",
     "K": "Z",
     "L": "IR",
     "M": "YI",
     "N": "L",
     "O": "I'",
+    "Ó": "I'",
     "P": "V",
     "Q": "KH",
     "R": "UA",
     "S": "W",
     "T": "F",
     "U": "G",
+    "Ú": "G",
     "V": "PH",
     "W": "IO",
     "X": "DE'",
@@ -125,6 +126,8 @@ const descifrar = {
     "AGATHOS": "AGATHOS",
     "SCP": "SCP",
     "YIL": "EY",
+    "YILA": "MI",
+    "LAO" : "NCH"
 };
 const maps = {
     "descifrar": descifrar,

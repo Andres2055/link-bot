@@ -57,7 +57,7 @@ module.exports.validarSpam = (client, message) => {
                 users.push(m.autor);
             }
         });
-        console.log(users);
+        //console.log(users);
         response.push({ type: "CHANNEL", users: users, channel: message.channel.id });
         client.warned_users.push({ channel: message.channel.id, time: now });
         /*messages_channel.forEach(i => {
@@ -81,12 +81,12 @@ module.exports.handleSpam = async (client, response, message) => {
         let channel = message.guild.channels.find(chan => chan.id == resp.channel);
         switch (resp.type) {
             case "CHANNEL":
-                console.log("Vamos a advertir a varios weones");
+                //console.log("Vamos a advertir a varios weones");
                 message.channel.send(`Detengan el spam. Los involucrados serán sancionados`);
                 resp.users.forEach((user, i) => {
                     client.setTimeout(() => {
                         let men_chan = `${user} pariticipar en el spam del canal ${channel} | 1 día`
-                        console.log(men_chan);
+                        //console.log(men_chan);
                         warn(client, message, men_chan.split(" "));
                     }, i * 10000);
                 });
