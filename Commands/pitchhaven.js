@@ -127,7 +127,8 @@ const descifrar = {
     "SCP": "SCP",
     "YIL": "EY",
     "YILA": "MI",
-    "LAO" : "NCH"
+    "LAO" : "NCH",
+    "LALA" : "NCI"
 };
 const maps = {
     "descifrar": descifrar,
