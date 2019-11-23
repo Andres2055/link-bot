@@ -35,6 +35,7 @@
 		"SCP_GENERATOR": "https://scp-generator.herokuapp.com/newscp",
 		"WIKIPEDIA": "https://es.wikipedia.org/w/api.php",
 		"FLICKR": "https://www.flickr.com/photos/",
+		"YOUTUBE": "https://www.youtube.com/watch?v=",
 		"FLICKR_FILTER": [
 			"pene",
 			"lesbiana",
@@ -164,7 +165,8 @@
 		"MAX_MESSAGE_CHANNEL": 10,
 		"EXCEPCIONES": [
 			"631624436688093244"
-		]
+		],
+		"CANALES_TEMPORALES" : []
 	},
 	"SERVER": {
 		"REGISTRO_EVENTOS": [
@@ -191,7 +193,7 @@
 		"CHANNEL_LOG": "631624097524219914",
 		"TIME_ZONE": "America/Mexico_City",
 		"LOCALE": "es-MX",
-		"HOUR_DIARY": "00:23",
+		"HOUR_DIARY": "07:00",
 		"ACTIVITY_INTERVAL": 25,
 		"ROL_ADVERTENCIA_L1": "Advertencia Nivel 1",
 		"ROL_ADVERTENCIA_L2": "Advertencia Nivel 2",
@@ -208,6 +210,14 @@
 		]
 	},
 	"COMMMAND_GROUPS": {
+		"SUP_ADMIN": {
+			"INTERVAL": 120,
+			"NUM_USOS": 5,
+			"BLOQUEO_TIME_OUT": 720,
+			"ROLES": [
+				"Admin"
+			]
+		},
 		"GENERAL": {
 			"INTERVAL": 60,
 			"NUM_USOS": 100,

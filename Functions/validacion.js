@@ -6,7 +6,8 @@ module.exports.validarSpam = (client, message) => {
     let response = [];
     //console.log(client.config.get("ANTISPAM").EXCEPCIONES);
     //console.log(message.channel.id);
-    if(client.config.get("ANTISPAM").EXCEPCIONES.includes(message.channel.id.toString())){
+    if(client.config.get("ANTISPAM").EXCEPCIONES.includes(message.channel.id.toString()) ||
+    client.config.get("ANTISPAM").CANALES_TEMPORALES.includes(message.channel.id.toString())){
         //console.log("Nope, acá no vamos a validar el spam");
         return response;
     }

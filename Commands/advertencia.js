@@ -9,7 +9,6 @@ module.exports = async (client, message, args) => {
         var razon = mensaje[0];
         var vigencia = mensaje[1];
         var notas = mensaje[2];
-        console.log(`razón: ${razon}`);
         if (!razon || razon.trim() == "") {
             message.channel.send(`Debes darme una razón para darle una advertencia  (シ. .)シ`);
             return;
@@ -68,7 +67,6 @@ module.exports = async (client, message, args) => {
 
 var getMessage = (args, adv, userId) => {
     let mensaje = [args[0], adv, "|", args.slice(1).join(" "), "|", userId];
-    console.log(mensaje);
     return mensaje;
 };
 

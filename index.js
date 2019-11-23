@@ -57,7 +57,7 @@ fs.readdir("./Commands/", (err, files) => {
 	} else {
 		console.log("No se encontraron las configuraciones para Flicrk, el comando no puede ser usado");
 	}
-	if(KEY_YOUTUBE){
+	if (KEY_YOUTUBE) {
 		client.config.set("KEY_YOUTUBE", KEY_YOUTUBE);
 		console.log("Configuración para el Api Youtube Lista");
 	} else {
@@ -152,16 +152,11 @@ client.on("message", message => {
 		try {
 			let spam = client.functions.get("SPAM");
 			let response = spam(client, message);
-			//console.log("response de validacion de spam");
-			//console.log(response);
 			if (response.length) {
 				let handle = client.functions.get("HANDLE_SPAM");
 				handle(client, response, message);
 				return;
-			} 
-			//else {
-				//console.log(`No hay spam de momento`);
-			//}
+			}
 			if (!message.content.startsWith(PREFIX)) return;
 			let messageArray = message.content.split(/ +/g);
 			let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
