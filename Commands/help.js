@@ -25,6 +25,7 @@ module.exports = async (client, message, args) => {
 		});
 		if (accesible) { grupos_visibles.push(k) }
 	}
+	
 
 	if (args.length === 0 || args.join(' ').toUpperCase() === 'GRUPOS') {
 		embed.setDescription(`Hola, mis comandos se dividen en diferentes grupos con una configuración propia. Según tu nivel de autorización, estos son los grupos a los que tienes acceso:`);
@@ -68,9 +69,9 @@ module.exports = async (client, message, args) => {
 		} else {
 			//Búsqueda por commandname
 			busqueda = busqueda.toLowerCase();
-			let comando = commands.find(c => c.name === busqueda || c.alias.includes(busqueda));
+			let comando = commands.find(c => grupos_visibles.includes(c.group) && (c.name === busqueda || c.alias.includes(busqueda)));
 			if (!comando) {
-				message.channel.send(`No encontré ningún grupo/comando llamado ${busqueda}`);
+				message.channel.send(`No encontré ningún grupo/comando llamado ${busqueda} al que tengas acceso`);
 				return;
 			}
 			embed.setDescription(`Hola, este es el detalle del comando **${busqueda}**`);
