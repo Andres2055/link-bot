@@ -24,12 +24,12 @@ var getPalabra = (palabra, map) => {
 var getCifrado = (acumulador, palabra, mapa, index) => {
     if (index > 0) {
         let v = mapa[palabra.substring(0, index)];
-        if (v) {
+        if (!!v) {
             acumulador.p += v;
             palabra = palabra.substring(index, palabra.length);
             getCifrado(acumulador, palabra, mapa, palabra.length);
-        } else if (palabra.length == 1) {
-            acumulador.p += palabra;
+        } else if (palabra.substring(0, index).length == 1) {
+            acumulador.p += palabra.substring(0, index);
             palabra = palabra.substring(index, palabra.length);
             getCifrado(acumulador, palabra, mapa, palabra.length);
         } else {
@@ -86,7 +86,6 @@ const cifrar = {
     "FREDERICK": "FREDERICK",
     "ELIMINADO": "ELIMINADO",
     "AGATHOS": "AGATHOS",
-    "█": "█",
     "SCP": "SCP"
 };
 const descifrar = {
@@ -116,8 +115,6 @@ const descifrar = {
     "DE'": "X",
     "IL": "Y",
     "XU": "Z",
-    "Ã": "A",
-    "█": "█",
     "DATA": "DATA",
     "EXPUNGED": "EXPUNGED",
     "CLOVIS": "CLOVIS",
@@ -126,6 +123,7 @@ const descifrar = {
     "AGATHOS": "AGATHOS",
     "SCP": "SCP",
     "YIL": "EY",
+    "YIR": "EL",
     "YILA": "MI",
     "LAO" : "NCH",
     "LALA" : "NCI"

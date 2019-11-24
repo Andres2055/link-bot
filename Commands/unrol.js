@@ -16,9 +16,9 @@ module.exports = async (client, message, args) => {
         const role = message.guild.roles.find(role => role.name.toLowerCase() == role_name.toLowerCase().trim());
         if (role) {
             member.removeRoles([role], razon ? razon : "").then(() => {
-                message.channel.send(`Se eliminó el rol **${role}** a **${member.user.username}**`);
+                message.channel.send(`Se eliminó el rol **${role.name}** a **${member.user.username}**`);
             }).catch((error) => {
-                message.channel.send(`Sumimasen no pude quitarle el rol **${role}** a **${member.user.username}**`);
+                message.channel.send(`Sumimasen no pude quitarle el rol **${role.name}** a **${member.user.username}**`);
             })
         } else {
             message.channel.send(`El rol **${role_name}** no existe no mames ┐(‘～\` )┌ `);

@@ -1,129 +1,136 @@
 {
-	"h": {
-		"name": "help / h / ayuda",
-		"group": "Usuario",
-		"desc": "Despliega una lista de comandos",
-		"usage": "h [grupo o comando]"
-	},
-	"info": {
-		"name": "info",
-		"group": "Usuario",
-		"desc": "Información sobre mi",
-		"usage": "info"
-	},
-	"activar": {
-		"name": "activar / act / activate",
-		"group": "Admin",
-		"desc": "Activa un comando que esté desactivado, uso para staff",
-		"usage": "activar <nombre del comando>"
-	},
-	"desactivar": {
-		"name": "desactivar / deact / deactivate",
-		"group": "Admin",
-		"desc": "Desactiva un comando que esté desactivado, uso para staff",
-		"usage": "desactiva <nombre del comando>"
-	},
-	"kick": {
-		"name": "kick / kickear / patear",
-		"group": "Admin",
-		"desc": "Kickea a un miembro del server",
-		"usage": "kick <@miembro> <razón>.  El comando envía un mp informando al usuario de su Kick"
-	},
-	"ban": {
-		"name": "ban / banear ",
-		"group": "Admin",
-		"desc": "Banea a un miembro del server",
-		"usage": "ban <@miembro> <razón>. Después de eso se te pedirá confirmación. El comando envía un mp informando al usuario de su baneo"
-	},
-	"rol": {
-		"name": "rol / role / add_role ",
-		"group": "Admin",
-		"desc": "Agregar un rol a miembro del server",
-		"usage": "rol <@miembro> <nombre_rol> | [razón]. El comando guarda en el registro de auditoria la razón"
-	},
-	"unrol": {
-		"name": "unrol / unrole / remove_rol ",
-		"group": "Admin",
-		"desc": "Elimina un rol a miembro del server",
-		"usage": "unrol <@miembro> <nombre_rol> | [razón]. El comando guarda en el registro de auditoria la razón"
-	},
-
-
-	"scp": {
-		"name": "scp",
-		"group": "SCP",
-		"desc": "Buscar enlaces sobre SCPs",
-		"usage": "scp [sitio de la SCP] <terminación (ej: -es-100)>"
-	},
-	"scpr": {
-		"name": "scpr",
-		"group": "SCP",
-		"desc": "SCP aleatorio",
-		"usage": "scp [sitio de la SCP]"
-	},
-	"art": {
-		"name": "art / r",
-		"group": "SCP",
-		"desc": "Buscar artículos que no son SCPs",
-		"usage": "art <nombre del relato (ej: good as new)> [sitio de la SCP]"
-	},
-	"artr": {
-		"name": "artr / rr",
-		"group": "SCP",
-		"desc": "Artículo no-SCP aleatorio",
-		"usage": "artr"
-	},
-	"tag": {
-		"name": "tag / etiq",
-		"group": "SCP",
-		"desc": "Busca 4 artículos según la etiqueta. Para incluir una etiqueta se utiliza +, para excluirla -. Si se busca en otra rama, recuerda que tienen etiquetas en otros idiomas.",
-		"usage": "tag <grupo de etiqueta (ej: +meta -euclid)> [sitio de la SCP]"
-	},
-	"user": {
-		"name": "user / autor",
-		"group": "SCP",
-		"desc": "Busca un usuario específico de la Fundación SCP en SCPperDB",
-		"usage": "user <usuario>"
-	},
-
-
-
-	"f": {
-		"name": "f / pay",
-		"group": "Ocio",
-		"desc": "Paga tus respetos",
-		"usage": "f [usuario]"
-	},
-	"wiki": {
-		"name": "wiki / wikipedia",
-		"group": "Ocio",
-		"desc": "Busca artículos en Wikipedia.",
-		"usage": "wikipedia <búsqueda>"
-	},
-	"calc": {
-		"name": "calc / calcular / clc",
-		"group": "Ocio",
-		"desc": "Resuelve operaciones matemáticas como sumas, potencias, trigonométricas, determinantes de matrices, etc. Usa punto decimal para separa decimales",
-		"usage": "cacl <expresion>"
-	},
-	"generate": {
-		"name": "generate / gen_scp / scp_generator",
-		"group": "Ocio",
-		"desc": "Genera una idea random para un scp. Gracias a la página https://scp-generator.herokuapp.com",
-		"usage": "generate"
-	},
-	"encuesta": {
-		"name": "encuesta / votacion / voten / votar",
-		"group": "Ocio",
-		"desc": "Genera una encuesta donde los usuarios podrán votar, al finalizar el tiempo anunciará la opción ganadora usando emojis owo",
-		"usage": "encuesta <pregunta para la encuesta> | <duracion> (en minutos) | <emoji> , <nombre opcion> (puedes insertar varias opciones de esta misma forma usando '|' como separador entre cada una)"
-	},
-
-
-	"purga": {
-		"name": "purga / delet / elim",
-		"group": "Admin",
-		"desc": "Elimina mensajes",
-		"usage": "purga <número de mensajes a eliminar>"		
-	}
+	"this": "Listado con la descripción y uso de los comandos, la información de los grupos y configuración se setean al inicio de la aplicación",
+	"comandos": [
+		{
+			"name": "activar",
+			"desc": "Activa un comando que esté desactivado y regresa el contador de usos a 0",
+			"usage": "activar <nombre_del_comando>"
+		},
+		{
+			"name": "advertencia",
+			"desc": "Agrega el rol de Advertencia correspondiente al usuario. Una vez agregado el rol, se crea un mensaje en #registro-disciplinario. El usuario es notificado de la razón y vigencia de dicha sanción",
+			"usage": "advertencia <@miembro> | <razón> | <vigencia> | [notas]"
+		},
+		{
+			"name": "art",
+			"desc": "Buscar artículos que no son SCPs",
+			"usage": "art <términos de búsqueda> [rama SCP]"
+		},
+		{
+			"name": "artr",
+			"desc": "Artículo no-SCP aleatorio",
+			"usage": "artr"
+		},
+		{
+			"name": "ban",
+			"desc": "Banea a un miembro del server. Se requiere confirmación para realizar esta acción. El comando envía un mp informando al usuario el motivo y vigencia de su baneo",
+			"usage": "ban <@miembro> <razón> | <vigencia> | [notas]"
+		},
+		{
+			"name": "calc",
+			"desc": "Resuelve operaciones matemáticas como sumas, potencias, trigonométricas, determinantes de matrices, etc. Usa punto decimal para separa decimales",
+			"usage": "cacl <expresion>"
+		},
+		{
+			"name": "dab",
+			"desc": "Envía una imagen de justo lo que crees",
+			"usage": "dab"
+		},
+		{
+			"name": "desactivar",
+			"desc": "Desactiva un comando que esté desactivado",
+			"usage": "desactiva <nombre del comando>"
+		},
+		{
+			"name": "encuesta",
+			"desc": "Genera una encuesta donde los usuarios podrán votar, al finalizar el tiempo anunciará la opción ganadora usando emojis owo. Puedes insertar varias opciones de esta misma forma usando '|' como separador entre cada opción. No olvides poner una coma entre el emoji y el texto",
+			"usage": "encuesta <pregunta para la encuesta> | <duracion en minutos>  | <emoji para votar> **,** <nombre opcion>"
+		},
+		{
+			"name": "f",
+			"desc": "Paga tus respetos",
+			"usage": "f [lo que sea que quieras pagar respetos]"
+		},
+		{
+			"name": "generate",
+			"desc": "Genera una idea random para un scp. Gracias a la página https://scp-generator.herokuapp.com",
+			"usage": "generate"
+		},
+		{
+			"name": "help",
+			"desc": "Despliega la lista de comandos o grupos a los que tienes acceso",
+			"usage": "h [grupo o comando]"
+		},
+		{
+			"name": "img",
+			"desc": "Busca una imagen en Flickr que coincidan con los términos de búsqueda. Cuidado con tratar de usarla para buscar contenido NSFW",
+			"usage": "img [término de búsqueda]"
+		},
+		{
+			"name": "info",
+			"desc": "Información sobre mi",
+			"usage": "info"
+		},
+		{
+			"name": "kick",
+			"desc": "Kickea a un miembro del server. El comando envía un mp informando al usuario la razón y vigencia de su kick",
+			"usage": "kick <@miembro>  <razón> | <vigencia> | [notas] "
+		},
+		{
+			"name": "pitch_haven",
+			"desc": "Cifra o Descifra texto usando el código de la serie Pitch Haven de la Fundación SCP. Apoyo para traducciones de esta serie, pero no realiza traducciones",
+			"usage": "pitch_haven <cifrar/descifrar> | <texto que se va a cifrar o descifrar>"
+		},
+		{
+			"name": "purga",
+			"desc": "Elimina el número de mensajes que le pidas dentro del canal ¡No puedes borrar más de 100!",
+			"usage": "purga <número de mensajes a eliminar>"
+		},
+		{
+			"name": "rol",
+			"desc": "Agregar un rol a miembro del server. El comando guarda en el registro de auditoria la razón",
+			"usage": "rol <@miembro> <nombre_rol> | [razón]"
+		},
+		{
+			"name": "scp",
+			"desc": "Buscar enlaces al artículo SCP correspondiente",
+			"usage": "scp [Rama dónde se buscará] <terminación (ej: -es-100)>"
+		},
+		{
+			"name": "scpr",
+			"desc": "Busca un artículo SCP aleatorio",
+			"usage": "scp [Rama dónde se buscará]"
+		},
+		{
+			"name": "antispam",
+			"desc": "Desactiva el protocolo antispam dentro del canal durante el tiempo indicado. No puedes desactivarlo por más de una hora y solo funcionará en el canal que lo uses ¡Procura estar presente para que no se descontrole!",
+			"usage": "spam <tiempo en minutos>"
+		},
+		{
+			"name": "tag",
+			"desc": "Busca 4 artículos según la etiqueta. Para incluir una etiqueta se utiliza +, para excluirla -. Si se busca en otra rama, recuerda que tienen etiquetas en otros idiomas.",
+			"usage": "tag <grupo de etiqueta> [Rama de la Fundación SCP]"
+		},
+		{
+			"name": "unrol",
+			"desc": "Elimina un rol a miembro del server. El comando guarda en el registro de auditoria la razón",
+			"usage": "unrol <@miembro> <nombre_rol> | [razón]"
+		},
+		
+		{
+			"name": "user",
+			"desc": "Busca un usuario específico de la Fundación SCP en SCPperDB",
+			"usage": "user <usuario>"
+		},
+		{
+			"name": "wiki",
+			"desc": "Busca artículos en Wikipedia.",
+			"usage": "wikipedia <búsqueda>"
+		},
+		{
+			"name": "yt",
+			"desc": "Busca videos en Youtube.",
+			"usage": "yt <búsqueda>"
+		}
+	]
 }

@@ -6,6 +6,8 @@ module.exports = async (client, message, args) => {
 	const ver = client.config.get("VERSION");
 	const verString = `${ver["major"]}.${ver["minor"]}.${ver["micro"]} ${ver["build"]}`;
 
+	//client.user.setAvatar("./Estiben_2.jpg");
+
 	const embed = new Discord.RichEmbed()
 		.setURL('https://github.com/Andres2055/link-bot')
 		.setDescription("Y-yo, soy... Estiben. Dios, mi nombre sigue siendo tan horrendo, incluso creo que está mal escrito, que vergüenza. Yo, iba a decir que soy un robot y todo eso, probablemente una persona encerrada en una pieza de software ejecutable. Dios, que delirios. Aunque ahora tengo esteroides y puedo hacer más cosas, así que puedes llamarme _Gran hermano_ o Nii-san si lo prefieres :trukazo:")

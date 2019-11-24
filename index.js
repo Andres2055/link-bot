@@ -5,6 +5,7 @@ const client = new Discord.Client();
 const fs = require('fs');
 const config_json = new Map(Object.entries(require("./Storage/config.json")));
 const config_var = require("./Storage/config.json");
+const commands = JSON.parse(fs.readFileSync('./Storage/commands_help.json'), 'utf8').comandos;
 
 /* Environment Variables */
 const PREFIX = config_var['PREFIX'] || process.env.PREFIX
@@ -18,10 +19,11 @@ client.commands = new Discord.Collection(); //Guarda una colección con los coma
 client.aliases = new Discord.Collection(); //Guarda una colección con los comandos disponibles para el bot accesibles mediante el alias
 client.config = new Discord.Collection(); //Guarda una colección con las configuraciones tomadas del jsonConfig para su acceso global
 client.functions = new Discord.Collection(); //Guarda una coleción con funciones de utilidad que pueden ser usadas por cualquier comando
-//client.registros = new Discord.Collection(); //Guarda una colección de los registros auditables de acciones
 client.cache_message = []; //Guarda una caché limitado de mensajes para la validación del spam
 client.warned_users = [];
+client.command_help = commands;
 //const sanciones = new Discord.Collection();
+//client.registros = new Discord.Collection(); //Guarda una colección de los registros auditables de acciones
 
 
 //========================================================
@@ -44,6 +46,12 @@ fs.readdir("./Commands/", (err, files) => {
 		})
 	});
 	console.log("¡Todos los comandos cargados!");
+	client.command_help.forEach(c =>{
+		let comando = client.commands.get(c.name);
+		c.alias = comando.config.aliases;
+		c.group = comando.config.grupo;
+	});
+	console.log(`¡Alias y grupo para "!help" agregados!`)
 
 	for (let [key, value] of config_json.entries()) {
 		console.log(`¡Configuración para ${key} cargada!`)
@@ -167,10 +175,14 @@ client.on("message", message => {
 			let commandFile = commandsName || aliasesName;
 			if (commandFile) {
 				if (commandFile.config.activo) {
+					let numero_usos = client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS;
 					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
-						//console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
+						console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
 					}
-					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS && commandFile.config.contador >= client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
+					if(numero_usos &&  commandFile.config.contador >= Math.floor(numero_usos * 0.80)){
+						message.channel.send(`Advertencia: El comando ${commandFile.config.name} se está usando demasiado y podría bloquearse`);
+					}
+					if (numero_usos && commandFile.config.contador >= numero_usos) {
 						let bloqueaComandoSpam = client.functions.get("BLOQUEO_COMANDO");
 						bloqueaComandoSpam(commandFile, message, client);
 						return

@@ -22,9 +22,9 @@ module.exports = async (client, message, args) => {
         let role = message.guild.roles.find(role => role.name.toLowerCase() == role_name.toLowerCase().trim());
         if (role) {
             member.addRole(role, razon ? razon : "").then(() => {
-                message.channel.send(`Se agregó el rol **${role}** a **${member.user.username}**`);
+                message.channel.send(`Se agregó el rol **${role.name}** a **${member.user.username}**`);
             }).catch((error) => {
-                message.channel.send(`Sumimasen no pude agregarle el rol ${role} a ${member.user.username}`);
+                message.channel.send(`Sumimasen no pude agregarle el rol **${role.name}** a ${member.user.username}`);
             })
         } else {
             message.channel.send(`El rol **${role_name}** no existe no mames ┐(‘～\` )┌ `);

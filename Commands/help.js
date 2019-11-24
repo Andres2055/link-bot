@@ -1,146 +1,103 @@
 'use strict';
 const Discord = require("discord.js");
-const fs = require('fs');
-const commands = JSON.parse(fs.readFileSync('./Storage/commands_help.json'), 'utf8');
 
 const checkMD = message => {
 	if (message.channel.type === "dm") {
 		return;
 	} else {
-		return `Y-yo... te envié un mensaje <@${message.author.id}>`;
+		return `Y-yo... te envié un mensaje <@${message.author.id	}>`;
 	}
 }
 
 module.exports = async (client, message, args) => {
-	if (args.length === 0) {
+	const commands = client.command_help;
+	var embed = new Discord.RichEmbed().setColor(0x1D82B6);
+	embed.setTitle("Ayuda");
+	embed.setFooter(`Para conocer los comandos de cierto grupo escribe !help [grupo]. También puedes usar !help [comando] para ver el detalle de un comando en específico. Recuerda que abusar del uso de un comando hará que este sea desactivado automáticamente`);
 
-		const embed = new Discord.RichEmbed()
-			.setColor(0x1D82B6)
+	const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
+	var member = guild.member(message.author);
+	var grupos_visibles = [];
+	for (let [k, v] of Object.entries(client.config.get("COMMMAND_GROUPS"))) {
+		let accesible = false;
+		v.ROLES.forEach(rol => {
+			if (member.roles.some(role => role.name === rol)) { accesible = true; }
+		});
+		if (accesible) { grupos_visibles.push(k) }
+	}
 
-		let commandsFound = 0;
-
-		for (var cmd in commands) {
-			if (commands[cmd].group.toUpperCase() === 'USUARIO') {
-				commandsFound += 1
-				embed.addField(`:information_source:  ${commands[cmd].name}`, `**Descripción:** ${commands[cmd].desc}\n**Uso:** !${commands[cmd].usage}`);
-			}
-		}
-
-		embed.setFooter(`Estás viendo el grupo de comandos "usuario". Si quieres ver otro, escribe !help [grupo / comando]. Escribe !help grupos para verlos todos.`)
-		embed.setDescription(`**${commandsFound} comandos para ti** - Lo encerrado entre <> es requerido, si es [] es opcional`)
-
+	if (args.length === 0 || args.join(' ').toUpperCase() === 'GRUPOS') {
+		embed.setDescription(`Hola, mis comandos se dividen en diferentes grupos con una configuración propia. Según tu nivel de autorización, estos son los grupos a los que tienes acceso:`);
+		embed.addField("**Grupos**", grupos_visibles.join("\n"));
 		message.author.send({ embed })
-		message.channel.send({
-			embed: {
-				color: 0x1D82B6,
-				description: checkMD(message)
-			}
-		})
-
-	} else if (args.join(' ').toUpperCase() === 'GRUPOS') {
-
-		// Variables
-		let groups = '';
-
-		for (var cmd in commands) {
-			if (!groups.includes(commands[cmd].group)) {
-				groups += `${commands[cmd].group}\n`
-			}
-		}
-
-		message.channel.send({
-			embed: {
-				description: `**${groups}**`,
-				title: "Grupos",
-				color: 0x1D82B6
-			}
-		})
-
-		return;
-
-	} else {
-
-		let groupFound = '';
-
-		for (var cmd in commands) {
-			if (args.join(" ").trim().toUpperCase() === commands[cmd].group.toUpperCase()) {
-				groupFound = commands[cmd].group.toUpperCase();
-				break;
-			}
-		}
-
-		if (groupFound != '') {
-
-			const embed = new Discord.RichEmbed()
-				.setColor(0x1D82B6)
-
-			let commandsFound = 0;
-
-			for (var cmd in commands) {
-				if (commands[cmd].group.toUpperCase() === groupFound) {
-					commandsFound += 1
-					embed.addField(`:information_source: ${commands[cmd].name}`, `**Descripción:** ${commands[cmd].desc}\n**Uso:** !${commands[cmd].usage}`);
-				}
-			}
-
-			embed.setFooter(`Estás viendo el grupo de comandos "${groupFound}". Si quieres ver otro, escribe !help [grupo / comando]. Escribe !help grupos para verlos todos.`)
-			embed.setDescription(`**${commandsFound} comandos para ti** - Lo encerrado entre <> es requerido, si es [] es opcional`)
-
-			message.author.send({ embed })
+		if (message.channel.type != 'dm') {
 			message.channel.send({
 				embed: {
 					color: 0x1D82B6,
 					description: checkMD(message)
 				}
 			})
-
+		}
+	} else {
+		if (args.length > 1) {
+			message.channel.send(`${args.join(" ")} no es un término de búsqueda válido`);
 			return;
 		}
+		let busqueda = args.join("").toUpperCase().trim();
+		if (grupos_visibles.includes(busqueda)) {
+			//Búsqueda por grupo
+			let comandos_accesibles = commands.filter(c => c.group == busqueda);
+			embed.setDescription(`Hola, estos son los comandos exclusivos al grupo **${busqueda}** a los que tienes acceso:`);
+			comandos_accesibles.forEach(cmd => {
+				console.log(cmd.alias);
+				let c = `**Alias:** ${cmd.alias.join(" / ")}
+				**Descripción:** ${cmd.desc}
+				**Uso:** ${cmd.usage}\n`
+				embed.addField(`Comando: **${cmd.name}**`, c);
+			});
 
-		let commandFound = '';
-		let commandDesc = '';
-		let commandUsage = '';
-		let commandGroup = '';
-
-		for (var cmd in commands) { 
-			if (args.join(" ").trim().toUpperCase() === commands[cmd].name.toUpperCase()) {
-				commandFound = commands[cmd].name;
-				commandDesc  = commands[cmd].desc;
-				commandUsage = commands[cmd].usage;
-				commandGroup = commands[cmd].group;
-				break;
+			message.author.send({ embed });
+			if (message.channel.type != 'dm') {
+				message.channel.send({
+					embed: {
+						color: 0x1D82B6,
+						description: checkMD(message)
+					}
+				});
+			}
+		} else {
+			//Búsqueda por commandname
+			busqueda = busqueda.toLowerCase();
+			let comando = commands.find(c => c.name === busqueda || c.alias.includes(busqueda));
+			if (!comando) {
+				message.channel.send(`No encontré ningún grupo/comando llamado ${busqueda}`);
+				return;
+			}
+			embed.setDescription(`Hola, este es el detalle del comando **${busqueda}**`);
+			let c = `**Alias:** ${comando.alias.join(" / ")}
+				**Descripción:** ${comando.desc}
+				**Uso:** ${comando.usage}\n`
+			embed.addField(`Comando **${comando.name}**`, c);
+			message.author.send({ embed });
+			if (message.channel.type != 'dm') {
+				message.channel.send({
+					embed: {
+						color: 0x1D82B6,
+						description: checkMD(message)
+					}
+				});
 			}
 		}
 
-		if (commandFound === '') {
-			message.channel.send({
-				embed: {
-					description: "*Definitivamente no tengo ese comando/grupo llamado **``" + args.join(" ") + "``***",
-					color: 0x1D82B6,
-				}
-			})
-		}
-
-		message.channel.send({
-			embed: {
-				title: 'Lo encerrado entre <> es requerido, si es [] es opcional',
-				color: 0x1D82B6,
-				fields: [{
-					name: commandFound,
-					value: `**Descripción:** ${commandDesc}\n**Uso:** ${commandUsage}\n**Grupo:** ${commandGroup}`
-				}]
-			}
-		})
-		return;
 	}
 }
 
 module.exports.config = {
 	name: "help",
 	aliases: ["h", "ayuda"],
-	activo : true,
+	activo: true,
 	configurable: false,
 	grupo: "GENERAL",
-	contador : 0, 
-	mp : true
+	contador: 0,
+	mp: true
 }

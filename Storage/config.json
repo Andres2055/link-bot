@@ -210,7 +210,7 @@
 		]
 	},
 	"COMMMAND_GROUPS": {
-		"SUP_ADMIN": {
+		"ADMIN": {
 			"INTERVAL": 120,
 			"NUM_USOS": 5,
 			"BLOQUEO_TIME_OUT": 720,
@@ -256,11 +256,6 @@
 			"ROLES": [
 				"Admin",
 				"Moderadores"
-			]
-		},
-		"ADMIN": {
-			"ROLES": [
-				"Admin"
 			]
 		}
 	}

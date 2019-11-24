@@ -22,6 +22,6 @@ module.exports.config = {
     aliases: ["desactivar_antispam"],
     activo: true,
     configurable: true,
-    grupo: "SUP_ADMIN",
+    grupo: "ADMIN",
     contador: 0
 }
