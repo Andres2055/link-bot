@@ -158,13 +158,13 @@ client.on("message", message => {
 
 	if (!message.author.bot) {
 		try {
-			let spam = client.functions.get("SPAM");
+			/*let spam = client.functions.get("SPAM");
 			let response = spam(client, message);
 			if (response.length) {
 				let handle = client.functions.get("HANDLE_SPAM");
 				handle(client, response, message);
 				return;
-			}
+			}*/
 			if (!message.content.startsWith(PREFIX)) return;
 			let messageArray = message.content.split(/ +/g);
 			let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
