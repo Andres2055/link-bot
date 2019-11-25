@@ -23,7 +23,7 @@
 		},
 		{
 			"name": "ban",
-			"desc": "Banea a un miembro del server. Se requiere confirmación para realizar esta acción. El comando envía un mp informando al usuario el motivo y vigencia de su baneo",
+			"desc": "Banea a un miembro del server. Se requiere confirmación para realizar esta acción y tienes un minuto para confirmar. El comando envía un mp informando al usuario el motivo y vigencia de su baneo",
 			"usage": "ban <@miembro> <razón> | <vigencia> | [notas]"
 		},
 		{

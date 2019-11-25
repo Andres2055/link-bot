@@ -68,11 +68,11 @@ module.exports.agregarIntervalos = (client) => {
             console.log(`Grupo ${key} tendrá un intervalo de reinicio de ${value.INTERVAL} minutos`);
             client.setInterval(() => {
                 client.commands.filter(command => command.config.grupo == key).forEach(com => {
-                    console.log(`reseteando contador del comando ${com.config.name}`);
+                    //console.log(`reseteando contador del comando ${com.config.name}`);
                     if (com.config.activo) {
                         com.config.contador = 0;
                     }
-                    console.log(`contador actual: ${com.config.contador}`);
+                    //console.log(`contador actual: ${com.config.contador}`);
                 });
             }, value.INTERVAL * client.config.get("SCPDIARY_TIME"));
         }
