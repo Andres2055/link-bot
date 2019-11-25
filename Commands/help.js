@@ -50,7 +50,7 @@ module.exports = async (client, message, args) => {
 			let comandos_accesibles = commands.filter(c => c.group == busqueda);
 			embed.setDescription(`Hola, estos son los comandos exclusivos al grupo **${busqueda}** a los que tienes acceso:`);
 			comandos_accesibles.forEach(cmd => {
-				console.log(cmd.alias);
+				//console.log(cmd.alias);
 				let c = `**Alias:** ${cmd.alias.join(" / ")}
 				**Descripción:** ${cmd.desc}
 				**Uso:** ${cmd.usage}\n`
