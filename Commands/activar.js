@@ -25,7 +25,7 @@ module.exports = async (client, message, args) => {
 module.exports.config = {
     name: "activar",
     aliases: ["act", "activate"],
-    activo: true,
+    activo: false,
     configurable: false,
     grupo: "MODERADORES",
     contador: 0

@@ -40,6 +40,6 @@ module.exports.config = {
     aliases: ["add_role", "role"],
     activo: true,
     configurable: false,
-    grupo: "JR_STAFF",
+    grupo: "AMIGOS",
     contador: 0
 }

@@ -175,7 +175,7 @@ client.on("message", message => {
 			let commandFile = commandsName || aliasesName;
 			if (commandFile) {
 				if (commandFile.config.activo) {
-					let numero_usos = client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS;
+					/*let numero_usos = client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS;
 					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
 						//console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
 					}
@@ -190,7 +190,7 @@ client.on("message", message => {
 					if (!validarPermisos(message, commandFile)) {
 						message.channel.send(`Lo siento ${message.author} pero no tienes permiso para usar este comando`);
 						return
-					}
+					}*/
 					if (commandFile.config.grupo == 'SCP') {
 						let msgR = client.functions.get("MSN_R");
 						msgR(message);

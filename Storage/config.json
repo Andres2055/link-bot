@@ -211,45 +211,35 @@
 	},
 	"COMMMAND_GROUPS": {
 		"ADMIN": {
-			"INTERVAL": 120,
-			"NUM_USOS": 5,
-			"BLOQUEO_TIME_OUT": 720,
 			"ROLES": [
 				"Admin"
 			]
 		},
 		"GENERAL": {
-			"INTERVAL": 60,
-			"NUM_USOS": 100,
-			"BLOQUEO_TIME_OUT": 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
 		"SCP": {
-			"INTERVAL": 60,
-			"NUM_USOS": 100,
-			"BLOQUEO_TIME_OUT": 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
 		"OCIO": {
-			"INTERVAL": 60,
-			"NUM_USOS": 50,
-			"BLOQUEO_TIME_OUT": 120,
 			"ROLES": [
 				"Miembros",
 				"@everyone"
 			]
 		},
-		"JR_STAFF": {
+		"AMIGOS": {
 			"ROLES": [
 				"Admin",
 				"Moderadores",
-				"Junior Staff"
+				"AMIGOS",
+				"amigos",
+				"Amigos"
 			]
 		},
 		"MODERADORES": {

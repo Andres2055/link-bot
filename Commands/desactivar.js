@@ -24,7 +24,7 @@ module.exports = async (client, message, args) => {
 module.exports.config = {
     name: "desactivar",
     aliases: ["deact", "deactivate"],
-    activo: true,
+    activo: false,
     configurable: false,
     grupo: "MODERADORES",
     contador : 0
