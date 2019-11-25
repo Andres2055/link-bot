@@ -58,7 +58,7 @@
 		},
 		{
 			"name": "help",
-			"desc": "Despliega la lista de comandos o grupos a los que tienes acceso",
+			"desc": "Despliega la lista de comandos o grupos a los que tienes acceso. Puede ser usado por mp ¡Tal como lo hacemos ahora!",
 			"usage": "h [grupo o comando]"
 		},
 		{
@@ -78,7 +78,7 @@
 		},
 		{
 			"name": "pitch_haven",
-			"desc": "Cifra o Descifra texto usando el código de la serie Pitch Haven de la Fundación SCP. Apoyo para traducciones de esta serie, pero no realiza traducciones",
+			"desc": "Cifra o Descifra texto usando el código de la serie Pitch Haven de la Fundación SCP. Apoyo para traducciones de esta serie, pero no realiza traducciones Puede ser usado por mp",
 			"usage": "pitch_haven <cifrar/descifrar> | <texto que se va a cifrar o descifrar>"
 		},
 		{
