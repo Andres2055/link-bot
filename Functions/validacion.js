@@ -47,7 +47,7 @@ module.exports.validarSpam = (client, message) => {
     //Se valida la cantidad de adjuntos enviados por un mismo usuario
     let adjuntos_match = 0;
     client.cache_message.forEach(m => {
-        if (message.author.id && now - m.time <= (interval)) {
+        if (message.author.id == m.autor && now - m.time <= (interval)) {
             adjuntos_match += message.attachments.size;
         }
     });
