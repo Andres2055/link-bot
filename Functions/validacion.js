@@ -23,7 +23,7 @@ module.exports.validarSpam = (client, message) => {
     var warnable_images = !client.warned_users.filter(u => u.user == message.author.id && u.image && ((now - u.time) < interval)).length;
     //console.log(`el mensaje enviado por ${message.author} ${warnable ? " es punible por flood " : " no es punible por flood"}`);
     //console.log(`el mensaje enviado por ${message.author} ${warnable_channel ? " es punible por spam en el canal " : " no es punible por spam en el canal"}`);
-    console.log(`el mensaje enviado por ${message.author} ${warnable_images ? " es punible por spam de adjuntos " : " no es punible por spam de adjuntos"}`);
+    //console.log(`el mensaje enviado por ${message.author} ${warnable_images ? " es punible por spam de adjuntos " : " no es punible por spam de adjuntos"}`);
 
     if (client.warned_users.length >= 20) {
         client.warned_users = client.warned_users.slice(0, 10);
@@ -51,7 +51,7 @@ module.exports.validarSpam = (client, message) => {
             adjuntos_match += message.attachments.size;
         }
     });
-    console.log(adjuntos_match);
+    //console.log(adjuntos_match);
     if (messages_channel.length >= max_men_channel && warnable_channel) {
         let users = [];
         messages_channel.forEach(m =>{
@@ -74,7 +74,7 @@ module.exports.validarSpam = (client, message) => {
         response.push({ type: "ATTACHMENT", user: message.member.id, channel: message.channel.id });
         client.warned_users.push({ user: message.member.id, image: true, time: now });
     }
-    console.log(response);
+    //console.log(response);
     return response;
 };
 //324174158063992832
