@@ -2,7 +2,7 @@
 module.exports = async (client, message, args) => {
 	var name = message.member.nickname ? message.member.nickname : message.member.user.username;
 	if (args[0] != undefined) {
-		msg = args.join(" ");
+		let msg = args.join(" ");
 		message.channel.send(`**${name}** ha pagado sus respetos a **${msg}**`)
 	} else {
 		message.channel.send(`**${name}** ha pagado sus respetos`)
