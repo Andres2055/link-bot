@@ -47,7 +47,7 @@ module.exports = async (client, message, args) => {
         //console.log(response.body.photos.photo);
         let photos = response.body.photos.photo;
         console.log(photos.length);
-        var randomN = Math.floor(1 + Math.floor(Math.random() * 100)/photos.length);
+        var randomN = Math.floor((1 + Math.floor(Math.random() * 100))/photos.length);
         let url = `https://www.flickr.com/photos/${photos[randomN]['owner']}/${photos[randomN]['id']}`;
         message.channel.send(url);
     }).catch(error => {
