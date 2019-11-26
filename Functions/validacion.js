@@ -47,12 +47,11 @@ module.exports.validarSpam = (client, message) => {
     //Se valida la cantidad de adjuntos enviados por un mismo usuario
     let adjuntos_match = 0;
     client.cache_message.forEach(m => {
-        console.log(`Diferencia de tiempos ${now - m.time}`);
         if (message.author.id == m.autor && now - m.time < interval && warnable_images && message.channel.id == m.channel) {
             adjuntos_match += message.attachments.size;
         }
     });
-    console.log(`Cantidad de Aduntos enviados por ${message.member.name}: ${adjuntos_match}`);
+    console.log(`Cantidad de Aduntos enviados por ${message.member.user.username}: ${adjuntos_match}`);
     if (messages_channel.length >= max_men_channel && warnable_channel) {
         let users = [];
         messages_channel.forEach(m => {

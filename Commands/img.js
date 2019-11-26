@@ -10,12 +10,12 @@ module.exports = async (client, message, args) => {
         return;
     }
     var safe = true;
-    args.forEach(arg =>{
-        if(client.config.get("SERVICES").FLICKR_FILTER.includes(arg.trim().toLowerCase())){
+    args.forEach(arg => {
+        if (client.config.get("SERVICES").FLICKR_FILTER.includes(arg.trim().toLowerCase())) {
             safe = false;
         }
     });
-    if(!safe){
+    if (!safe) {
         message.channel.send("Listen here little shit, nada de NSFW :angry_marw:");
         return;
     }
@@ -23,7 +23,7 @@ module.exports = async (client, message, args) => {
     var flickr = new Flickr(FLICKR_TOKEN);
     var textSearch = '';
     var n = 10;
-    var randomN = 1 + Math.floor(Math.random() * 100);
+
 
     if (args.length == 1) {
         n = 100;
@@ -32,11 +32,9 @@ module.exports = async (client, message, args) => {
         else if (args[0].toLowerCase() == "perro" || args[0].toLowerCase() == "dog") { textSearch = "funny+dog"; }
         else {
             textSearch = args.join("+");
-            //randomN = 0;
         }
     } else {
         textSearch = args.join("+");
-        //randomN = 0;
     }
     console.log(textSearch);
     flickr.photos.search({
@@ -49,6 +47,7 @@ module.exports = async (client, message, args) => {
         //console.log(response.body.photos.photo);
         let photos = response.body.photos.photo;
         console.log(photos.length);
+        var randomN = Math.floor(1 + Math.floor(Math.random() * 100)/photos.length);
         let url = `https://www.flickr.com/photos/${photos[randomN]['owner']}/${photos[randomN]['id']}`;
         message.channel.send(url);
     }).catch(error => {
