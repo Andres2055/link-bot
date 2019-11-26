@@ -6,8 +6,8 @@ module.exports.validarSpam = (client, message) => {
     let response = [];
     //console.log(client.config.get("ANTISPAM").EXCEPCIONES);
     //console.log(message.channel.id);
-    if(client.config.get("ANTISPAM").EXCEPCIONES.includes(message.channel.id.toString()) ||
-    client.config.get("ANTISPAM").CANALES_TEMPORALES.includes(message.channel.id.toString())){
+    if (client.config.get("ANTISPAM").EXCEPCIONES.includes(message.channel.id.toString()) ||
+        client.config.get("ANTISPAM").CANALES_TEMPORALES.includes(message.channel.id.toString())) {
         //console.log("Nope, acá no vamos a validar el spam");
         return response;
     }
@@ -23,7 +23,7 @@ module.exports.validarSpam = (client, message) => {
     var warnable_images = !client.warned_users.filter(u => u.user == message.author.id && u.image && ((now - u.time) < interval)).length;
     //console.log(`el mensaje enviado por ${message.author} ${warnable ? " es punible por flood " : " no es punible por flood"}`);
     //console.log(`el mensaje enviado por ${message.author} ${warnable_channel ? " es punible por spam en el canal " : " no es punible por spam en el canal"}`);
-    //console.log(`el mensaje enviado por ${message.author} ${warnable_images ? " es punible por spam de adjuntos " : " no es punible por spam de adjuntos"}`);
+    console.log(`el mensaje enviado por ${message.author} ${warnable_images ? " es punible por spam de adjuntos " : " no es punible por spam de adjuntos"}`);
 
     if (client.warned_users.length >= 20) {
         client.warned_users = client.warned_users.slice(0, 10);
@@ -47,15 +47,15 @@ module.exports.validarSpam = (client, message) => {
     //Se valida la cantidad de adjuntos enviados por un mismo usuario
     let adjuntos_match = 0;
     client.cache_message.forEach(m => {
-        if (message.author.id == m.autor && now - m.time <= (interval) && warnable_images && message.channel.id == m.channel) {
+        if (message.author.id == m.autor && now - m.time < interval && warnable_images && message.channel.id == m.channel) {
             adjuntos_match += message.attachments.size;
         }
     });
-    //console.log(adjuntos_match);
+    console.log(`Cantidad de Aduntos enviados por ${message.member.name}: ${adjuntos_match}`);
     if (messages_channel.length >= max_men_channel && warnable_channel) {
         let users = [];
-        messages_channel.forEach(m =>{
-            if(!users.includes(m.autor) && warnable){
+        messages_channel.forEach(m => {
+            if (!users.includes(m.autor) && warnable) {
                 users.push(m.autor);
             }
         });

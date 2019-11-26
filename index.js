@@ -46,7 +46,7 @@ fs.readdir("./Commands/", (err, files) => {
 		})
 	});
 	console.log("¡Todos los comandos cargados!");
-	client.command_help.forEach(c =>{
+	client.command_help.forEach(c => {
 		let comando = client.commands.get(c.name);
 		c.alias = comando.config.aliases;
 		c.group = comando.config.grupo;
@@ -179,7 +179,7 @@ client.on("message", message => {
 					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
 						//console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
 					}
-					if(numero_usos &&  commandFile.config.contador >= Math.floor(numero_usos * 0.80)){
+					if (numero_usos && commandFile.config.contador >= Math.floor(numero_usos * 0.80)) {
 						message.channel.send(`Advertencia: El comando ${commandFile.config.name} se está usando demasiado y podría bloquearse`);
 					}
 					if (numero_usos && commandFile.config.contador >= numero_usos) {
