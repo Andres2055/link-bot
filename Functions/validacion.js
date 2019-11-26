@@ -51,7 +51,7 @@ module.exports.validarSpam = (client, message) => {
             adjuntos_match += message.attachments.size;
         }
     });
-    console.log(`Cantidad de Aduntos enviados por ${message.member.user.username}: ${adjuntos_match}`);
+    console.log(`Cantidad de Aduntos enviados por ${message.member.user.username} en ${message.channel}: ${adjuntos_match}`);
     if (messages_channel.length >= max_men_channel && warnable_channel) {
         let users = [];
         messages_channel.forEach(m => {
