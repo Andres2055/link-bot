@@ -9,7 +9,7 @@
 		{
 			"name": "advertencia",
 			"desc": "Agrega el rol de Advertencia correspondiente al usuario. Una vez agregado el rol, se crea un mensaje en #registro-disciplinario. El usuario es notificado de la razón y vigencia de dicha sanción",
-			"usage": "advertencia <@miembro> | <razón> | <vigencia> | [notas]"
+			"usage": "advertencia <@miembro> <razón> | <vigencia> | [notas]"
 		},
 		{
 			"name": "art",
