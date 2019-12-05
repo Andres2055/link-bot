@@ -73,7 +73,7 @@ var getMessage = (args, adv, userId) => {
 module.exports.config = {
     name: "advertencia",
     aliases: ["adv", "warn"],
-    activo: true,
+    activo: false,
     configurable: false,
     grupo: "JR_STAFF",
     contador: 0

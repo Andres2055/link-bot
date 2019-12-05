@@ -20,7 +20,7 @@ module.exports = (client, message, args) => {
 module.exports.config = {
     name: "antispam",
     aliases: ["desactivar_antispam"],
-    activo: true,
+    activo: false,
     configurable: true,
     grupo: "ADMIN",
     contador: 0

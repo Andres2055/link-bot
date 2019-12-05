@@ -27,9 +27,9 @@ module.exports.msgR = async (message) => { //%10 de que salga
         }
 
         var orangutanes = [
-            "Nueve", "Ocho", "Siete",
+            "Un", "Nueve", "Ocho", "Siete",
             "Seis", "Cinco", "Cuatro",
-            "Tres", "Dos", "Un"
+            "Tres", "Dos"
         ]
 
         var preSendMsg = [
@@ -42,7 +42,7 @@ module.exports.msgR = async (message) => { //%10 de que salga
             "Todos nos hemos reído, pero ya no es gracioso.",
             `Woowee veh i matate <@${message.author.id}>`,
             theOrangutan(orangutan),
-            '* lo lame *'
+            '_* lo lame *_'
         ]
         message.channel.send(preSendMsg[msgNum2])
     }

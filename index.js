@@ -158,16 +158,14 @@ client.on("message", message => {
 
 	if (!message.author.bot) {
 		try {
-			if (message.channel.type != 'dm') {
-				let spam = client.functions.get("SPAM");
-				let response = spam(client, message);
-				if (response.length) {
-					let handle = client.functions.get("HANDLE_SPAM");
-					handle(client, response, message);
-					return;
-				}
-			}
 
+			/*let spam = client.functions.get("SPAM");
+			let response = spam(client, message);
+			if (response.length) {
+				let handle = client.functions.get("HANDLE_SPAM");
+				handle(client, response, message);
+				return;
+			}*/
 			if (!message.content.startsWith(PREFIX)) return;
 			let messageArray = message.content.split(/ +/g);
 			let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
@@ -182,14 +180,14 @@ client.on("message", message => {
 					if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
 						//console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
 					}
-					if (numero_usos && commandFile.config.contador >= Math.floor(numero_usos * 0.80)) {
+					/*if (numero_usos && commandFile.config.contador >= Math.floor(numero_usos * 0.80)) {
 						message.channel.send(`Advertencia: El comando ${commandFile.config.name} se está usando demasiado y podría bloquearse`);
 					}
 					if (numero_usos && commandFile.config.contador >= numero_usos) {
 						let bloqueaComandoSpam = client.functions.get("BLOQUEO_COMANDO");
 						bloqueaComandoSpam(commandFile, message, client);
 						return
-					}
+					}*/
 					if (!validarPermisos(message, commandFile)) {
 						message.channel.send(`Lo siento ${message.author} pero no tienes permiso para usar este comando`);
 						return

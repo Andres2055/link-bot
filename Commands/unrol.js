@@ -32,7 +32,7 @@ module.exports = async (client, message, args) => {
 module.exports.config = {
     name: "unrol",
     aliases: ["remove_rol", "unrole"],
-    activo: true,
+    activo: false,
     configurable: false,
     grupo: "JR_STAFF",
     contador: 0
