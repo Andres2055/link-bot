@@ -78,7 +78,7 @@ var confirmacion = (message, username, razon, client) => {
 module.exports.config = {
     name: "ban",
     aliases: ["banear", "banamex"],
-    activo: false,
+    activo: true,
     configurable: false,
     grupo: "MODERADORES",
     contador: 0

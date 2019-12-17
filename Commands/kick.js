@@ -52,7 +52,7 @@ module.exports = async (client, message, args) => {
 module.exports.config = {
     name: "kick",
     aliases: ["kickear", "patear"],
-    activo: false,
+    activo: true,
     configurable: false,
     grupo: "JR_STAFF",
     contador: 0
