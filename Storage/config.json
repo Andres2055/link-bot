@@ -166,7 +166,7 @@
 		"EXCEPCIONES": [
 			"193820592384901129"
 		],
-		"CANALES_TEMPORALES" : []
+		"CANALES_TEMPORALES": []
 	},
 	"SERVER": {
 		"REGISTRO_EVENTOS": [
@@ -183,8 +183,7 @@
 			"Merlin-VI"
 		],
 		"DEVELOPERS": [
-			"Merlin-VI",
-			"LazyLasagne"
+			"Merlin-VI"
 		],
 		"NAME": "Sitio-34",
 		"CHANNEL_WELCOME": "193819598565408769",
@@ -258,5 +257,14 @@
 				"Moderadores"
 			]
 		}
-	}
+	},
+	"RSS_CONFIGURATIONS": [{
+		"nombre" : "default",
+		"url" : "default",
+		"interval" : 5,
+		"channel" : "idFefault",
+		"date" : "fecha Default",
+		"estatus" : "defatul",
+		"id" : "default"
+	}]
 }

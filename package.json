@@ -16,7 +16,9 @@
     "flickr-sdk": "^3.9.0",
     "fs": "0.0.1-security",
     "googleapis": "^45.0.0",
+    "html2json": "^1.0.2",
     "mathjs": "^6.2.3",
+    "rss-parser": "^3.7.3",
     "scpper.js": "^3.0.3",
     "wikijs": "^4.11.1"
   },

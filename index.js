@@ -76,6 +76,7 @@ fs.readdir("./Commands/", (err, files) => {
 	//sanciones.set("BANEO", []);
 	const internal_function = require("./Functions/internal.js");
 	const validaciones = require("./Functions/validacion.js");
+	const rss = require("./Functions/rss.js");
 	client.functions.set("INFORMAR_ERROR", internal_function.notificar);//Función que notifica de un error a los desarrolladores
 	client.functions.set("BLOQUEO_COMANDO", internal_function.bloqueaComandoSpam);//Función que bloquea comandos que han sido spameados
 	client.functions.set("MSN_R", internal_function.msgR);//Función que genera un mensaje aleatorio de espera
@@ -83,7 +84,11 @@ fs.readdir("./Commands/", (err, files) => {
 	client.functions.set("EMBED_NOTIFY", internal_function.getRegistroDisciplinario);//Función que genera el mensaje que irá al canal de registro disciplinario
 	client.functions.set("SPAM", validaciones.validarSpam);//Función que valida si el mensaje entrante está clasificado como spam
 	client.functions.set("HANDLE_SPAM", validaciones.handleSpam);//Función que procesa los mensajes marcados como spam
-	//Estos registros serán usaos más adelante
+	client.functions.set("FLAGS", internal_function.process_flags);//Función que procesa las banderas enviadas en un comando
+	client.functions.set("INIT_RSS", rss.initRSS);
+	client.functions.set("START_RSS", rss.startRSS);
+	client.functions.set("STOP_RSS", rss.stopRSS);
+	//Estos registros serán usados más adelante
 	//client.registros.set("SANCION", sanciones);
 	//client.registros.set("CONFIGURACION", []);
 	//client.registros.set("ADVERTENCIAABUSO_COMANDO", []);
