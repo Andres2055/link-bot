@@ -14,6 +14,7 @@ module.exports.initRSS = async (client, flags, message) => {
         "url": flags.url,
         "interval": flags.interval,
         "channel": flags.channel,
+        "channel_name": flags.channel_name,
         "date": new Date(),
         "estatus": "ACTIVO"
     };
@@ -30,7 +31,7 @@ module.exports.initRSS = async (client, flags, message) => {
         console.log(err);
     });
 
-    let id = client.setInterval(() => {
+    let intObj = client.setInterval(() => {
         let now = new Date();
         now.setMinutes(now.getMinutes() - cnf.interval);
         console.log(`Notificando todos los mensajes del feed cuya hora sea posterior a ${now}`)
@@ -45,14 +46,14 @@ module.exports.initRSS = async (client, flags, message) => {
             console.log(err);
         });
     }, cnf.interval * client.config.get("SCPDIARY_TIME"));
-    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].id = id;
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].interval_obj = intObj;
     console.log(client.config.get("RSS_CONFIGURATIONS"));
 
 }
 
 module.exports.startRSS = async (client, flags, message) => {
     let cnf = client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0];
-    let id = client.setInterval(() => {
+    let intObj = client.setInterval(() => {
         let now = new Date();
         now.setMinutes(now.getMinutes() - cnf.interval);
         let channel = message.guild.channels.find(c => c.id == cnf.channel);
@@ -65,42 +66,41 @@ module.exports.startRSS = async (client, flags, message) => {
             console.log(err);
         });
     }, cnf.interval * client.config.get("SCPDIARY_TIME"));
-    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].id = id;
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].interval_obj = intObj;
     client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].estatus = "ACTIVO";
-    message.channel.send(`Se activó el lector RSS ${cnf.nombre} para la url ${cnf.url}` )
+    message.channel.send(`Se activó el lector RSS ${cnf.nombre} para la url ${cnf.url}`)
     console.log(client.config.get("RSS_CONFIGURATIONS"));
 }
 
 module.exports.stopRSS = async (client, flags, message) => {
-    console.log(flags);
     let cnf = client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0];
-    console.log(cnf)
-    client.clearInterval(cnf.interval);
-    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].id = 0;
+    client.clearInterval(cnf.interval_obj);
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].interval_obj = "";
     client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].estatus = "INACTIVO"
     console.log(client.config.get("RSS_CONFIGURATIONS"));
-    message.channel.send(`Se desactivó el lector RSS ${cnf.nombre} para la url ${cnf.url}` )
+    message.channel.send(`Se desactivó el lector RSS ${cnf.nombre} para la url ${cnf.url}`)
 }
-module.exports.allRSS = async (client, flags, message) => {
 
+module.exports.consultar = async (client, flags, message) => {
+    client.config.get("RSS_CONFIGURATIONS").forEach(cnf => {
+        message.channel.send(configToMessage(cnf));
+    });
 }
+
 module.exports.updateRSS = async (client, flags, message) => {
 
 }
 
-/*var rss = (message, config) => {
-    let now = new Date();
-    now.setMinutes(now.getMinutes() - config.interval);
-    let channel = message.guild.channels.find(c => c.id == config.channel);
-    parser.parseURL(config.url).then(feed => {
-        feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
-            channel.send(feedToMessage(f))
-        });
-    }).catch(err => {
-        message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
-        console.log(err);
-    });
-}*/
+var configToMessage = (cnf) => {
+    const message = new Discord.RichEmbed()
+        .setTitle(`Configuración : **${cnf.nombre}**`)
+        .setColor("ECCC00")
+        .addField("URL del Feed", `**${cnf.url}**`)
+        .addField("Intervalo de Lectura", `**${cnf.interval}** minutos`)
+        .addField("Canal de publicación", `**${cnf.channel_name}**`)
+        .addField("Estatus", `**${cnf.estatus}**`);
+    return message;
+}
 
 var titleChannelRSS = (title, link) => {
     const titleMessage = new Discord.RichEmbed()

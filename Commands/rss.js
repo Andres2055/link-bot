@@ -1,18 +1,13 @@
 'use strict';
-
-const commands = {
-    INIT: "función de init",
-    START: "función para iniciar",
-    STOP: "detener el feed de un rss"
-};
+const Discord = require("discord.js");
 
 module.exports = async (client, message, args) => {
     const commands = {
         INIT: client.functions.get("INIT_RSS"),
         START: client.functions.get("START_RSS"),
         STOP: client.functions.get("STOP_RSS"),
-        CONSULTAR : client.functions.get("ALL_RSS"),
-        UPDATE : client.functions.get("UPDATE_RSS")
+        ALL: client.functions.get("ALL_RSS"),
+        //UPDATE: client.functions.get("UPDATE_RSS")
     };
     let command_name = args[0].toUpperCase();
     let flstr = args.slice(1).join(" ");
@@ -21,12 +16,15 @@ module.exports = async (client, message, args) => {
         let flags = client.functions.get("FLAGS")(flstr);
         console.log(flags)
         if (validateFlags(flags, command_name, client, message)) {
-            command(client, flags, message)
-        } 
+            command(client, flags, message);
+        }
     } else {
         message.channel.send(`Lo siento, pero **${command_name}** no coincide con niguna instrucción para el comando RSS`)
     }
 };
+
+
+
 
 var validateFlags = (flag, command_name, client, message) => {
     if (Object.entries(flag).length > 0) {
@@ -38,10 +36,9 @@ var validateFlags = (flag, command_name, client, message) => {
             case "STOP":
                 return validarStop(flag, message, client);
         }
-        if(command_name == "START"){
-            return validarStart(flag, message, client);
-        }
-        return true
+        return true;
+    } else if (command_name == "ALL") {
+        return true;
     } else {
         message.channel.send(`Lo siento, pero los parámetros no son válidos para ejecutar la función ${command_name}`)
         return false;
@@ -60,7 +57,7 @@ var validarStart = (flags, message, client) => {
     flags.nombre = flags.nombre.toUpperCase();
     let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre).length;
     if (rss_config) {
-        if(rss_config.estatus == "ACTIVO"){
+        if (rss_config.estatus == "ACTIVO") {
             message.channel.send(`El lector RSS ${flags.nombre} ya está activo`);
             return false;
         }
@@ -83,7 +80,7 @@ var validarStop = (flags, message, client) => {
     flags.nombre = flags.nombre.toUpperCase();
     let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre).length;
     if (rss_config) {
-        if(rss_config.estatus == "INACTIVO"){
+        if (rss_config.estatus == "INACTIVO") {
             message.channel.send(`El lector RSS ${flags.nombre} ya está inactivo`);
             return false;
         }
@@ -113,7 +110,7 @@ var validarInit = (flags, message, client) => {
         }
     }
     let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre && cnf.url == flags.url).length;
-    if (rss_config){
+    if (rss_config) {
         message.channel.send(`Ya existe una configuración RSS para el nombre ${flags.nombre}, leyendo la url ${flags.url}`);
         return false
     }
@@ -146,6 +143,7 @@ var validarInit = (flags, message, client) => {
     let channel = message.guild.channels.find(c => c.name == flags.channel || c.id == flags.channel);
     if (channel) {
         flags.channel = channel.id;
+        flags.channel_name = channel.name
     } else {
         message.channel.send(`No se ha encontrado el canal ${flags.channel}`);
         return false;

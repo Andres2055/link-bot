@@ -211,7 +211,7 @@
 	"COMMMAND_GROUPS": {
 		"ADMIN": {
 			"INTERVAL": 120,
-			"NUM_USOS": 5,
+			"NUM_USOS": 50,
 			"BLOQUEO_TIME_OUT": 720,
 			"ROLES": [
 				"Admin"
@@ -259,12 +259,13 @@
 		}
 	},
 	"RSS_CONFIGURATIONS": [{
-		"nombre" : "default",
-		"url" : "default",
+		"nombre" : "DEFAULT",
+		"url" : "DEFAULT",
 		"interval" : 5,
-		"channel" : "idFefault",
-		"date" : "fecha Default",
-		"estatus" : "defatul",
-		"id" : "default"
+		"channel" : "DEFAULT",
+		"channel_name" : "DEFAULT",
+		"date" : "DEFAULT",
+		"estatus" : "ACTIVO",
+		"interval_obj" : "DEFAULT"
 	}]
 }
