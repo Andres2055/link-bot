@@ -83,6 +83,7 @@ module.exports.stopRSS = async (client, flags, message) => {
 
 module.exports.consultar = async (client, flags, message) => {
     client.config.get("RSS_CONFIGURATIONS").forEach(cnf => {
+        console.log(cnf);
         message.channel.send(configToMessage(cnf));
     });
 }
@@ -111,6 +112,7 @@ var titleChannelRSS = (title, link) => {
 }
 
 var feedToMessage = (item) => {
+    console.log(`Nuevo mensaje ${item["content:encoded"].substring(0,50)}`);
     let message = rssToMessage(item["content:encoded"]);
     const post = new Discord.RichEmbed()
         .setURL(`${item.link}`)
