@@ -10,13 +10,16 @@ module.exports = async (client, message, args) => {
     const commands = {
         INIT: client.functions.get("INIT_RSS"),
         START: client.functions.get("START_RSS"),
-        STOP: client.functions.get("STOP_RSS")
+        STOP: client.functions.get("STOP_RSS"),
+        CONSULTAR : client.functions.get("ALL_RSS"),
+        UPDATE : client.functions.get("UPDATE_RSS")
     };
     let command_name = args[0].toUpperCase();
     let flstr = args.slice(1).join(" ");
     let command = commands[command_name]
     if (command) {
         let flags = client.functions.get("FLAGS")(flstr);
+        console.log(flags)
         if (validateFlags(flags, command_name, client, message)) {
             command(client, flags, message)
         } 
@@ -48,15 +51,16 @@ var validateFlags = (flag, command_name, client, message) => {
 var validarStart = (flags, message, client) => {
     if (!flags.nombre || flags.nombre.trim() == "") {
         if (!flags.n || flags.n.trim() == "") {
-            message.channel.send("No se ha enviado el nombre que se asignará a esta configuración RSS");
+            message.channel.send("No se ha enviado el nombre de la configuración RSS a iniciar");
             return false;
         } else {
             flags.nombre = flags.n;
         }
     }
-    let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre && cnf.url == flags.url).length;
+    flags.nombre = flags.nombre.toUpperCase();
+    let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre).length;
     if (rss_config) {
-        if(rss_config.estatus = "ACTIVO"){
+        if(rss_config.estatus == "ACTIVO"){
             message.channel.send(`El lector RSS ${flags.nombre} ya está activo`);
             return false;
         }
@@ -70,15 +74,16 @@ var validarStart = (flags, message, client) => {
 var validarStop = (flags, message, client) => {
     if (!flags.nombre || flags.nombre.trim() == "") {
         if (!flags.n || flags.n.trim() == "") {
-            message.channel.send("No se ha enviado el nombre que se asignará a esta configuración RSS");
+            message.channel.send("No se ha enviado el nombre de la configuración RSS a detener");
             return false;
         } else {
             flags.nombre = flags.n;
         }
     }
-    let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre && cnf.url == flags.url).length;
+    flags.nombre = flags.nombre.toUpperCase();
+    let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre).length;
     if (rss_config) {
-        if(rss_config.estatus = "INACTIVO"){
+        if(rss_config.estatus == "INACTIVO"){
             message.channel.send(`El lector RSS ${flags.nombre} ya está inactivo`);
             return false;
         }
@@ -98,6 +103,7 @@ var validarInit = (flags, message, client) => {
             flags.nombre = flags.n;
         }
     }
+    flags.nombre = flags.nombre.toUpperCase();
     if (!flags.url || flags.url.trim() == "") {
         if (!flags.u || flags.u.trim() == "") {
             message.channel.send("No se ha enviado la url de donde se leerá el RSS");

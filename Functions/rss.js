@@ -10,7 +10,7 @@ let parser = new Parser({
 
 module.exports.initRSS = async (client, flags, message) => {
     let cnf = {
-        "nombre": flags.nombre,
+        "nombre": flags.nombre.toUpperCase(),
         "url": flags.url,
         "interval": flags.interval,
         "channel": flags.channel,
@@ -22,23 +22,86 @@ module.exports.initRSS = async (client, flags, message) => {
     message.channel.send(`:newspaper: Comenzaré a leer el RSS desde la url **${cnf.url}**, cada **${cnf.interval}** minutos en el canal ${channel}. Para detenerlo usa el nombre **${cnf.nombre}** :D`);
     await parser.parseURL(cnf.url).then(feed => {
         channel.send(titleChannelRSS(feed.title, feed.link));
-        feed.items.reverse().slice(feed.items.length - 15).forEach(f => {
+        feed.items.reverse().slice(feed.items.length - 5).forEach(f => {
             channel.send(feedToMessage(f))
-        })
+        });
     }).catch(err => {
         message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :c");
         console.log(err);
     });
 
+    let id = client.setInterval(() => {
+        let now = new Date();
+        now.setMinutes(now.getMinutes() - cnf.interval);
+        console.log(`Notificando todos los mensajes del feed cuya hora sea posterior a ${now}`)
+        let channel = message.guild.channels.find(c => c.id == cnf.channel);
+        parser.parseURL(cnf.url).then(feed => {
+            feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
+                console.log("notificando un mensaje");
+                channel.send(feedToMessage(f));
+            });
+        }).catch(err => {
+            message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
+            console.log(err);
+        });
+    }, cnf.interval * client.config.get("SCPDIARY_TIME"));
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].id = id;
+    console.log(client.config.get("RSS_CONFIGURATIONS"));
+
 }
 
-module.exports.startRSS = () => {
+module.exports.startRSS = async (client, flags, message) => {
+    let cnf = client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0];
+    let id = client.setInterval(() => {
+        let now = new Date();
+        now.setMinutes(now.getMinutes() - cnf.interval);
+        let channel = message.guild.channels.find(c => c.id == cnf.channel);
+        parser.parseURL(cnf.url).then(feed => {
+            feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
+                channel.send(feedToMessage(f))
+            });
+        }).catch(err => {
+            message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
+            console.log(err);
+        });
+    }, cnf.interval * client.config.get("SCPDIARY_TIME"));
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].id = id;
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].estatus = "ACTIVO";
+    message.channel.send(`Se activó el lector RSS ${cnf.nombre} para la url ${cnf.url}` )
+    console.log(client.config.get("RSS_CONFIGURATIONS"));
+}
+
+module.exports.stopRSS = async (client, flags, message) => {
+    console.log(flags);
+    let cnf = client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0];
+    console.log(cnf)
+    client.clearInterval(cnf.interval);
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].id = 0;
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].estatus = "INACTIVO"
+    console.log(client.config.get("RSS_CONFIGURATIONS"));
+    message.channel.send(`Se desactivó el lector RSS ${cnf.nombre} para la url ${cnf.url}` )
+}
+module.exports.allRSS = async (client, flags, message) => {
+
+}
+module.exports.updateRSS = async (client, flags, message) => {
 
 }
 
-module.exports.stopRSS = () => {
+/*var rss = (message, config) => {
+    let now = new Date();
+    now.setMinutes(now.getMinutes() - config.interval);
+    let channel = message.guild.channels.find(c => c.id == config.channel);
+    parser.parseURL(config.url).then(feed => {
+        feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
+            channel.send(feedToMessage(f))
+        });
+    }).catch(err => {
+        message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
+        console.log(err);
+    });
+}*/
 
-}
 var titleChannelRSS = (title, link) => {
     const titleMessage = new Discord.RichEmbed()
         .setURL(link)
@@ -67,7 +130,7 @@ var rssToMessage = (content) => {
     json_mensaje.forEach(m => { mensaje += nodoToString(m) })
     if (mensaje.length > 2000) {
         mensaje = mensaje.substring(0, 2000)
-        mensaje += "[...]"
+        mensaje += " [...]"
     }
     let pie = ""
     json_pie.forEach(m => { pie += nodoToString(m) })
@@ -88,12 +151,13 @@ var nodoToString = (nodo) => {
     if (nodo.tag == "p") { texto += '\n\n' }
     if (nodo.tag == "a") { texto += ' ' }
     if (nodo.tag == "blockquote") { texto = '> ' + texto }
-    if (nodo.tag == "strong") { texto = "**" + texto + "**" }
-    if (nodo.tag == "em") { texto = "_" + texto + "_" }
+    if (nodo.tag == "strong") { texto = "**" + texto + "** " }
+    if (nodo.tag == "em") { texto = "_" + texto + "_ " }
     return decodeHtmlEntities(texto)
 }
 
 var decodeHtmlEntities = (string) => {
     return string.replace(/&quot;/g, '\"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
-        .replace(/&apos;/g, '\'').replace(/&nbsp;/g, ' ').replace(/&#160;/g, " ").replace(/&#8212;/g, "--");
+        .replace(/&apos;/g, '\'').replace(/&nbsp;/g, ' ').replace(/&#160;/g, " ").replace(/&#8212;/g, "--")
+        .replace(/&#8230;/g, "...");
 }
