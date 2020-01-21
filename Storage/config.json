@@ -258,14 +258,5 @@
 			]
 		}
 	},
-	"RSS_CONFIGURATIONS": [{
-		"nombre" : "DEFAULT",
-		"url" : "DEFAULT",
-		"interval" : 5,
-		"channel" : "DEFAULT",
-		"channel_name" : "DEFAULT",
-		"date" : "DEFAULT",
-		"estatus" : "ACTIVO",
-		"interval_obj" : "DEFAULT"
-	}]
+	"RSS_CONFIGURATIONS": []
 }

@@ -23,7 +23,7 @@ module.exports.initRSS = async (client, flags, message) => {
     message.channel.send(`:newspaper: Comenzaré a leer el RSS desde la url **${cnf.url}**, cada **${cnf.interval}** minutos en el canal ${channel}. Para detenerlo usa el nombre **${cnf.nombre}** :D`);
     await parser.parseURL(cnf.url).then(feed => {
         channel.send(titleChannelRSS(feed.title, feed.link));
-        feed.items.reverse().slice(feed.items.length - 5).forEach(f => {
+        feed.items.reverse().forEach(f => {
             channel.send(feedToMessage(f))
         });
     }).catch(err => {
