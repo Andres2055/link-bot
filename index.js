@@ -89,7 +89,7 @@ fs.readdir("./Commands/", (err, files) => {
 	client.functions.set("START_RSS", rss.startRSS);
 	client.functions.set("STOP_RSS", rss.stopRSS);
 	client.functions.set("ALL_RSS", rss.consultar);
-	//client.functions.set("UPDATE_RSS", rss.updateRSS);
+	client.functions.set("UPDATE_RSS", rss.updateRSS);
 	//Estos registros serán usados más adelante
 	//client.registros.set("SANCION", sanciones);
 	//client.registros.set("CONFIGURACION", []);

@@ -7,14 +7,14 @@ module.exports = async (client, message, args) => {
         START: client.functions.get("START_RSS"),
         STOP: client.functions.get("STOP_RSS"),
         ALL: client.functions.get("ALL_RSS"),
-        //UPDATE: client.functions.get("UPDATE_RSS")
+        UPDATE: client.functions.get("UPDATE_RSS")
     };
     let command_name = args[0].toUpperCase();
     let flstr = args.slice(1).join(" ");
     let command = commands[command_name]
     if (command) {
         let flags = client.functions.get("FLAGS")(flstr);
-        console.log(flags)
+        //console.log(flags)
         if (validateFlags(flags, command_name, client, message)) {
             command(client, flags, message);
         }
@@ -35,6 +35,8 @@ var validateFlags = (flag, command_name, client, message) => {
                 return validarStart(flag, message, client);
             case "STOP":
                 return validarStop(flag, message, client);
+            case "UPDATE":
+                return validarUpdate(flag, message, client);
         }
         return true;
     } else if (command_name == "ALL") {
@@ -44,6 +46,20 @@ var validateFlags = (flag, command_name, client, message) => {
         return false;
     }
 };
+
+var validarUpdate = (flags, message, client) => {
+    if (!flags.nombre || flags.nombre.trim() == "") {
+        if (!flags.n || flags.n.trim() == "") {
+            message.channel.send("No se ha enviado el nombre de la configuración RSS para actualizar");
+            return false;
+        } else {
+            flags.nombre = flags.n;
+        }
+    }
+    flags.nombre = flags.nombre.toUpperCase();
+
+    
+}
 
 var validarStart = (flags, message, client) => {
     if (!flags.nombre || flags.nombre.trim() == "") {
