@@ -166,7 +166,7 @@
 		"EXCEPCIONES": [
 			"193820592384901129"
 		],
-		"CANALES_TEMPORALES" : []
+		"CANALES_TEMPORALES": []
 	},
 	"SERVER": {
 		"REGISTRO_EVENTOS": [
@@ -183,8 +183,7 @@
 			"Merlin-VI"
 		],
 		"DEVELOPERS": [
-			"Merlin-VI",
-			"LazyLasagne"
+			"Merlin-VI"
 		],
 		"NAME": "Sitio-34",
 		"CHANNEL_WELCOME": "193819598565408769",
@@ -212,7 +211,7 @@
 	"COMMMAND_GROUPS": {
 		"ADMIN": {
 			"INTERVAL": 120,
-			"NUM_USOS": 5,
+			"NUM_USOS": 50,
 			"BLOQUEO_TIME_OUT": 720,
 			"ROLES": [
 				"Admin"
@@ -258,5 +257,6 @@
 				"Moderadores"
 			]
 		}
-	}
+	},
+	"RSS_CONFIGURATIONS": []
 }

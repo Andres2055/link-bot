@@ -101,3 +101,19 @@ module.exports.getRegistroDisciplinario = (message, member, accion, razon, color
     }
     return notficacion;
 };
+
+//Genera un objeto donde el atributo tiene el nombre de la vandera y su valor es el valor de esta bandera
+//Ejemplo: la cadena "-b flag b -c another flag" genera el objeto {b: "flag b" , c : "another flag"}
+module.exports.process_flags = (flags_str) => {
+    let flags = {}
+    if (flags_str && flags_str.trim() != "") {
+        var arrayFlasgs = flags_str.split(/(\-\-[a-zA-Z]{1,20})/g)
+        arrayFlasgs = arrayFlasgs.filter(m => m != "")
+        if (arrayFlasgs.length % 2 == 0) {
+            for (let i = 0; i < arrayFlasgs.length; i += 2) {
+                flags[arrayFlasgs[i].replace("--", "")] = arrayFlasgs[i + 1].trim();
+            }
+        }
+    }
+    return flags
+}
