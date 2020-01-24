@@ -51,7 +51,7 @@ module.exports.initRSS = async (client, flags, message) => {
     }, cnf.interval * client.config.get("SCPDIARY_TIME"));
     client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].interval_obj = intObj;
     console.log("Se guardó la nueva configuración del lector RSS")
-    //console.log(client.config.get("RSS_CONFIGURATIONS"));
+    console.log(client.config.get("RSS_CONFIGURATIONS"));
 }
 
 module.exports.startRSS = async (client, flags, message) => {
@@ -59,6 +59,7 @@ module.exports.startRSS = async (client, flags, message) => {
     let intObj = client.setInterval(() => {
         let now = new Date();
         now.setMinutes(now.getMinutes() - cnf.interval);
+        console.log(`Notificando todos los mensajes del feed cuya hora sea posterior a ${now}`)
         let channel = message.guild.channels.find(c => c.id == cnf.channel);
         parser.parseURL(cnf.url).then(feed => {
             feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
@@ -72,7 +73,7 @@ module.exports.startRSS = async (client, flags, message) => {
     client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].interval_obj = intObj;
     client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].estatus = "ACTIVO";
     message.channel.send(`Se activó el lector RSS ${cnf.nombre} para la url ${cnf.url}`)
-    //console.log(client.config.get("RSS_CONFIGURATIONS"));
+    console.log(client.config.get("RSS_CONFIGURATIONS"));
 }
 
 module.exports.stopRSS = async (client, flags, message) => {
