@@ -120,9 +120,9 @@ var feedToMessage = (item) => {
     let message = rssToMessage(item["content:encoded"]);
     const post = new Discord.RichEmbed()
         .setURL(`${item.link}`)
-        .setTitle(`${item.title && item.title != "" ? item.title : message[2]}`)
+        .setTitle(`:newspaper: | ${item.title && item.title != "" ? item.title : message[2]}`)
         .setAuthor(`Autor: ${item["wikidot:authorName"]}`)
-        .setDescription(`:newspaper: \n${message[0]}`)
+        .setDescription(`${message[0]}`)
         .setColor("0E3CDA")
         .setFooter(message[1]);
     return post;
