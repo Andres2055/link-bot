@@ -33,13 +33,13 @@ module.exports = async (client, message, args) => {
     } else if (pro_grupos > 91) {
         mensaje = grupo9[i];
     }
-    message.channel.send("La sabiduría del 13 dice que: La coca sabe más chida que la pepsi");
-    /*message.channel.send("Qué raios estabas intentando?").then(msg=>{
+    //message.channel.send("La sabiduría del 13 dice que: La coca sabe más chida que la pepsi");
+    message.channel.send("Qué raios estabas intentando?").then(msg=>{
         client.setTimeout(() => {
             msg.edit(mensaje);
             msg.delete(13000);
         }, 13000);
-    })*/
+    })
 }
 
 module.exports.config = {
