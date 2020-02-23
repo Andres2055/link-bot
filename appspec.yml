@@ -1,0 +1,8 @@
+version: 1.0
+os: linux
+files:
+  - source: /
+    destination: /home/centos/projects/scp/estiben-bot/
+hooks:
+  ApplicationStart:
+    - location: scripts/runEstiben.sh
