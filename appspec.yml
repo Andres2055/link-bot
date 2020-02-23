@@ -4,7 +4,7 @@ files:
   - source: /
     destination: /home/centos/projects/scp/estiben-bot/
 permissions:
-  - object: /home/centos/projects/scp/estiben-bot/
+  - object: /home/centos/projects/scp/estiben-bot/scripts/
     pattern: "**"
     owner: centos
     group: centos
