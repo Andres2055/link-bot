@@ -5,6 +5,7 @@ logs_dir="/u01/log/Estiben/"
 log_date=$(date +'%d-%B-%Y-%H%M')
 estiben_directory="/home/centos/projects/scp/estiben-bot/"
 log="${logs_dir}estiben_${log_date}.log"
+process_name="Estiben"
 
 #pkill -f "${process_name}"
 
