@@ -12,5 +12,7 @@ permissions:
 hooks:
   ApplicationStop:
     - location: scripts/stopEstiben.sh
+      runas: centos
   ApplicationStart:
     - location: scripts/startEstiben.sh
+      runas: centos

@@ -16,8 +16,6 @@ then
     sudo chown centos:centos "${logs_dir}"
 fi
 
-> "${log}"
-
 cd "${estiben_directory}"
 #Instala las dependencias de Node que sean necesarias
 npm install
