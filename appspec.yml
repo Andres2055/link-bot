@@ -4,5 +4,12 @@ files:
   - source: /
     destination: /home/centos/projects/scp/estiben-bot/
 hooks:
+  ApplicationStop:
+    - location: scripts/applicationStop.sh
+      runas: centos
+  BeforeInstall:
+    - location: scripts/beforeInstall.sh
+      runas: centos
   ApplicationStart:
     - location: scripts/runEstiben.sh
+      runas: centos
