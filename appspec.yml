@@ -6,8 +6,6 @@ files:
 permissions:
   - object: /home/centos/projects/scp/estiben-bot/scripts/
     pattern: "**"
-    owner: centos
-    group: centos
     mode: 777
     type:
       - file
