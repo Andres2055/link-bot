@@ -7,6 +7,16 @@ estiben_directory="/home/centos/projects/scp/estiben-bot/"
 log="${logs_dir}estiben_${log_date}.log"
 
 
+pkill -f "${process_name}"
+
+#Valida si existe el directorio para los logs
+if [[ ! -d "${logs_dir}" ]]
+then
+    echo "Se creará el directorio ${logs_dir}"
+    sudo mkdir -p "${logs_dir}"
+    sudo chown centos:centos "${logs_dir}"
+fi
+
 cd "${estiben_directory}"
 #Instala las dependencias de Node que sean necesarias
 npm install

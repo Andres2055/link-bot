@@ -4,7 +4,7 @@ files:
   - source: /
     destination: /home/centos/projects/scp/estiben-bot/
 permissions:
-  - object: /home/centos/projects/scp/estiben-bot/scripts
+  - object: /home/centos/projects/scp/estiben-bot/
     pattern: "**"
     owner: centos
     group: centos
@@ -12,12 +12,6 @@ permissions:
     type:
       - file
 hooks:
-  ApplicationStop:
-    - location: scripts/applicationStop.sh
-      runas: centos
-  BeforeInstall:
-    - location: scripts/beforeInstall.sh
-      runas: centos
   ApplicationStart:
     - location: scripts/runEstiben.sh
       runas: centos
