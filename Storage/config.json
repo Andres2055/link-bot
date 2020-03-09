@@ -18,7 +18,8 @@
 			"confirmado",
 			"yeah",
 			"dale",
-			"sip"
+			"sip", 
+			"yes"
 		],
 		"R_NEGATIVAS": [
 			"no",
@@ -186,6 +187,7 @@
 			"Merlin-VI"
 		],
 		"NAME": "Sitio-34",
+		"NAME_": "Sitio-34Dev",
 		"CHANNEL_WELCOME": "193819598565408769",
 		"CHANNEL_FARAWELL": "479457987640164382",
 		"CHANNEL_DIARY": "459517125946769408",

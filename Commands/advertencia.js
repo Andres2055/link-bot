@@ -4,11 +4,13 @@ module.exports = async (client, message, args) => {
     const rol = client.commands.get("rol");
     if (rol && rol.config.activo) {
         const user = message.mentions.users.first();
-        const userId = args[0];
-        let mensaje = args.slice(1).join(" ").split("|");
-        var razon = mensaje[0];
-        var vigencia = mensaje[1];
-        var notas = mensaje[2];
+        let mensaje = args.join(" ").split("|");
+        let idNameUser = mensaje[0];
+        let razon = mensaje[1];
+        let vigencia = mensaje[2];
+        let notas = mensaje[3];
+        var member = null;
+
         if (!razon || razon.trim() == "") {
             message.channel.send(`Debes darme una razón para darle una advertencia  (シ. .)シ`);
             return;
@@ -17,14 +19,20 @@ module.exports = async (client, message, args) => {
             message.channel.send(`Debes darme la vigencia de la advertencia. "| <vigencia>" `);
             return;
         }
-        var member = null;
         if (user) {
             member = message.guild.member(user);
-        } 
-        if (!isNaN(userId)) {
-            member = message.guild.members.find(m => m.id == userId);
+        } else if (idNameUser) {
+            if (isNaN(idNameUser)) {
+                console.log("Buscar por nombre/nickname ", idNameUser);
+                idNameUser = idNameUser.toUpperCase().trim();
+                member = message.guild.members.find(m => (m.nickname && m.nickname.toUpperCase().trim() == idNameUser) || (m.user.username.toUpperCase().trim() == idNameUser));
+            } else {
+                console.log("Buscar por id usuario ", idNameUser);
+                member = message.guild.members.find(m => m.id == idNameUser);
+            }
         }
         if (member) {
+            let userId = member.user.id;
             let advL1 = member.roles.find(rol => rol.name.toLowerCase() == client.config.get("SERVER")["ROL_ADVERTENCIA_L1"].toLowerCase());
             if (advL1) {
                 //Si tiene advertencia entonces debemos retirarla y agregar una advertencia nivel 2

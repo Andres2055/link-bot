@@ -33,7 +33,7 @@ module.exports.initRSS = async (client, flags, message) => {
         message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :c");
         console.log(err);
     });
-    
+
     let intObj = client.setInterval(() => {
         let now = new Date();
         now.setMinutes(now.getMinutes() - cnf.interval);
@@ -94,6 +94,35 @@ module.exports.consultar = async (client, flags, message) => {
 
 module.exports.updateRSS = async (client, flags, message) => {
 
+}
+
+module.exports.stratAllRss = async (client) => {
+    console.log("Inciando los intervalos de lectura RSS")
+    client.config.get("RSS_CONFIGURATIONS").forEach(cnf => {
+        if (cnf.estatus == "ACTIVO") {
+            let intObj = client.setInterval(() => {
+                let now = new Date();
+                now.setMinutes(now.getMinutes() - cnf.interval);
+                console.log(`Notificando todos los mensajes del feed cuya hora sea posterior a ${now}`);
+
+                const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
+                const channel = guild.channels.find(ch => ch.id == cnf.channel);
+
+                parser.parseURL(cnf.url).then(feed => {
+                    feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
+                        channel.send(feedToMessage(f))
+                    });
+                }).catch(err => {
+                    console.log("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
+                    console.log(err);
+                });
+            }, cnf.interval * client.config.get("SCPDIARY_TIME"));
+
+            client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].interval_obj = intObj;
+            console.log(`Se activó el lector RSS ${cnf.nombre} para la url ${cnf.url} en el canal ${cnf.channel_name}`)
+        }
+    });
+    console.log("Se han activado todas las configuraciones RSS");
 }
 
 var configToMessage = (cnf) => {

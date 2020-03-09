@@ -5,6 +5,7 @@ const client = new Discord.Client();
 const fs = require('fs');
 const config_json = new Map(Object.entries(require("./Storage/config.json")));
 const config_var = require("./Storage/config.json");
+const rss = require("./Functions/rss.js");
 const commands = JSON.parse(fs.readFileSync('./Storage/commands_help.json'), 'utf8').comandos;
 
 /* Environment Variables */
@@ -76,7 +77,6 @@ fs.readdir("./Commands/", (err, files) => {
 	//sanciones.set("BANEO", []);
 	const internal_function = require("./Functions/internal.js");
 	const validaciones = require("./Functions/validacion.js");
-	const rss = require("./Functions/rss.js");
 	client.functions.set("INFORMAR_ERROR", internal_function.notificar);//Función que notifica de un error a los desarrolladores
 	client.functions.set("BLOQUEO_COMANDO", internal_function.bloqueaComandoSpam);//Función que bloquea comandos que han sido spameados
 	client.functions.set("MSN_R", internal_function.msgR);//Función que genera un mensaje aleatorio de espera
@@ -122,6 +122,8 @@ client.on("ready", () => {
 	setInterval(() => {
 		scpDiary.postSCPDiary(client)
 	}, SCPDIARY_TIME);
+	
+	rss.stratAllRss(client);
 });
 
 client.on('guildMemberAdd', member => {
