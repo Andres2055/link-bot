@@ -81,7 +81,7 @@
 		],
 		"ADMIN_GROUPS": [
 			"ADMIN",
-			"MODERADORES",
+			"MODERADOR",
 			"JR_STAFF"
 		]
 	},
