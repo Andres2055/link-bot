@@ -124,7 +124,7 @@
 		"JR_STAFF": {
 			"ROLES": [
 				"Admin",
-				"Moderadores",
+				"Moderador",
 				"Junior Staff"
 			]
 		},
