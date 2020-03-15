@@ -87,7 +87,7 @@ module.exports.stopRSS = async (client, flags, message) => {
 
 module.exports.consultar = async (client, flags, message) => {
     client.config.get("RSS_CONFIGURATIONS").forEach(cnf => {
-        //console.log(cnf);
+        console.log(cnf);
         message.channel.send(configToMessage(cnf));
     });
 }
