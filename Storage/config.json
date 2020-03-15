@@ -139,9 +139,9 @@
 		{
 			"nombre": "O5",
 			"url": "http://cuarteldelo5.wikidot.com/feed/forum/posts.xml",
-			"interval": 5,
-			"channel": "670046820969218049",
-			"channel_name": "posts-05",
+			"interval": 2,
+			"channel": "594021772903579683",
+			"channel_name": "foro-05",
 			"estatus": "ACTIVO"
 		}
 	],
