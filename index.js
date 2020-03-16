@@ -154,7 +154,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 			.setColor("#ffee00")
 			.setTitle("Mensaje Editado en Lobby ")
 			.addField("**Mensaje Previo**", oldMessage.content)
-			.addField("**Mensaje Previo**", newMessage.content);
+			.addField("**Mensaje Nuevo**", newMessage.content);
 		channel.send(registrar);
 	}
 })
