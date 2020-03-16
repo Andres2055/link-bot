@@ -29,5 +29,9 @@
     "discord",
     "fundacion scp"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andres2055/link-bot.git"
+  }
 }

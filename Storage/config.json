@@ -7,6 +7,50 @@
 		"micro": 1,
 		"build": "Epsilón-0"
 	},
+	"SERVER": {
+		"NAME": "Sitio-34",
+		"NAME_": "Sitio-34Dev",
+		"CHANNEL_WELCOME_": "493515602460409886",
+		"CHANNEL_WELCOME": "193819598565408769",
+		"CHANNEL_FARAWELL": "479457987640164382",
+		"CHANNEL_DIARY": "459517125946769408",
+		"CHANNEL_LOG": "640640999718125581",
+		"CHANNEL_DELETED_MESSAGES_dev" : "689016930438348851",
+		"CHANNEL_DELETED_MESSAGES" : "689023664766976052",
+		"TIME_ZONE": "America/Mexico_City",
+		"LOCALE": "es-MX",
+		"HOUR_DIARY": "07:00",
+		"ACTIVITY_INTERVAL": 25,
+		"ROL_ADVERTENCIA_L1": "Advertencia Nivel 1",
+		"ROL_ADVERTENCIA_L2": "Advertencia Nivel 2",
+		"MUTED": "muted",
+		"GENERAL_GROUP": [
+			"GENERAL",
+			"OCIO",
+			"SCP"
+		],
+		"ADMIN_GROUPS": [
+			"ADMIN",
+			"MODERADOR",
+			"JR_STAFF"
+		],
+		"REGISTRO_EVENTOS": [
+			"SANCION",
+			"CONFIGURACION",
+			"ABUSO_COMANDO"
+		],
+		"SANCIONES": [
+			"ADVERTENCIA",
+			"KICK",
+			"BANEO"
+		],
+		"_DEVELOPERS": [
+			"Merlin-VI"
+		],
+		"DEVELOPERS": [
+			"Merlin-VI"
+		]
+	},
 	"ADMIN": {
 		"CONFIRMACION_REQUIRED": "true",
 		"TIME_OUT_CONFIRMACION": 1,
@@ -43,47 +87,6 @@
 			"193820592384901129"
 		],
 		"CANALES_TEMPORALES": []
-	},
-	"SERVER": {
-		"REGISTRO_EVENTOS": [
-			"SANCION",
-			"CONFIGURACION",
-			"ABUSO_COMANDO"
-		],
-		"SANCIONES": [
-			"ADVERTENCIA",
-			"KICK",
-			"BANEO"
-		],
-		"_DEVELOPERS": [
-			"Merlin-VI"
-		],
-		"DEVELOPERS": [
-			"Merlin-VI"
-		],
-		"NAME": "Sitio-34",
-		"NAME_": "Sitio-34Dev",
-		"CHANNEL_WELCOME": "193819598565408769",
-		"CHANNEL_FARAWELL": "479457987640164382",
-		"CHANNEL_DIARY": "459517125946769408",
-		"CHANNEL_LOG": "640640999718125581",
-		"TIME_ZONE": "America/Mexico_City",
-		"LOCALE": "es-MX",
-		"HOUR_DIARY": "07:00",
-		"ACTIVITY_INTERVAL": 25,
-		"ROL_ADVERTENCIA_L1": "Advertencia Nivel 1",
-		"ROL_ADVERTENCIA_L2": "Advertencia Nivel 2",
-		"MUTED": "muted",
-		"GENERAL_GROUP": [
-			"GENERAL",
-			"OCIO",
-			"SCP"
-		],
-		"ADMIN_GROUPS": [
-			"ADMIN",
-			"MODERADOR",
-			"JR_STAFF"
-		]
 	},
 	"COMMMAND_GROUPS": {
 		"ADMIN": {
@@ -142,7 +145,7 @@
 			"interval": 2,
 			"channel": "688584533196668928",
 			"channel_name": "foro-05",
-			"estatus": "ACTIVO"
+			"estatus": "INACTIVO"
 		}
 	],
 	"SERVICES": {

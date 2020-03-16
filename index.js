@@ -122,9 +122,42 @@ client.on("ready", () => {
 	setInterval(() => {
 		scpDiary.postSCPDiary(client)
 	}, SCPDIARY_TIME);
-	
+
 	rss.stratAllRss(client);
 });
+
+
+client.on('messageDelete', message => {
+	console.log("Alguien ha eliminado un mensaje, procediendo a registrar a la bitácora");
+	const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
+	const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
+	const mensajeBorrado = new Discord.RichEmbed()
+		.setAuthor(message.author.username, message.author.displayAvatarURL)
+		.setTitle("Mensaje borrado")
+		.setColor("#ff0037")
+		.addField("**Mensaje**", message.content)
+		.addField("**Canal**", message.channel, false);
+	channel.send(mensajeBorrado);
+});
+
+client.on('messageDeleteBulk', () => {
+	console.log("Acabo de borrar muchos mensajes");
+});
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+	if (oldMessage.channel.id == client.config.get("SERVER").CHANNEL_WELCOME) {
+		console.log("Alguien ha editado su mensaje en el #lobby, registrando en la bitácora");
+		const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
+		const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
+		const registrar = new Discord.RichEmbed()
+			.setAuthor(oldMessage.author.username, oldMessage.author.displayAvatarURL)
+			.setColor("#ffee00")
+			.setTitle("Mensaje Editado en Lobby ")
+			.addField("**Mensaje Previo**", oldMessage.content)
+			.addField("**Mensaje Previo**", newMessage.content);
+		channel.send(registrar);
+	}
+})
 
 client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_WELCOME);
