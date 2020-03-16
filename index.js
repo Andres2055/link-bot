@@ -136,6 +136,7 @@ client.on('messageDelete', message => {
 		.setTitle("Mensaje borrado")
 		.setColor("#ff0037")
 		.addField("**Mensaje**", message.content)
+		.addField("**Fecha de publicado** (UTC): " , new String(new Date(message.createdTimestamp)))
 		.addField("**Canal**", message.channel, false);
 	channel.send(mensajeBorrado);
 });
