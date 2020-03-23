@@ -128,6 +128,7 @@ client.on("ready", () => {
 
 
 client.on('messageDelete', message => {
+	if(message.content.startsWith(";;") || message.channel.type === "dm"){return}
 	console.log("Alguien ha eliminado un mensaje, procediendo a registrar a la bitácora");
 	const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
 	const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
@@ -136,7 +137,7 @@ client.on('messageDelete', message => {
 		.setTitle("Mensaje borrado")
 		.setColor("#ff0037")
 		.addField("**Mensaje**", message.content)
-		.addField("**Fecha de publicado** (UTC): " , new String(new Date(message.createdTimestamp)))
+		.addField("**Fecha de publicado** (UTC): ", new String(new Date(message.createdTimestamp)))
 		.addField("**Canal**", message.channel, false);
 	channel.send(mensajeBorrado);
 });
@@ -146,7 +147,7 @@ client.on('messageDeleteBulk', () => {
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
-	if (oldMessage.channel.id == client.config.get("SERVER").CHANNEL_WELCOME) {
+	if (oldMessage.channel.id == client.config.get("SERVER").CHANNEL_WELCOME && oldMessage.content && newMessage.content) {
 		console.log("Alguien ha editado su mensaje en el #lobby, registrando en la bitácora");
 		const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
 		const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
