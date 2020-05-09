@@ -141,9 +141,9 @@
 	"RSS_CONFIGURATIONS": [
 		{
 			"nombre": "O5",
-			"url": "http://www.scp-wiki.net/feed/forum/posts.xml",
+			"url": "http://cuarteldelo5.wikidot.com/feed/forum/posts.xml",
 			"interval": 5,
-			"channel": "708591026222399518",
+			"channel": "688584533196668928",
 			"channel_name": "foro-05",
 			"activo": true,
 			"type" : "FORO"
