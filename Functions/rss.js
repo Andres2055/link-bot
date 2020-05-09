@@ -149,15 +149,18 @@ var titleChannelRSS = (title, link) => {
 var feedToMessage = (item, type) => {
     let message = rssToMessage(item["content:encoded"], type);
     let autor = "";
+    let color = "#0eb5da";
 
     if (type == "ORIGINAL") {
+        color = "#5c18f0";
         autor = `Autor: ${message[3]}`;
         item.title = `¡Nuevo Artículo Original!  ${item.title && item.title.trim() != "" ? item.title : ""}`;
     } else if (type == "TRADUCCION") {
+        color = "#f5cf27";
         autor = `Traductor: ${message[3]}`;
         item.title = `¡Nueva Traduacción!  ${item.title && item.title.trim() != "" ? item.title : ""}`;
     } else {
-        autor = `Autor: ${item["wikidot:authorName"]}`;
+        autor = `Autor del post: ${item["wikidot:authorName"]}`;
     }
 
     const post = new Discord.RichEmbed()
@@ -165,7 +168,7 @@ var feedToMessage = (item, type) => {
         .setTitle(`:newspaper: | ${item.title && item.title.trim() != "" ? item.title : message[2]}`)
         .setAuthor(autor)
         .setDescription(`${message[0]}`)
-        .setColor("0E3CDA")
+        .setColor(color)
         .setFooter(message[1]);
     return post;
 }
