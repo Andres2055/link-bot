@@ -104,7 +104,7 @@ module.exports.stratAllRss = async (client) => {
             let intObj = client.setInterval(() => {
                 let now = new Date();
                 now.setMinutes(now.getMinutes() - cnf.interval);
-                console.log(`Notificando todos los mensajes del feed cuya hora sea posterior a ${now}`);
+                console.log(`Notificando todos los mensajes del feed cuya hora sea posterior a ${now} de la configuración ${cnf.nombre}` );
 
                 const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
                 const channel = guild.channels.find(ch => ch.id == cnf.channel);
@@ -128,7 +128,7 @@ module.exports.stratAllRss = async (client) => {
 
 var configToMessage = (cnf) => {
     const message = new Discord.RichEmbed()
-        .setTitle(`Configuración : **${cnf.nombre}**`)
+        .setTitle(`Configuración: **${cnf.nombre}**`)
         .setColor("ECCC00")
         .addField("URL del Feed", `**${cnf.url}**`)
         .addField("Intervalo de Lectura", `**${cnf.interval}** minutos`)

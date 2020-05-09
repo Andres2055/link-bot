@@ -151,7 +151,7 @@
 		{
 			"nombre": "ORIGINALES",
 			"url": "http://scp-es.com/feed/pages/tags/%2Bes/order/created_at+desc",
-			"interval": 2,
+			"interval": 5,
 			"channel": "708156415952420866",
 			"channel_name": "foro-scp",
 			"activo": true,
@@ -160,7 +160,7 @@
 		{
 			"nombre": "TRADUCCIONES",
 			"url": "http://scp-es.com/feed/pages/tags/-es%2Cscp%2Crelato%2Cformato-gdi%2Cadmin/order/created_at+desc",
-			"interval": 2,
+			"interval": 5,
 			"channel": "708156415952420866",
 			"channel_name": "foro-scp",
 			"activo": true,
@@ -169,7 +169,7 @@
 		{
 			"nombre": "SCP",
 			"url": "http://scp-es.com/feed/forum/posts.xml",
-			"interval": 2,
+			"interval": 5,
 			"channel": "708156415952420866",
 			"channel_name": "foro-scp",
 			"activo": true,
