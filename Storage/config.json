@@ -150,7 +150,7 @@
 		}, 
 		{
 			"nombre": "ORIGINALES",
-			"url": "http://scp-es.com/feed/pages/tags/%2Bes/order/created_at+desc",
+			"url": "http://scp-es.com/feed/pages/pagename/sandbox-inwiki-de-andres2055/category/_default/tags/%2Bes/order/created_at+desc/limit/5/t/Most+Recently+Created",
 			"interval": 5,
 			"channel": "708156415952420866",
 			"channel_name": "foro-scp",
@@ -159,7 +159,7 @@
 		},
 		{
 			"nombre": "TRADUCCIONES",
-			"url": "http://scp-es.com/feed/pages/tags/-es%2Cscp%2Crelato%2Cformato-gdi%2Cadmin/order/created_at+desc",
+			"url": "http://scp-es.com/feed/pages/pagename/sandbox-inwiki-de-andres2055/category/_default/tags/-es%2Cscp%2Crelato%2Cformato-gdi%2Cadmin/order/created_at+desc/limit/5/t/Most+Recently+Created",
 			"interval": 5,
 			"channel": "708156415952420866",
 			"channel_name": "foro-scp",
