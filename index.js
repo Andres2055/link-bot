@@ -128,7 +128,7 @@ client.on("ready", () => {
 
 
 client.on('messageDelete', message => {
-	if(message.content.startsWith(";;") || message.channel.type === "dm"){return}
+	if (message.content.startsWith(";;") || message.channel.type === "dm") { return }
 	console.log("Alguien ha eliminado un mensaje, procediendo a registrar a la bitácora");
 	const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
 	const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
@@ -162,6 +162,23 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 })
 
 client.on('guildMemberAdd', member => {
+	member.send(`Hola, Mi nombre es Estiben y soy el bot del sitio-34, puedes ver mis comandos tecleando !h !help o !ayuda aquí o en el server
+	Te doy la bienvenida a nuestra comunidad y algunas recomendaciones:
+	Lee el canal #reglas-leer-primero es importante que lo hagas
+	Evita el spam
+	No tenemos nada qué ver con el videojuego ni tampoco canales de youtube
+	Recuerda que nuestro staff son los usuarios
+	-Merlin-VI#1443 (Administrador)
+	-Dc_Yerko#7804 (Administrador)
+	-marw#1241 (Moderador)
+	-LazyLasagne#5154 (Moderador)
+	-Luis Gm#9398 (Moderador)
+	-Shadow-MASK#6421 (Vetenano)
+	
+	Evita usar las menciones (@alguien) con el staff si no es un tema urgente
+	Recuerda que **no puedes pedir ayuda** con el cuestionario de ingreso
+	Si notas que te llegan mensajes con spam de otros servidores comunícalo al staff`);
+
 	const channel = member.guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_WELCOME);
 	if (!channel) return;
 	channel.send(`¡Heya ${member.user}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
