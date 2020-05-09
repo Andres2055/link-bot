@@ -58,7 +58,7 @@ var validarUpdate = (flags, message, client) => {
     }
     flags.nombre = flags.nombre.toUpperCase();
 
-    
+
 }
 
 var validarStart = (flags, message, client) => {
@@ -73,7 +73,7 @@ var validarStart = (flags, message, client) => {
     flags.nombre = flags.nombre.toUpperCase();
     let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre).length;
     if (rss_config) {
-        if (rss_config.estatus == "ACTIVO") {
+        if (rss_config.activo) {
             message.channel.send(`El lector RSS ${flags.nombre} ya está activo`);
             return false;
         }
@@ -96,7 +96,7 @@ var validarStop = (flags, message, client) => {
     flags.nombre = flags.nombre.toUpperCase();
     let rss_config = client.config.get("RSS_CONFIGURATIONS").filter(cnf => cnf.nombre == flags.nombre).length;
     if (rss_config) {
-        if (rss_config.estatus == "INACTIVO") {
+        if (!rss_config.activo) {
             message.channel.send(`El lector RSS ${flags.nombre} ya está inactivo`);
             return false;
         }
@@ -115,6 +115,20 @@ var validarInit = (flags, message, client) => {
         } else {
             flags.nombre = flags.n;
         }
+    }
+
+    if (!flags.type || flags.type.trim() == "") {
+        if (!flags.t || flags.t == "") {
+            message.channel.send("No se ha enviado el tipo de configuración");
+            return false;
+        } else {
+            flags.type = flags.t;
+        }
+    }
+    flags.type = flags.type.toUpperCase().trim();
+    if (!(flags.type == "FORO" || flags.type == "ORIGINAL" || flags.type == "TRADUCCION")) {
+        message.channel.send("El tipo de configuración no es válida");
+        return false;
     }
     flags.nombre = flags.nombre.toUpperCase();
     if (!flags.url || flags.url.trim() == "") {

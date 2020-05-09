@@ -8,8 +8,8 @@
 		"build": "Epsilón-0"
 	},
 	"SERVER": {
-		"NAME": "Sitio-34",
-		"NAME_": "Sitio-34Dev",
+		"NAME_": "Sitio-34",
+		"NAME": "Sitio-34Dev",
 		"CHANNEL_WELCOME_": "493515602460409886",
 		"CHANNEL_WELCOME": "193819598565408769",
 		"CHANNEL_FARAWELL": "479457987640164382",
@@ -141,11 +141,12 @@
 	"RSS_CONFIGURATIONS": [
 		{
 			"nombre": "O5",
-			"url": "http://cuarteldelo5.wikidot.com/feed/forum/posts.xml",
+			"url": "http://www.scp-wiki.net/feed/forum/posts.xml",
 			"interval": 5,
-			"channel": "688584533196668928",
+			"channel": "708591026222399518",
 			"channel_name": "foro-05",
-			"estatus": "ACTIVO"
+			"activo": true,
+			"type" : "FORO"
 		}
 	],
 	"SERVICES": {

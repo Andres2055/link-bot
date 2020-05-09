@@ -16,8 +16,9 @@ module.exports.initRSS = async (client, flags, message) => {
         "interval": flags.interval,
         "channel": flags.channel,
         "channel_name": flags.channel_name,
+        "type": flags.type,
         "date": new Date(),
-        "estatus": "ACTIVO"
+        "activo": true
     };
     client.config.get("RSS_CONFIGURATIONS").push(cnf);
     let channel = message.guild.channels.find(c => c.name == flags.channel || c.id == flags.channel);
@@ -26,7 +27,7 @@ module.exports.initRSS = async (client, flags, message) => {
         console.log(`Publicando ${feed.items.length} mensajes anteriores del Foro`);
         channel.send(titleChannelRSS(feed.title, feed.link));
         feed.items.reverse().forEach(f => {
-            channel.send(feedToMessage(f))
+            channel.send(feedToMessage(f, cnf.type));
         });
         console.log("Se leyeron todos los mensajes del foro");
     }).catch(err => {
@@ -42,7 +43,7 @@ module.exports.initRSS = async (client, flags, message) => {
         parser.parseURL(cnf.url).then(feed => {
             feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
                 //console.log("notificando un mensaje");
-                channel.send(feedToMessage(f));
+                channel.send(feedToMessage(f, cnf.type));
             });
         }).catch(err => {
             message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
@@ -63,7 +64,7 @@ module.exports.startRSS = async (client, flags, message) => {
         let channel = message.guild.channels.find(c => c.id == cnf.channel);
         parser.parseURL(cnf.url).then(feed => {
             feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
-                channel.send(feedToMessage(f))
+                channel.send(feedToMessage(f, cnf.type))
             });
         }).catch(err => {
             message.channel.send("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
@@ -71,7 +72,7 @@ module.exports.startRSS = async (client, flags, message) => {
         });
     }, cnf.interval * client.config.get("SCPDIARY_TIME"));
     client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].interval_obj = intObj;
-    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].estatus = "ACTIVO";
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == cnf.nombre)[0].activo = true;
     message.channel.send(`Se activó el lector RSS ${cnf.nombre} para la url ${cnf.url}`)
     console.log(client.config.get("RSS_CONFIGURATIONS"));
 }
@@ -80,7 +81,7 @@ module.exports.stopRSS = async (client, flags, message) => {
     let cnf = client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0];
     client.clearInterval(cnf.interval_obj);
     client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].interval_obj = "";
-    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].estatus = "INACTIVO"
+    client.config.get("RSS_CONFIGURATIONS").filter(c => c.nombre == flags.nombre)[0].activo = false;
     console.log(client.config.get("RSS_CONFIGURATIONS"));
     message.channel.send(`Se desactivó el lector RSS ${cnf.nombre} para la url ${cnf.url}`)
 }
@@ -99,7 +100,7 @@ module.exports.updateRSS = async (client, flags, message) => {
 module.exports.stratAllRss = async (client) => {
     console.log("Inciando los intervalos de lectura RSS")
     client.config.get("RSS_CONFIGURATIONS").forEach(cnf => {
-        if (cnf.estatus == "ACTIVO") {
+        if (cnf.activo) {
             let intObj = client.setInterval(() => {
                 let now = new Date();
                 now.setMinutes(now.getMinutes() - cnf.interval);
@@ -110,7 +111,7 @@ module.exports.stratAllRss = async (client) => {
 
                 parser.parseURL(cnf.url).then(feed => {
                     feed.items.filter(f => new Date(f.pubDate) > now).reverse().forEach(f => {
-                        channel.send(feedToMessage(f))
+                        channel.send(feedToMessage(f, cnf.type))
                     });
                 }).catch(err => {
                     console.log("¡Ay! Lo siento, no pude leer el RSS que me pediste :otaku_sad:");
@@ -132,7 +133,8 @@ var configToMessage = (cnf) => {
         .addField("URL del Feed", `**${cnf.url}**`)
         .addField("Intervalo de Lectura", `**${cnf.interval}** minutos`)
         .addField("Canal de publicación", `**${cnf.channel_name}**`)
-        .addField("Estatus", `**${cnf.estatus}**`);
+        .addField("Estatus", `**${cnf.activo ? "Activo" : "Inactivo"}**`)
+        .addField("Tipo", `**${cnf.type}**`);
     return message;
 }
 
@@ -144,33 +146,82 @@ var titleChannelRSS = (title, link) => {
     return titleMessage;
 }
 
-var feedToMessage = (item) => {
-    //console.log(`Nuevo mensaje ${item["content:encoded"].substring(0,50)}`);
-    let message = rssToMessage(item["content:encoded"]);
+var feedToMessage = (item, type) => {
+    let message = rssToMessage(item["content:encoded"], type);
+    let autor = "";
+
+    if (type == "ORIGINAL") {
+        autor = `Autor: ${message[3]}`;
+        item.title = `¡Nuevo Artículo Original!  ${item.title && item.title.trim() != "" ? item.title : ""}`;
+    } else if (type == "TRADUCCION") {
+        autor = `Traductor: ${message[3]}`;
+        item.title = `¡Nueva Traduacción!  ${item.title && item.title.trim() != "" ? item.title : ""}`;
+    } else {
+        autor = `Autor: ${item["wikidot:authorName"]}`;
+    }
+
     const post = new Discord.RichEmbed()
         .setURL(`${item.link}`)
-        .setTitle(`:newspaper: | ${item.title && item.title != "" ? item.title : message[2]}`)
-        .setAuthor(`Autor: ${item["wikidot:authorName"]}`)
+        .setTitle(`:newspaper: | ${item.title && item.title.trim() != "" ? item.title : message[2]}`)
+        .setAuthor(autor)
         .setDescription(`${message[0]}`)
         .setColor("0E3CDA")
         .setFooter(message[1]);
     return post;
 }
 
-var rssToMessage = (content) => {
-    let json = htmlToJson(content.trim())
-    let json_mensaje = json.child.slice(0, json.child.length - 5)
-    let json_pie = json.child.slice(json.child.length - 5, json.child.length)
-    let mensaje = ""
-    json_mensaje.forEach(m => { mensaje += nodoToString(m) })
-    if (mensaje.length > 2000) {
-        mensaje = mensaje.substring(0, 2000)
+var rssToMessage = (content, type) => {
+    let json = htmlToJson(content.trim());
+    let mensaje = "";
+    let pie = "";
+    let user_name = "";
+    let foro_opcional = "";
+    switch (type) {
+        case "FORO":
+            let json_mensaje = json.child.slice(0, json.child.length - 5);
+            let json_pie = json.child.slice(json.child.length - 5, json.child.length);
+            json_mensaje.forEach(m => { mensaje += nodoToString(m) });
+            json_pie.forEach(m => { pie += nodoToString(m) });
+            foro_opcional = nodoToString(json_pie[json_pie.length - 1]);
+            break;
+        case "ORIGINAL":
+            json.child.forEach(m => { mensaje += nodoToString(m) });
+            pie = "Artículos originales de la Rama ES";
+            user_name = getUserName(json);
+            break;
+        case "TRADUCCION":
+            json.child.forEach(m => { mensaje += nodoToString(m) });
+            pie = "Traducción de artículos para la Rama ES";
+            user_name = getUserName(json);
+            break;
+    }
+
+    if (mensaje.length > 1000) {
+        mensaje = mensaje.substring(0, 1000)
         mensaje += " [...]"
     }
-    let pie = ""
-    json_pie.forEach(m => { pie += nodoToString(m) })
-    let foro_opcional = nodoToString(json_pie[json_pie.length - 1])
-    return [mensaje, pie, foro_opcional]
+
+    console.log(user_name);
+    return [mensaje, pie, foro_opcional, user_name]
+}
+
+var getUserName = (json) => {
+    let user_name = "";
+    json.child.forEach(e => {
+        if (e.child) {
+            e.child.forEach(c => {
+                if (c.attr && c.attr.class && (c.attr.class.includes("printuser") || c.attr.class.includes("avatarhover"))) {
+                    e.child.filter(l => l.tag == "a").forEach(n => {
+                        if (n.child && n.child.filter(t => t.tag = "img" && t.attr).length) {
+                            user_name = typeof n.child[0].attr.alt == "string" ? n.child[0].attr.alt : n.child[0].attr.alt.join(" ");
+                        }
+                    })
+                }
+
+            })
+        }
+    });
+    return user_name;
 }
 
 var nodoToString = (nodo) => {
