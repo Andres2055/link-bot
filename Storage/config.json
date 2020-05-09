@@ -147,6 +147,33 @@
 			"channel_name": "foro-05",
 			"activo": true,
 			"type" : "FORO"
+		}, 
+		{
+			"nombre": "ORIGINALES",
+			"url": "http://scp-es.com/feed/pages/tags/%2Bes/order/created_at+desc",
+			"interval": 2,
+			"channel": "708156415952420866",
+			"channel_name": "foro-scp",
+			"activo": true,
+			"type" : "ORIGINAL"
+		},
+		{
+			"nombre": "TRADUCCIONES",
+			"url": "http://scp-es.com/feed/pages/tags/-es%2Cscp%2Crelato%2Cformato-gdi%2Cadmin/order/created_at+desc",
+			"interval": 2,
+			"channel": "708156415952420866",
+			"channel_name": "foro-scp",
+			"activo": true,
+			"type" : "TRADUCCION"
+		}, 
+		{
+			"nombre": "SCP",
+			"url": "http://scp-es.com/feed/forum/posts.xml",
+			"interval": 2,
+			"channel": "708156415952420866",
+			"channel_name": "foro-scp",
+			"activo": true,
+			"type" : "FORO"
 		}
 	],
 	"SERVICES": {
