@@ -104,6 +104,7 @@ module.exports.stratAllRss = async (client) => {
             let intObj = client.setInterval(() => {
                 let now = new Date();
                 now.setMinutes(now.getMinutes() - cnf.interval);
+                now.setSeconds(0);
                 console.log(`Notificando todos los mensajes del feed cuya hora sea posterior a ${now} de la configuración ${cnf.nombre}` );
 
                 const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
