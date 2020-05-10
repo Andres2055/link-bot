@@ -148,6 +148,7 @@ var titleChannelRSS = (title, link) => {
 }
 
 var feedToMessage = (item, type) => {
+    console.log(item.title);
     let message = rssToMessage(item["content:encoded"], type);
     let autor = "";
     let color = "#0eb5da";
