@@ -125,7 +125,7 @@ client.on("ready", () => {
 
 	rss.startAllRss(client);
 	const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
-	let merlin = guild.members.find(mem => mem.id = "324174158063992832");
+	let merlin = guild.members.find(mem => mem.id == "324174158063992832");
 	merlin.send("Hi, Heroku acaba de reiniciarme, revisa lo que debas revisar");
 
 });
