@@ -97,7 +97,7 @@ module.exports.updateRSS = async (client, flags, message) => {
 
 }
 
-module.exports.stratAllRss = async (client) => {
+module.exports.startAllRss = async (client) => {
     console.log("Inciando los intervalos de lectura RSS")
     client.config.get("RSS_CONFIGURATIONS").forEach(cnf => {
         if (cnf.activo) {
