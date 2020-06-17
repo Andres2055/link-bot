@@ -177,7 +177,7 @@ client.on('guildMemberAdd', member => {
 	-marw#1241 (Moderador)
 	-LazyLasagne#5154 (Moderador)
 	-Luis Gm#9398 (Moderador)
-	-Shadow-MASK#6421 (Vetenano)
+	-Shadow-MASK#6421 (Veterano)
 	
 	Evita usar las menciones (@alguien) con el staff si no es un tema urgente
 	Recuerda que **no puedes pedir ayuda** con el cuestionario de ingreso
