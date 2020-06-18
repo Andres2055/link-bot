@@ -175,7 +175,7 @@ client.on('guildMemberAdd', member => {
 	-Merlin-VI#1443 (Administrador)
 	-Dc_Yerko#7804 (Administrador)
 	-Luis Gm#9398 (Moderador)
-	-Shadow-MASK#6421 (Vetenano)
+	-Shadow-MASK#6421 (Veterano)
 	-Abbsy#5905 (Mod Junior)
 	-Agente Shuffle (Mod Junior)
 	
