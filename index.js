@@ -174,10 +174,10 @@ client.on('guildMemberAdd', member => {
 	Recuerda que nuestro staff son los usuarios
 	-Merlin-VI#1443 (Administrador)
 	-Dc_Yerko#7804 (Administrador)
-	-marw#1241 (Moderador)
-	-LazyLasagne#5154 (Moderador)
 	-Luis Gm#9398 (Moderador)
 	-Shadow-MASK#6421 (Vetenano)
+	-Abbsy#5905 (Mod Junior)
+	-Agente Shuffle (Mod Junior)
 	
 	Evita usar las menciones (@alguien) con el staff si no es un tema urgente
 	Recuerda que **no puedes pedir ayuda** con el cuestionario de ingreso

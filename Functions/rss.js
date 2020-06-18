@@ -250,5 +250,5 @@ var nodoToString = (nodo) => {
 var decodeHtmlEntities = (string) => {
     return string.replace(/&quot;/g, '\"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
         .replace(/&apos;/g, '\'').replace(/&nbsp;/g, ' ').replace(/&#160;/g, " ").replace(/&#8212;/g, "--")
-        .replace(/&#8230;/g, "...");
+        .replace(/&#8230;/g, "...").replace(/&#32;/g, " ");
 }
