@@ -1,305 +1,308 @@
 {
-	"PREFIX": "!",
-	"SCPDIARY_TIME": 60000,
-	"VERSION": {
-		"major": 1,
-		"minor": 0,
-		"micro": 1,
-		"build": "Epsilón-0"
-	},
-	"SERVER": {
-		"NAME": "Sitio-34",
-		"NAME_": "Sitio-34Dev",
-		"CHANNEL_WELCOME_": "493515602460409886",
-		"CHANNEL_WELCOME": "193819598565408769",
-		"CHANNEL_FARAWELL": "479457987640164382",
-		"CHANNEL_DIARY": "459517125946769408",
-		"CHANNEL_LOG": "640640999718125581",
-		"CHANNEL_DELETED_MESSAGES_dev" : "689016930438348851",
-		"CHANNEL_DELETED_MESSAGES" : "689023664766976052",
-		"TIME_ZONE": "America/Mexico_City",
-		"LOCALE": "es-MX",
-		"HOUR_DIARY": "07:00",
-		"ACTIVITY_INTERVAL": 25,
-		"ROL_ADVERTENCIA_L1": "Advertencia Nivel 1",
-		"ROL_ADVERTENCIA_L2": "Advertencia Nivel 2",
-		"MUTED": "muted",
-		"GENERAL_GROUP": [
-			"GENERAL",
-			"OCIO",
-			"SCP"
-		],
-		"ADMIN_GROUPS": [
-			"ADMIN",
-			"MODERADOR",
-			"JR_STAFF"
-		],
-		"REGISTRO_EVENTOS": [
-			"SANCION",
-			"CONFIGURACION",
-			"ABUSO_COMANDO"
-		],
-		"SANCIONES": [
-			"ADVERTENCIA",
-			"KICK",
-			"BANEO"
-		],
-		"_DEVELOPERS": [
-			"Merlin-VI"
-		],
-		"DEVELOPERS": [
-			"Merlin-VI"
-		]
-	},
-	"ADMIN": {
-		"CONFIRMACION_REQUIRED": "true",
-		"TIME_OUT_CONFIRMACION": 1,
-		"R_AFIRMATIVAS": [
-			"sí",
-			"sis",
-			"si",
-			"claro",
-			"confirmar",
-			"confirmado",
-			"yeah",
-			"dale",
-			"sip",
-			"yes"
-		],
-		"R_NEGATIVAS": [
-			"no",
-			"nel",
-			"ño",
-			"cancelar",
-			"olvidalo",
-			"nop",
-			"perate",
-			"nel prro"
-		]
-	},
-	"ANTISPAM": {
-		"FLOOD": 5,
-		"MIN_INTERVAL": 5,
-		"INTERVAL": 10,
-		"MAX_ATTACHMENT": 5,
-		"MAX_MESSAGE_CHANNEL": 10,
-		"EXCEPCIONES": [
-			"193820592384901129"
-		],
-		"CANALES_TEMPORALES": []
-	},
-	"COMMMAND_GROUPS": {
-		"ADMIN": {
-			"INTERVAL": 120,
-			"NUM_USOS": 50,
-			"BLOQUEO_TIME_OUT": 720,
-			"ROLES": [
-				"Admin"
-			]
-		},
-		"GENERAL": {
-			"INTERVAL": 60,
-			"NUM_USOS": 100,
-			"BLOQUEO_TIME_OUT": 120,
-			"ROLES": [
-				"Miembros",
-				"@everyone"
-			]
-		},
-		"SCP": {
-			"INTERVAL": 60,
-			"NUM_USOS": 100,
-			"BLOQUEO_TIME_OUT": 120,
-			"ROLES": [
-				"Miembros",
-				"@everyone"
-			]
-		},
-		"OCIO": {
-			"INTERVAL": 60,
-			"NUM_USOS": 50,
-			"BLOQUEO_TIME_OUT": 120,
-			"ROLES": [
-				"Miembros",
-				"@everyone"
-			]
-		},
-		"JR_STAFF": {
-			"ROLES": [
-				"Admin",
-				"Moderador",
-				"Junior Staff"
-			]
-		},
-		"MODERADORES": {
-			"ROLES": [
-				"Admin",
-				"Moderador"
-			]
-		}
-	},
-	"RSS_CONFIGURATIONS": [
-		{
-			"nombre": "O5",
-			"url": "http://cuarteldelo5.wikidot.com/feed/forum/posts.xml",
-			"interval": 2,
-			"channel": "688584533196668928",
-			"channel_name": "foro-05",
-			"activo": true,
-			"type" : "FORO"
-		}, 
-		{
-			"nombre": "ORIGINALES",
-			"url": "http://scp-es.com/feed/pages/pagename/sandbox-inwiki-de-andres2055/category/_default/tags/%2Bes/order/created_at+desc/limit/5/t/Most+Recently+Created",
-			"interval": 2,
-			"channel": "708156415952420866",
-			"channel_name": "foro-scp",
-			"activo": true,
-			"type" : "ORIGINAL"
-		},
-		{
-			"nombre": "TRADUCCIONES",
-			"url": "http://scp-es.com/feed/pages/pagename/sandbox-inwiki-de-andres2055/category/_default/tags/-es%2Cscp%2Crelato%2Cformato-gdi%2Cadmin/order/created_at+desc/limit/5/t/Most+Recently+Created",
-			"interval": 2,
-			"channel": "708156415952420866",
-			"channel_name": "foro-scp",
-			"activo": true,
-			"type" : "TRADUCCION"
-		}, 
-		{
-			"nombre": "SCP",
-			"url": "http://scp-es.com/feed/forum/posts.xml",
-			"interval": 2,
-			"channel": "708156415952420866",
-			"channel_name": "foro-scp",
-			"activo": true,
-			"type" : "FORO"
-		}
-	],
-	"SERVICES": {
-		"SCP_GENERATOR": "https://scp-generator.herokuapp.com/newscp",
-		"WIKIPEDIA": "https://es.wikipedia.org/w/api.php",
-		"FLICKR": "https://www.flickr.com/photos/",
-		"YOUTUBE": "https://www.youtube.com/watch?v=",
-		"FLICKR_FILTER": [
-			"pene",
-			"lesbiana",
-			"lesbian",
-			"gay",
-			"gei",
-			"omo",
-			"homo",
-			"homosexual",
-			"homosetsual",
-			"dick",
-			"pito",
-			"tula",
-			"verga",
-			"ñonga",
-			"vagina",
-			"pussy",
-			"coño",
-			"panocha",
-			"panosha",
-			"concha",
-			"nopor",
-			"porno",
-			"pornografia",
-			"porn",
-			"pornography",
-			"pornografico",
-			"pornográfico",
-			"ponro",
-			"sexo",
-			"sex",
-			"culo",
-			"culos",
-			"teta",
-			"tetas",
-			"chicis",
-			"bubis",
-			"bubi",
-			"sheshe",
-			"sheshes",
-			"shemale",
-			"lesbian",
-			"futanari",
-			"bdsm",
-			"hentai",
-			"agehao",
-			"bondage",
-			"midget",
-			"fuck",
-			"fucker",
-			"nsfw",
-			"rape",
-			"cp",
-			"bastard",
-			"milf",
-			"teen",
-			"loli",
-			"lolicon",
-			"coger",
-			"culear",
-			"culeo",
-			"follar",
-			"follando",
-			"follacion",
-			"follado",
-			"follada",
-			"ass",
-			"lolita",
-			"qlo",
-			"qlos",
-			"porongas",
-			"poronga",
-			"cocks",
-			"cock",
-			"desnuda",
-			"desnudo",
-			"nudity",
-			"nude",
-			"nudes",
-			"bukake",
-			"bukaki",
-			"bukakes",
-			"gangbang",
-			"femdom",
-			"cbt",
-			"deepthroat",
-			"facesitting",
-			"trampling",
-			"lezdom",
-			"mistress",
-			"putas",
-			"zorra",
-			"prostitutas",
-			"prostituta",
-			"travesti",
-			"anal",
-			"ano",
-			"oral",
-			"fucking",
-			"tiddies",
-			"pechos",
-			"senos",
-			"gore",
-			"violación",
-			"cei",
-			"cum",
-			"cropping",
-			"nalgas",
-			"trasero",
-			"nalgotas",
-			"penes",
-			"dicks",
-			"pornografía",
-			"desnudos",
-			"desnudas",
-			"prostíbulo",
-			"dildos",
-			"consolador",
-			"masturbación"
-		]
-	}
+    "PREFIX": "!",
+    "SCPDIARY_TIME": 60000,
+    "VERSION": {
+        "major": 1,
+        "minor": 0,
+        "micro": 1,
+        "build": "Epsilón-0"
+    },
+    "SERVER": {
+        "NAME": "Sitio-34",
+        "NAME_": "Sitio-34Dev",
+        "CHANNEL_WELCOME_": "493515602460409886",
+        "CHANNEL_WELCOME": "193819598565408769",
+        "CHANNEL_FARAWELL": "479457987640164382",
+        "CHANNEL_DIARY": "459517125946769408",
+        "CHANNEL_LOG": "640640999718125581",
+        "CHANNEL_DELETED_MESSAGES_dev": "689016930438348851",
+        "CHANNEL_DELETED_MESSAGES": "689023664766976052",
+        "TIME_ZONE": "America/Mexico_City",
+        "LOCALE": "es-MX",
+        "HOUR_DIARY": "07:00",
+        "ACTIVITY_INTERVAL": 25,
+        "ROL_ADVERTENCIA_L1": "Advertencia Nivel 1",
+        "ROL_ADVERTENCIA_L2": "Advertencia Nivel 2",
+        "MUTED": "muted",
+        "GENERAL_GROUP": [
+            "GENERAL",
+            "OCIO",
+            "SCP"
+        ],
+        "ADMIN_GROUPS": [
+            "ADMIN",
+            "MODERADOR",
+            "JR_STAFF"
+        ],
+        "REGISTRO_EVENTOS": [
+            "SANCION",
+            "CONFIGURACION",
+            "ABUSO_COMANDO"
+        ],
+        "SANCIONES": [
+            "ADVERTENCIA",
+            "KICK",
+            "BANEO"
+        ],
+        "_DEVELOPERS": [
+            "Merlin-VI"
+        ],
+        "DEVELOPERS": [
+            "Merlin-VI"
+        ]
+    },
+    "ADMIN": {
+        "CONFIRMACION_REQUIRED": "true",
+        "TIME_OUT_CONFIRMACION": 1,
+        "R_AFIRMATIVAS": [
+            "sí",
+            "sis",
+            "si",
+            "claro",
+            "confirmar",
+            "confirmado",
+            "yeah",
+            "dale",
+            "sip",
+            "yes"
+        ],
+        "R_NEGATIVAS": [
+            "no",
+            "nel",
+            "ño",
+            "cancelar",
+            "olvidalo",
+            "nop",
+            "perate",
+            "nel prro"
+        ]
+    },
+    "ANTISPAM": {
+        "FLOOD": 5,
+        "MIN_INTERVAL": 5,
+        "INTERVAL": 10,
+        "MAX_ATTACHMENT": 5,
+        "MAX_MESSAGE_CHANNEL": 10,
+        "EXCEPCIONES": [
+            "193820592384901129"
+        ],
+        "CANALES_TEMPORALES": []
+    },
+    "COMMMAND_GROUPS": {
+        "ADMIN": {
+            "INTERVAL": 120,
+            "NUM_USOS": 50,
+            "BLOQUEO_TIME_OUT": 720,
+            "ROLES": [
+                "Admin"
+            ]
+        },
+        "GENERAL": {
+            "INTERVAL": 60,
+            "NUM_USOS": 100,
+            "BLOQUEO_TIME_OUT": 120,
+            "ROLES": [
+                "Miembros",
+                "@everyone"
+            ]
+        },
+        "SCP": {
+            "INTERVAL": 60,
+            "NUM_USOS": 100,
+            "BLOQUEO_TIME_OUT": 120,
+            "ROLES": [
+                "Miembros",
+                "@everyone"
+            ]
+        },
+        "OCIO": {
+            "INTERVAL": 60,
+            "NUM_USOS": 50,
+            "BLOQUEO_TIME_OUT": 120,
+            "ROLES": [
+                "Miembros",
+                "@everyone"
+            ]
+        },
+        "JR_STAFF": {
+            "ROLES": [
+                "Admin",
+                "Moderador",
+                "Junior Staff"
+            ]
+        },
+        "MODERADORES": {
+            "ROLES": [
+                "Admin",
+                "Moderador"
+            ]
+        }
+    },
+    "RSS_CONFIGURATIONS": [{
+            "nombre": "O5",
+            "url": "http://cuarteldelo5.wikidot.com/feed/forum/posts.xml",
+            "interval": 2,
+            "channel": "688584533196668928",
+            "channel_name": "foro-05",
+            "activo": true,
+            "type": "FORO"
+        },
+        {
+            "nombre": "ORIGINALES",
+            "url": "http://scp-es.com/feed/pages/pagename/sandbox-inwiki-de-andres2055/category/_default/tags/%2Bes/order/created_at+desc/limit/5/t/Most+Recently+Created",
+            "interval": 2,
+            "channel": "708156415952420866",
+            "channel_name": "foro-scp",
+            "activo": true,
+            "type": "ORIGINAL"
+        },
+        {
+            "nombre": "TRADUCCIONES",
+            "url": "http://scp-es.com/feed/pages/pagename/sandbox-inwiki-de-andres2055/category/_default/tags/-es%2Cscp%2Crelato%2Cformato-gdi%2Cadmin/order/created_at+desc/limit/5/t/Most+Recently+Created",
+            "interval": 2,
+            "channel": "708156415952420866",
+            "channel_name": "foro-scp",
+            "activo": true,
+            "type": "TRADUCCION"
+        },
+        {
+            "nombre": "SCP",
+            "url": "http://scp-es.com/feed/forum/posts.xml",
+            "interval": 2,
+            "channel": "708156415952420866",
+            "channel_name": "foro-scp",
+            "activo": true,
+            "type": "FORO"
+        }
+    ],
+    "SERVICES": {
+        "SCP_GENERATOR": "https://scp-generator.herokuapp.com/newscp",
+        "WIKIPEDIA": "https://es.wikipedia.org/w/api.php",
+        "FLICKR": "https://www.flickr.com/photos/",
+        "YOUTUBE": "https://www.youtube.com/watch?v=",
+        "FLICKR_FILTER": [
+            "pene",
+            "lesbiana",
+            "lesbian",
+            "gay",
+            "gei",
+            "omo",
+            "homo",
+            "homosexual",
+            "homosetsual",
+            "dick",
+            "pito",
+            "tula",
+            "verga",
+            "ñonga",
+            "vagina",
+            "pussy",
+            "coño",
+            "panocha",
+            "panosha",
+            "concha",
+            "nopor",
+            "porno",
+            "pornografia",
+            "porn",
+            "pornography",
+            "pornografico",
+            "pornográfico",
+            "ponro",
+            "sexo",
+            "sex",
+            "culo",
+            "culos",
+            "teta",
+            "tetas",
+            "chicis",
+            "bubis",
+            "bubi",
+            "sheshe",
+            "sheshes",
+            "shemale",
+            "lesbian",
+            "futanari",
+            "bdsm",
+            "hentai",
+            "agehao",
+            "bondage",
+            "midget",
+            "fuck",
+            "fucker",
+            "nsfw",
+            "rape",
+            "cp",
+            "bastard",
+            "milf",
+            "teen",
+            "loli",
+            "lolicon",
+            "coger",
+            "culear",
+            "culeo",
+            "follar",
+            "follando",
+            "follacion",
+            "follado",
+            "follada",
+            "ass",
+            "lolita",
+            "qlo",
+            "qlos",
+            "porongas",
+            "poronga",
+            "cocks",
+            "cock",
+            "desnuda",
+            "desnudo",
+            "nudity",
+            "nude",
+            "nudes",
+            "bukake",
+            "bukaki",
+            "bukakes",
+            "gangbang",
+            "femdom",
+            "cbt",
+            "deepthroat",
+            "facesitting",
+            "trampling",
+            "lezdom",
+            "mistress",
+            "putas",
+            "zorra",
+            "prostitutas",
+            "prostituta",
+            "travesti",
+            "anal",
+            "ano",
+            "oral",
+            "fucking",
+            "tiddies",
+            "pechos",
+            "senos",
+            "gore",
+            "violación",
+            "cei",
+            "cum",
+            "cropping",
+            "nalgas",
+            "trasero",
+            "nalgotas",
+            "penes",
+            "dicks",
+            "pornografía",
+            "desnudos",
+            "desnudas",
+            "prostíbulo",
+            "dildos",
+            "consolador",
+            "masturbación",
+            "zonzo",
+            "sonso",
+            "zonso",
+            "sonzo"
+        ]
+    }
 }
