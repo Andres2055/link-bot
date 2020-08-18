@@ -46,6 +46,7 @@ module.exports = async (client, message, args) => {
         }
 
         confirmacion(message, member.user.username, razon, client).then(async confirmar => {
+            console.log(confirmar);
             if (confirmar) {
                 //Se enviará un mensaje privado al usuario justo antes de ser baneado para informarle la razón de su baneo
                 await member.send(`Saludos **${member.user.username}** se le informa que ha sido baneado debido a: **${razon}**, con vigencia **${vigencia}**`);
