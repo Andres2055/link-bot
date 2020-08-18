@@ -53,7 +53,7 @@
     },
     "ADMIN": {
         "CONFIRMACION_REQUIRED": "true",
-        "TIME_OUT_CONFIRMACION": 1,
+        "TIME_OUT_CONFIRMACION": 10,
         "R_AFIRMATIVAS": [
             "sí",
             "sis",
