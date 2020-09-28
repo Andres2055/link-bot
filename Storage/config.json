@@ -162,7 +162,7 @@
             "interval": 2,
             "channel": "708156415952420866",
             "channel_name": "foro-scp",
-            "activo": true,
+            "activo": false,
             "type": "TRADUCCION"
         },
         {
