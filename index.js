@@ -125,7 +125,13 @@ client.on("ready", () => {
     }, SCPDIARY_TIME);
 
     rss.startAllRss(client);
-    const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
+    const guild = client.guilds.find(guild => guild.name === "Sitio 34-Z:  (No) Iremos a Japón");
+    console.log(guild.memberCount);
+    console.log(guild.name);
+    guild.members.forEach((value, key) => {
+        console.log(value.user.username);
+    })
+
     let merlin = guild.members.find(mem => mem.id == "324174158063992832");
     if (merlin) {
         merlin.send("Hi, Heroku acaba de reiniciarme, revisa lo que debas revisar");

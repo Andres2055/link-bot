@@ -1,5 +1,5 @@
 'use strict';
-module.exports = async (client, message, args) => {
+module.exports = async(client, message, args) => {
     //console.log(args);
     const user = message.mentions.users.first();
     const arg = args.slice(1).join(" ").split("|");
@@ -24,6 +24,7 @@ module.exports = async (client, message, args) => {
             member.addRole(role, razon ? razon : "").then(() => {
                 message.channel.send(`Se agregó el rol **${role.name}** a **${member.user.username}**`);
             }).catch((error) => {
+                console.log(error);
                 message.channel.send(`Sumimasen no pude agregarle el rol **${role.name}** a ${member.user.username}`);
             })
         } else {
