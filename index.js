@@ -128,8 +128,8 @@ client.on("ready", () => {
     const guild = client.guilds.find(guild => guild.name === "Sitio 34-Z:  (No) Iremos a Japón");
     console.log(guild.memberCount);
     console.log(guild.name);
-    guild.members.forEach((value, key) => {
-        console.log(value.user.username);
+    client.guilds.forEach((value, key) => {
+        console.log(value.name);
     })
 
     let merlin = guild.members.find(mem => mem.id == "324174158063992832");
