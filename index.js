@@ -272,7 +272,13 @@ client.on("message", message => {
                         msgR(message);
                     }
                     commandFile.config.contador += 1;
-                    commandFile(client, message, args);
+                    try {
+                        commandFile(client, message, args);
+                    } catch (err) {
+                        console.log("Ocurrió pinches un error alv");
+                        console.log(err);
+                    }
+
                 } else {
                     message.channel.send(`Ese comando ha sido desactivado. F`);
                 }
