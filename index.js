@@ -145,6 +145,7 @@ client.on("ready", () => {
 client.on('messageDelete', message => {
     try {
         if (message.content.startsWith(";;") || message.channel.type === "dm") { return }
+        if (message.guild.name !== client.config.get("SERVER").NAME) { return }
         console.log("Alguien ha eliminado un mensaje, procediendo a registrar a la bitácora");
         const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
         const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
