@@ -272,7 +272,7 @@ client.on("message", message => {
             	handle(client, response, message);
             	return;
             }*/
-            if (message.content.toLocaleLowerCase.includes("sesenta\ y\ nueve") || message.content.match(/( 69|69 )/g) || (message.content === '69')) { message.channel.send("Nice").catch(() => { console.log("No Nice") }) }
+            if (message.content.toLocaleLowerCase.includes("sesenta\ y\ nueve") || message.content.toLocaleLowerCase.includes("ES-169") || message.content.match(/( 69|69 )/g) || (message.content === '69')) { message.channel.send("Nice").catch(() => { console.log("No Nice") }) }
             if (!message.content.startsWith(PREFIX)) return;
             let messageArray = message.content.split(/ +/g);
             let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
