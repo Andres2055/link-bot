@@ -272,7 +272,7 @@ client.on("message", message => {
             	handle(client, response, message);
             	return;
             }*/
-            if (message.includes("69")) { message.channel.send("Nice").catch(() => { console.log("No Nice") }) }
+            if (message.content.includes("69")) { message.channel.send("Nice").catch(() => { console.log("No Nice") }) }
             if (!message.content.startsWith(PREFIX)) return;
             let messageArray = message.content.split(/ +/g);
             let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
