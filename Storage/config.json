@@ -134,6 +134,7 @@
         "MODERADORES": {
             "ROLES": [
                 "Admin",
+                "Mod Junior",
                 "Moderador"
             ]
         }
