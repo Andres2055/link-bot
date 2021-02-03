@@ -35,7 +35,7 @@
         "ADMIN_GROUPS": [
             "ADMIN",
             "MODERADOR",
-            "JR_STAFF"
+            "MOD_JUNIOR"
         ],
         "REGISTRO_EVENTOS": [
             "SANCION",
@@ -46,9 +46,6 @@
             "ADVERTENCIA",
             "KICK",
             "BANEO"
-        ],
-        "_DEVELOPERS": [
-            "Merlin-VI"
         ],
         "DEVELOPERS": [
             "Merlin-VI"
