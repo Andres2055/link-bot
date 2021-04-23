@@ -272,8 +272,11 @@ client.on("message", message => {
             	handle(client, response, message);
             	return;
             }*/
-            if ((message.content.toLowerCase().includes("trece") || message.content.toUpperCase().includes("ES-113") || message.content.match(/( 13|13 )/g) || (message.content === '13')) && Math.random().toFixed(2) <= 0.13 && message.channel.name !== "lobby") { message.channel.send("Entre más me la mamas más me crece :picardia:").catch(() => { console.log("No Nice") }) }
-            if (message.content.toLowerCase().includes("sesenta\ y\ nueve") || message.content.toUpperCase().includes("ES-169") || message.content.match(/( 69|69 )/g) || (message.content === '69')) { message.channel.send("Nice").catch(() => { console.log("No Nice") }) }
+
+            if (message.channel.id != client.config.get("CHANNELS").NO_SHITPOST) {
+                if ((message.content.toLowerCase().includes("trece") || message.content.toUpperCase().includes("ES-113") || message.content.match(/( 13|13 )/g) || (message.content === '13')) && Math.random().toFixed(2) <= 0.13 && message.channel.name !== "lobby") { message.channel.send("Entre más me la mamas más me crece :picardia:").catch(() => { console.log("No Nice") }) }
+                if (message.content.toLowerCase().includes("sesenta\ y\ nueve") || message.content.toUpperCase().includes("ES-169") || message.content.match(/( 69|69 )/g) || (message.content === '69')) { message.channel.send("Nice").catch(() => { console.log("No Nice") }) }
+            }
             if (!message.content.startsWith(PREFIX)) return;
             let messageArray = message.content.split(/ +/g);
             let cmd = messageArray[0].toLowerCase().slice(PREFIX.length);
