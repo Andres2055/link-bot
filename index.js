@@ -102,41 +102,48 @@ fs.readdir("./Commands/", (err, files) => {
 // Código que se ejecutará una vez que el bot haga login
 //========================================================
 
-client.on("ready", () => {
-    console.log("¡Estoy listo!");
-    var msgActivity = ["Cada !help cura mi depresión",
-        "Un !help es igual a un abrazo",
-        "Necesitas el !help tanto como yo a ti",
-        "Lo hago porque te quiero",
-        "!help, ¡HELP! ¡HELP ME!"
-    ];
+client.on("ready", async () => {
+    try {
+        console.log("¡Estoy listo!");
+        var msgActivity = ["Cada !help cura mi depresión",
+            "Un !help es igual a un abrazo",
+            "Necesitas el !help tanto como yo a ti",
+            "Lo hago porque te quiero",
+            "!help, ¡HELP! ¡HELP ME!"
+        ];
 
-    var msgNum = Math.floor(Math.random() * msgActivity.length);
+        var msgNum = Math.floor(Math.random() * msgActivity.length);
 
-    client.user.setActivity(msgActivity[msgNum]);
-    setInterval(() => {
-        msgNum = Math.floor(Math.random() * msgActivity.length);
         client.user.setActivity(msgActivity[msgNum]);
-    }, SCPDIARY_TIME * client.config.get("SERVER").ACTIVITY_INTERVAL);
+        setInterval(() => {
+            msgNum = Math.floor(Math.random() * msgActivity.length);
+            client.user.setActivity(msgActivity[msgNum]);
+        }, SCPDIARY_TIME * client.config.get("SERVER").ACTIVITY_INTERVAL);
 
-    const scpDiary = require('./Functions/scpDiary.js');
-    setInterval(() => {
-        scpDiary.postSCPDiary(client)
-    }, SCPDIARY_TIME);
+        const scpDiary = require('./Functions/scpDiary.js');
+        setInterval(() => {
+            scpDiary.postSCPDiary(client)
+        }, SCPDIARY_TIME);
 
-    rss.startAllRss(client);
-    const guild = client.guilds.find(guild => guild.name === "Sitio 34-Z:  (No) Iremos a Japón");
-    console.log(guild.memberCount);
-    console.log(guild.name);
-    client.guilds.forEach((value, key) => {
-        console.log(value.name);
-    })
+        rss.startAllRss(client);
+        const guild = client.guilds.cache.find(guild => guild.name === "Sitio 34-Z:  (No) Iremos a Japón");
+        // console.log(guild.memberCount);
+        // console.log(guild.name);
+        // console.log(client.guilds.cache);
+        client.guilds.cache.forEach((server, id) => {
+            console.log(server.name);
+        })
 
-    let merlin = guild.members.find(mem => mem.id == "324174158063992832");
-    if (merlin) {
-        merlin.send("Hi, Heroku acaba de reiniciarme, revisa lo que debas revisar");
-    } else {
-        console.log("No te encontré Merlin :c");
+        let merlin = await guild.members.fetch("324174158063992832");
+        // console.log(merlin);
+        if (merlin) {
+            merlin.send("Hi, Heroku acaba de reiniciarme, revisa lo que debas revisar");
+        } else {
+            console.log("No te encontré Merlin :c");
+        }
+    } catch (error) {
+        console.log(`Error al iniciar ${err}`);
+        console.log(error);
     }
 
 });
@@ -210,7 +217,7 @@ client.on('guildMemberAdd', member => {
 	Recuerda que **no puedes pedir ayuda** con el cuestionario de ingreso
 	Si notas que te llegan mensajes con spam de otros servidores comunícalo al staff`);
 
-        const channel = member.guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_WELCOME);
+        const channel = member.guild.channels.cache.get(ch => ch.id === client.config.get("SERVER").CHANNEL_WELCOME);
         if (!channel) return;
         channel.send(`¡Heya ${member.user}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
     } catch (err) {
@@ -258,7 +265,7 @@ client.on("message", message => {
         }
         //validación de roles de acuerdo con el grupo correspondiente del comando
         client.config.get("COMMMAND_GROUPS")[comando.config.grupo].ROLES.forEach(rol => {
-            if (message.member.roles.some(role => role.name === rol)) { v = true; }
+            if (message.member.roles.cache.some(role => role.name === rol)) { v = true; }
         });
         return v;
     }
@@ -268,9 +275,9 @@ client.on("message", message => {
             /*let spam = client.functions.get("SPAM");
             let response = spam(client, message);
             if (response.length) {
-            	let handle = client.functions.get("HANDLE_SPAM");
-            	handle(client, response, message);
-            	return;
+                let handle = client.functions.get("HANDLE_SPAM");
+                handle(client, response, message);
+                return;
             }*/
 
             if (message.channel.id != client.config.get("CHANNELS").NO_SHITPOST) {
@@ -289,15 +296,15 @@ client.on("message", message => {
                 if (commandFile.config.activo) {
                     /*let numero_usos = client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS;
                     if (client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS) {
-                    	//console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
+                        //console.log(`El comando ${commandFile.config.name} se ha usado ${commandFile.config.contador} veces. Puede usarse sólo ${client.config.get("COMMMAND_GROUPS")[commandFile.config.grupo].NUM_USOS} veces`);
                     }
                     /*if (numero_usos && commandFile.config.contador >= Math.floor(numero_usos * 0.80)) {
-                    	message.channel.send(`Advertencia: El comando ${commandFile.config.name} se está usando demasiado y podría bloquearse`);
+                        message.channel.send(`Advertencia: El comando ${commandFile.config.name} se está usando demasiado y podría bloquearse`);
                     }
                     if (numero_usos && commandFile.config.contador >= numero_usos) {
-                    	let bloqueaComandoSpam = client.functions.get("BLOQUEO_COMANDO");
-                    	bloqueaComandoSpam(commandFile, message, client);
-                    	return
+                        let bloqueaComandoSpam = client.functions.get("BLOQUEO_COMANDO");
+                        bloqueaComandoSpam(commandFile, message, client);
+                        return
                     }*/
                     if (!validarPermisos(message, commandFile)) {
                         message.channel.send(`Lo siento ${message.author} pero no tienes permiso para usar este comando`);
@@ -335,5 +342,6 @@ client.on("message", message => {
 try {
     client.login(TOKEN);
 } catch (err) {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Error al iniciar sesión");
     console.log(err);
 }
