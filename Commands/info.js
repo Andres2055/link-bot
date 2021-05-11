@@ -23,7 +23,7 @@ module.exports = async (client, message, args) => {
 module.exports.config = {
 	name: "info",
 	aliases: ["inf", "estiben"],
-	activo: true,
+	activo: false,
 	configurable: true,
 	grupo: "GENERAL",
 	contador: 0
