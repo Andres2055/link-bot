@@ -36,7 +36,7 @@ module.exports = async (client, message, args) => {
 			list += response
 		}
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`Artículos con las etiquetas: ${args} (-${site.toUpperCase()})`)
 			.setDescription(list)
 			.setAuthor(message.author.username, message.author.displayAvatarURL)

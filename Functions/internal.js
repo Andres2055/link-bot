@@ -89,7 +89,7 @@ module.exports.registrar_sancion = async (client, embed) => {
 
 //Función que genera un mensaje Rich Embed para notificar una sanción
 module.exports.getRegistroDisciplinario = (message, member, accion, razon, color, vigencia, notas) => {
-    const notficacion = new Discord.RichEmbed()
+    const notficacion = new Discord.MessageEmbed()
         .setAuthor(message.author.username, message.author.displayAvatarURL)
         .addField("**Sujeto**", member.nickname ? member.nickname : member.user.username)
         .addField("**Procedimiento**", accion)

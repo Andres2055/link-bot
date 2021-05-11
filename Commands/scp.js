@@ -27,7 +27,7 @@ module.exports = async (client, message, args) => {
 				return message.channel.send(`Ese SCP no existe, <@${message.author.id}>.`);
 			}
 
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setTitle(`${page['title']} - ${all.checkTitle(page['title'], page['altTitle'])} (${all.checkVotes(page['rating'])})`)
 				.setURL(`${page['site']}/${page['name']}`)
 				.setDescription(`${all.checkAuthors(page['status'], page['authors'], page)} [-${site.toUpperCase()}]`)

@@ -10,7 +10,7 @@ module.exports = async (client, message, args) => {
 	rran.then(function(value) {
 		let page = value['data']['pages'][0]
 
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(page['title'] + ' (' + all.checkVotes(page['rating']) + ')')
 			.setURL(page['site'] + '\/' + page['name'])
 			.setDescription(all.checkAuthors(page['status'], page['authors'], page))

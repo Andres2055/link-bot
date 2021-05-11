@@ -20,7 +20,7 @@
     "mathjs": "^6.2.3",
     "rss-parser": "^3.7.3",
     "scpper.js": "^3.0.3",
-    "wikijs": "^4.11.1"
+    "wikijs": "^6.2.0"
   },
   "keywords": [
     "node",

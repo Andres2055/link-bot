@@ -34,10 +34,15 @@ module.exports = async (client, message, args) => {
         mensaje = grupo9[i];
     }
     //message.channel.send("La sabiduría del 13 dice que: La coca sabe más chida que la pepsi");
-    message.channel.send("Qué raios estabas intentando?").then(msg=>{
-        client.setTimeout(() => {
-            msg.edit(mensaje);
-            msg.delete(13000);
+    message.channel.send("Qué raios estabas intentando?").then(msg => {
+        client.setTimeout(async () => {
+            try {
+                await msg.edit(mensaje);
+                await msg.delete({ timeout: 13000 });
+            } catch (error) {
+                console.log("Error al hacer el coso del :13:");
+                console.log(error);
+            }
         }, 13000);
     })
 }

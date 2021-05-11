@@ -12,18 +12,18 @@ module.exports = async (client, message, args) => {
 		return;
 	}
 
-	const fetched = await message.channel.fetchMessages({ limit: args[0] });
-	console.log(fetched.size + ' mensajes encontrados, eliminando...');
+	// const fetched = await message.channel.fetchMessages({ limit: args[0] });
+	// console.log(fetched.size + ' mensajes encontrados, eliminando...');
 
-	message.channel.bulkDelete(fetched)
+	message.channel.bulkDelete(args[0], true)
 		.catch(error => message.channel.send(`Error: ${error}`));
 }
 
 module.exports.config = {
 	name: "purga",
 	aliases: ["delet", "elim"],
-	activo : true,
+	activo: true,
 	configurable: true,
 	grupo: "JR_STAFF",
-	contador : 0
+	contador: 0
 }

@@ -7,7 +7,7 @@ module.exports = async (client, message, args) => {
 	try {	
 		console.log(typeof expresion + " " + expresion);
 		var result = math.evaluate(expresion);
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`Resultado`)
 			.setAuthor(message.author.username, message.author.displayAvatarURL)
 			.setColor("56BD00")
@@ -16,7 +16,7 @@ module.exports = async (client, message, args) => {
 	}
 	catch (err) {
 		console.log("Ocurrió un error al evaluar la expresión " + expresion + " " + err);
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`Resultado`)
 			.setAuthor(message.author.username, message.author.displayAvatarURL)
 			.setColor("BD1800")

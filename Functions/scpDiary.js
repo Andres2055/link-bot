@@ -39,7 +39,7 @@ module.exports.postSCPDiary = client => {
 		scpDiary.then(function (value) {
 			let page = value['data']['pages'][0];
 
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setTitle(`${page['title']} - ${all.checkTitle(page['title'], page['altTitle'])} (${all.checkVotes(page['rating'])})`)
 				.setURL(page['site'] + '\/' + page['name'])
 				.setDescription(all.checkAuthors(page['status'], page['authors'], page))
@@ -55,7 +55,7 @@ module.exports.postSCPDiary = client => {
 		scpESDiary.then(function (value) {
 			let page = value['data']['pages'][0];
 
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setTitle(`${page['title']} - ${all.checkTitle(page['title'], page['altTitle'])} (${all.checkVotes(page['rating'])})`)
 				.setURL(page['site'] + '\/' + page['name'])
 				.setDescription(all.checkAuthors(page['status'], page['authors'], page))
@@ -71,7 +71,7 @@ module.exports.postSCPDiary = client => {
 		taleDiary.then(function (value) {
 			let page = value['data']['pages'][0];
 
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setTitle(all.checkTitle(page['title'], page['altTitle']) + ' (' + all.checkVotes(page['rating']) + ')')
 				.setURL(page['site'] + '\/' + page['name'])
 				.setDescription(all.checkAuthors(page['status'], page['authors'], page))
@@ -87,7 +87,7 @@ module.exports.postSCPDiary = client => {
 		taleESDiary.then(function (value) {
 			let page = value['data']['pages'][0];
 
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setTitle(all.checkTitle(page['title'], page['altTitle']) + ' (' + all.checkVotes(page['rating']) + ')')
 				.setURL(page['site'] + '\/' + page['name'])
 				.setDescription(all.checkAuthors(page['status'], page['authors'], page))

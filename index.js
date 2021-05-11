@@ -158,7 +158,7 @@ client.on('messageDelete', message => {
         const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
         console.log("Se supone que deberíamos poder saber quién fue el autor, pero como puto discord se puso mamón, pues alv");
         console.log(message.author.username);
-        const mensajeBorrado = new Discord.RichEmbed()
+        const mensajeBorrado = new Discord.MessageEmbed()
             .setAuthor(message.author.username, message.author.displayAvatarURL)
             .setTitle("Mensaje borrado")
             .setColor("#ff0037")
@@ -182,7 +182,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
             console.log("Alguien ha editado su mensaje en el #lobby, registrando en la bitácora");
             const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
             const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
-            const registrar = new Discord.RichEmbed()
+            const registrar = new Discord.MessageEmbed()
                 .setAuthor(oldMessage.author.username, oldMessage.author.displayAvatarURL)
                 .setColor("#ffee00")
                 .setTitle("Mensaje Editado en Lobby ")
@@ -251,7 +251,11 @@ client.on('guildBanAdd', (guild, user) => {
 
 client.on("message", message => {
 
-    var validarPermisos = (message, comando) => {
+    var validarPermisos = async (message1, comando) => {
+        const autorID = message.author.id;
+        const guild = client.guilds.cache.find(guild => guild.name == client.config.get("SERVER").NAME);
+        var member = await guild.members.fetch(autorID);
+
         let v = false;
         //Si el comando es del grupo General, entonces no es necesario validar roles
         //Si se está usando por mp, el comando validará que solo puedan usarse los comandos configurados para ello
@@ -259,13 +263,15 @@ client.on("message", message => {
             return comando.config.mp
         }
         //Valida que no se intente usar comandos administrativos por mensaje privado
+        console.log(message.channel.type);
+        console.log(client.config.get("SERVER").ADMIN_GROUPS.includes(comando.config.grupo));
         if (client.config.get("SERVER").ADMIN_GROUPS.includes(comando.config.grupo) && message.channel.type === "dm") {
             message.channel.send("Oye, oye, oye, las acciones administrativas van en el canal de #staff (」゜ロ゜)」");
             return false;
         }
         //validación de roles de acuerdo con el grupo correspondiente del comando
         client.config.get("COMMMAND_GROUPS")[comando.config.grupo].ROLES.forEach(rol => {
-            if (message.member.roles.cache.some(role => role.name === rol)) { v = true; }
+            if (member.roles.cache.some(role => role.name === rol)) { v = true; }
         });
         return v;
     }

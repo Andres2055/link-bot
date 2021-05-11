@@ -5,27 +5,29 @@ const checkMD = message => {
 	if (message.channel.type === "dm") {
 		return;
 	} else {
-		return `Y-yo... te envié un mensaje <@${message.author.id	}>`;
+		return `Y-yo... te envié un mensaje <@${message.author.id}>`;
 	}
 }
 
 module.exports = async (client, message, args) => {
 	const commands = client.command_help;
-	var embed = new Discord.RichEmbed().setColor(0x1D82B6);
+	var embed = new Discord.MessageEmbed().setColor(0x1D82B6);
 	embed.setTitle("Ayuda");
 	embed.setFooter(`Para conocer los comandos de cierto grupo escribe !help [grupo]. También puedes usar !help [comando] para ver el detalle de un comando en específico. Recuerda que abusar del uso de un comando hará que este sea desactivado automáticamente`);
 
-	const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
-	var member = guild.member(message.author);
+	const autorID = message.author.id;
+	const guild = client.guilds.cache.find(guild => guild.name == client.config.get("SERVER").NAME);
+	var member = await guild.members.fetch(autorID);
+
 	var grupos_visibles = [];
 	for (let [k, v] of Object.entries(client.config.get("COMMMAND_GROUPS"))) {
 		let accesible = false;
 		v.ROLES.forEach(rol => {
-			if (member.roles.some(role => role.name === rol)) { accesible = true; }
+			if (member.roles.cache.some(role => role.name === rol)) { accesible = true; }
 		});
 		if (accesible) { grupos_visibles.push(k) }
 	}
-	
+
 
 	if (args.length === 0 || args.join(' ').toUpperCase() === 'GRUPOS') {
 		embed.setDescription(`Hola, mis comandos se dividen en diferentes grupos con una configuración propia. Según tu nivel de autorización, estos son los grupos a los que tienes acceso:`);

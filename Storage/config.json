@@ -34,7 +34,7 @@
         ],
         "ADMIN_GROUPS": [
             "ADMIN",
-            "MODERADOR",
+            "MODERADORES",
             "JR_STAFF"
         ],
         "REGISTRO_EVENTOS": [

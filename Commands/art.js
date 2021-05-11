@@ -23,7 +23,7 @@ module.exports = async (client, message, args) => {
 			return message.channel.send('<@' + message.author.id + '>, ese artículo no es válido');
 		};
 
-		let embed = new Discord.RichEmbed()
+		let embed = new Discord.MessageEmbed()
 			.setTitle(page['title'] + ' (' + all.checkVotes(page['rating']) + ')')
 			.setURL(page['site'] + '\/' + page['name'])
 			.setDescription(all.checkAuthors(page['status'], page['authors'], page) + " [-" + site.toUpperCase() + "]")

@@ -10,7 +10,7 @@ module.exports = async (client, message, args) => {
         })
         response.on("end", () => {
             if (response.statusCode == 200) {
-                const embed = new Discord.RichEmbed()
+                const embed = new Discord.MessageEmbed()
                     .setDescription(`Idea for SCP: ${scp_generado}`)
                     .setAuthor(message.author.username, message.author.displayAvatarURL)
                     .setColor("0040ff");
