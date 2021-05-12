@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "El bot oficial del sitio-34",
   "engines": {
-    "node": "10.x"
+    "node": "14.x"
   },
   "main": "index.js",
   "_scripts": {
