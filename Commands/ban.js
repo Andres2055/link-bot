@@ -2,15 +2,16 @@
 const prompter = require('discordjs-prompter');
 
 module.exports = async (client, message, args) => {
-    const user = message.mentions.users.first();
+    // const user = message.mentions.users.first();
     const mensaje = args.join(" ").split("|");
     var idNameUser = mensaje[0];
     var razon = mensaje[1];
     var vigencia = mensaje[2];
     var notas = mensaje[3];
-    var member = null;
+    const members = await message.guild.members.fetch({ query: idNameUser.trim() });
+    var member = members.first();
 
-    if (user) {
+    /* if (user) {
         member = message.guild.member(user);
     } else if (idNameUser) {
         if (isNaN(idNameUser)) {
@@ -21,11 +22,11 @@ module.exports = async (client, message, args) => {
             console.log("Buscar por id usuario ", idNameUser);
             member = message.guild.members.find(m => m.id == idNameUser);
         }
-    }
+    } */
 
     if (member) {
         if (member.user === message.author) { //valida que no se banear así mismo
-            message.channel.send(`Ba-baka, no puedes banearte a tí mismo ${member.user.username}-sempai ヽ('﹏')ノ`);
+            message.channel.send(`Ba-baka, no puedes banearte a tí mismo ${member.displayName}-sempai ヽ('﹏')ノ`);
             return;
         }
         if (member.user.username === client.user.username) { //valida que no intente banear al bot
@@ -49,7 +50,7 @@ module.exports = async (client, message, args) => {
             console.log(confirmar);
             if (confirmar) {
                 //Se enviará un mensaje privado al usuario justo antes de ser baneado para informarle la razón de su baneo
-                await member.send(`Saludos **${member.user.username}** se le informa que ha sido baneado debido a: **${razon}**, con vigencia **${vigencia}**`);
+                await member.send(`Saludos **${member.displayName}** se le informa que ha sido baneado debido a: **${razon}**, con vigencia **${vigencia}**`);
 
                 member.ban({ reason: razon }).then(() => {
                     //message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
@@ -58,7 +59,7 @@ module.exports = async (client, message, args) => {
                     log(client, embed(message, member, "Ban", razon, "010F1E", vigencia, notas));
                 }).catch(err => {
                     console.log(err);
-                    message.channel.send(`No pude darle ban **${member.user.username}** debido a **${err}**. No me mates  m;_ _)m`);
+                    message.channel.send(`No pude darle ban **${member.displayName}** debido a **${err}**. No me mates  m;_ _)m`);
                 })
                 return;
             } else {

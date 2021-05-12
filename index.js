@@ -244,11 +244,11 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 client.on('guildBanAdd', (guild, user) => {
     try {
-        const channel = guild.channels.cache.find(client.config.get("SERVER").CHANNEL_FARAWELL);
+        const channel = guild.channels.resolve(client.config.get("SERVER").CHANNEL_FARAWELL);
         if (!channel) return;
-        channel.send(`${user.tag} ha sido baneado`);
+        channel.send(`**${user.tag}** ha sido baneado`);
     } catch (err) {
-        console.log("Error al banear a alguien");
+        console.log("Error al notificar el baneo de alguien");
         console.log(err);
     }
 });
