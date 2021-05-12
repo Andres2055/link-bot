@@ -154,8 +154,8 @@ client.on('messageDelete', message => {
         if (message.content.startsWith(";;") || message.channel.type === "dm") { return }
         if (message.guild.name !== client.config.get("SERVER").NAME) { return }
         console.log("Alguien ha eliminado un mensaje, procediendo a registrar a la bitácora");
-        const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
-        const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
+        const guild = client.guilds.cache.find(guild => guild.name === client.config.get("SERVER").NAME);
+        const channel = guild.channels.resolve(client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
         console.log("Se supone que deberíamos poder saber quién fue el autor, pero como puto discord se puso mamón, pues alv");
         console.log(message.author.username);
         const mensajeBorrado = new Discord.MessageEmbed()
@@ -180,8 +180,8 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     try {
         if (oldMessage.channel.id == client.config.get("SERVER").CHANNEL_WELCOME && oldMessage.content && newMessage.content) {
             console.log("Alguien ha editado su mensaje en el #lobby, registrando en la bitácora");
-            const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
-            const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
+            const guild = client.guilds.cache.find(guild => guild.name === client.config.get("SERVER").NAME);
+            const channel = guild.channels.resolve(client.config.get("SERVER").CHANNEL_DELETED_MESSAGES);
             const registrar = new Discord.MessageEmbed()
                 .setAuthor(oldMessage.author.username, oldMessage.author.displayAvatarURL)
                 .setColor("#ffee00")
@@ -196,39 +196,43 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     }
 })
 
-client.on('guildMemberAdd', member => {
+/* client.on('guildMemberAdd', member => {
+    console.log("Se supone que acaba de entrar un nuevo wacho, pero no sé si pueda notificarlo :sad_marw:");
     try {
-        console.log("Se supone que acaba de entrar un nuevo wacho, pero no sé si pueda notificarlo :sad_marw:");
         console.log(member);
         member.send(`Hola, Mi nombre es Estiben y soy el bot del sitio-34, puedes ver mis comandos tecleando !h !help o !ayuda aquí o en el server
-	Te doy la bienvenida a nuestra comunidad y algunas recomendaciones:
-	Lee el canal #reglas-leer-primero es importante que lo hagas
-	Evita el spam
-	No tenemos nada qué ver con el videojuego ni tampoco canales de youtube
-	Recuerda que nuestro staff son los usuarios
-	-Merlin-VI#1443 (Administrador)
-	-Dc_Yerko#7804 (Administrador)
-	-Luis Gm#9398 (Moderador)
-	-Shadow-MASK#6421 (Veterano)
-	-Abbsy#5905 (Mod Junior)
-	-Agente Shuffle (Mod Junior)
+    Te doy la bienvenida a nuestra comunidad y algunas recomendaciones:
+    Lee el canal #reglas-leer-primero es importante que lo hagas
+    Evita el spam
+    No tenemos nada qué ver con el videojuego, canales de youtube, ni tampoco grupos de facebook
+    Recuerda que nuestro staff son los usuarios
+    -Merlin-VI#1443 (Administrador)
+    -Inner Alchemy#5647 (Administrador)
+    -Luis Gm#9398 (Moderador)
+    -LazyLasagne#5154 (Moderador)
+    -marw#1241 (Veterano)
 	
-	Evita usar las menciones (@alguien) con el staff si no es un tema urgente
-	Recuerda que **no puedes pedir ayuda** con el cuestionario de ingreso
-	Si notas que te llegan mensajes con spam de otros servidores comunícalo al staff`);
+	
+    Evita usar las menciones (@alguien) con el staff si no es un tema urgente
+    Recuerda que **no puedes pedir ayuda** con el cuestionario de ingreso
+    Si notas que te llegan mensajes con spam de otros servidores comunícalo al staff`);
 
-        const channel = member.guild.channels.cache.get(ch => ch.id === client.config.get("SERVER").CHANNEL_WELCOME);
+        const channel = member.guild.channels.cache.find(client.config.get("SERVER").CHANNEL_WELCOME);
+        console.log(channel);
         if (!channel) return;
-        channel.send(`¡Heya ${member.user}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
+        channel.send(`¡Heya ${member}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
     } catch (err) {
         console.log("La putamadre Estiben, porqué no puedes notificar los nuevos miembros?");
         console.log(err);
     }
-});
+}); */
 
-client.on('guildMemberRemove', member => {
+/* client.on('guildMemberRemove', member => {
     try {
-        const channel = member.guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_FARAWELL);
+        console.log("Se nos va un grande");
+        console.log(member);
+        const channel = member.guild.channels.cache.find(client.config.get("SERVER").CHANNEL_FARAWELL);
+        console.log(channel);
         if (!channel) return;
         channel.send(`¡Adios, **${member.user.username}**! Espero que vuelvas pronto :D`);
     } catch (err) {
@@ -236,11 +240,11 @@ client.on('guildMemberRemove', member => {
         console.log(err);
     }
 
-});
+}); */
 
 client.on('guildBanAdd', (guild, user) => {
     try {
-        const channel = guild.channels.find(ch => ch.id === client.config.get("SERVER").CHANNEL_FARAWELL);
+        const channel = guild.channels.cache.find(client.config.get("SERVER").CHANNEL_FARAWELL);
         if (!channel) return;
         channel.send(`${user.tag} ha sido baneado`);
     } catch (err) {
