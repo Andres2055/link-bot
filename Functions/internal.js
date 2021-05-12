@@ -81,8 +81,8 @@ module.exports.agregarIntervalos = (client) => {
 
 //Función que agrega envía un mensaje notificando una nueva ejecución de sanción
 module.exports.registrar_sancion = async (client, embed) => {
-    const guild = client.guilds.find(guild => guild.name == client.config.get("SERVER").NAME);
-    const channel = guild.channels.find(ch => ch.id == client.config.get("SERVER").CHANNEL_LOG);
+    const guild = client.guilds.cache.find(guild => guild.name === client.config.get("SERVER").NAME);
+    const channel = guild.channels.resolve(client.config.get("SERVER").CHANNEL_LOG);
     if (!channel) return;
     channel.send({ embed });
 }
@@ -91,7 +91,7 @@ module.exports.registrar_sancion = async (client, embed) => {
 module.exports.getRegistroDisciplinario = (message, member, accion, razon, color, vigencia, notas) => {
     const notficacion = new Discord.MessageEmbed()
         .setAuthor(message.author.username, message.author.displayAvatarURL)
-        .addField("**Sujeto**", member.nickname ? member.nickname : member.user.username)
+        .addField("**Sujeto**", member.displayName)
         .addField("**Procedimiento**", accion)
         .addField("**Razón:**", razon)
         .addField("**Vigencia:**", vigencia)
