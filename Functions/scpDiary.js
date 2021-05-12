@@ -6,15 +6,8 @@ const api = new Scpper.Scpper({ site: 'es' });
 
 var getChannel = (client) => {
 	try {
-		//console.log(client.guilds);
-		const guild = client.guilds.find(guild => guild.name === client.config.get("SERVER").NAME);
-		/*guild.fetchBans().then(bans => {
-            bans.forEach(user => {
-				console.log(user)
-                console.log(user.username + '#' + user.tag);
-            });
-        });*/
-		const channel = guild['channels'].find(ch => ch.id === client.config.get("SERVER").CHANNEL_DIARY);
+		const guild = client.guilds.cache.find(guild => guild.name === client.config.get("SERVER").NAME);
+		const channel = guild.channels.resolve(client.config.get("SERVER").CHANNEL_DIARY);
 		return channel;
 	} catch (err) {
 		console.log('Aún no se ha logeado');
