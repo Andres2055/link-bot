@@ -142,7 +142,7 @@ client.on("ready", async () => {
             console.log("No te encontré Merlin :c");
         }
     } catch (error) {
-        console.log(`Error al iniciar ${err}`);
+        console.log(`Error al iniciar ${error}`);
         console.log(error);
     }
 
@@ -205,7 +205,7 @@ client.on('guildMemberAdd', member => {
     Lee el canal #reglas-leer-primero es importante que lo hagas
     Evita el spam
     No tenemos nada qué ver con el videojuego, canales de youtube, ni tampoco grupos de facebook
-    Recuerda que nuestro staff son los usuarios
+    Recuerda que nuestro staff son los usuarios:
     -Merlin-VI#1443 (Administrador)
     -Inner Alchemy#5647 (Administrador)
     -Luis Gm#9398 (Moderador)
