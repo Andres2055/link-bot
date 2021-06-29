@@ -196,11 +196,11 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     }
 })
 
-/* client.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', member => {
     console.log("Se supone que acaba de entrar un nuevo wacho, pero no sé si pueda notificarlo :sad_marw:");
     try {
         console.log(member);
-        member.send(`Hola, Mi nombre es Estiben y soy el bot del sitio-34, puedes ver mis comandos tecleando !h !help o !ayuda aquí o en el server
+        member.send(`Hola, Mi nombre es Estiben y soy el bot del sitio-34, puedes ver mis comandos tecleando !h !help o !ayuda en el server
     Te doy la bienvenida a nuestra comunidad y algunas recomendaciones:
     Lee el canal #reglas-leer-primero es importante que lo hagas
     Evita el spam
@@ -211,10 +211,11 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     -Luis Gm#9398 (Moderador)
     -LazyLasagne#5154 (Moderador)
     -marw#1241 (Veterano)
+    -Nihonio worm#9595 (Mod Junior)
 	
 	
     Evita usar las menciones (@alguien) con el staff si no es un tema urgente
-    Recuerda que **no puedes pedir ayuda** con el cuestionario de ingreso
+    Recuerda que **NO PUEDES SOLICITAR AYUDA** con el cuestionario de ingreso
     Si notas que te llegan mensajes con spam de otros servidores comunícalo al staff`);
 
         const channel = member.guild.channels.cache.find(client.config.get("SERVER").CHANNEL_WELCOME);
@@ -225,9 +226,9 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
         console.log("La putamadre Estiben, porqué no puedes notificar los nuevos miembros?");
         console.log(err);
     }
-}); */
+});
 
-/* client.on('guildMemberRemove', member => {
+client.on('guildMemberRemove', member => {
     try {
         console.log("Se nos va un grande");
         console.log(member);
@@ -240,7 +241,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
         console.log(err);
     }
 
-}); */
+});
 
 client.on('guildBanAdd', (guild, user) => {
     try {
