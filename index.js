@@ -102,7 +102,7 @@ fs.readdir("./Commands/", (err, files) => {
 // Código que se ejecutará una vez que el bot haga login
 //========================================================
 
-client.on("ready", async () => {
+client.on("ready", async() => {
     try {
         console.log("¡Estoy listo!");
         var msgActivity = ["Cada !help cura mi depresión",
@@ -199,8 +199,11 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 client.on('guildMemberAdd', member => {
     console.log("Se supone que acaba de entrar un nuevo wacho, pero no sé si pueda notificarlo :sad_marw:");
     try {
-        console.log(member);
-        member.send(`Hola, Mi nombre es Estiben y soy el bot del sitio-34, puedes ver mis comandos tecleando !h !help o !ayuda en el server
+
+        //Solo notificaremos la entrada al sitio-34
+        if (member.guild.name === client.config.get("SERVER").NAME) {
+            console.log(member);
+            member.send(`Hola, Mi nombre es Estiben y soy el bot del sitio-34, puedes ver mis comandos tecleando !h !help o !ayuda en el server
     Te doy la bienvenida a nuestra comunidad y algunas recomendaciones:
     Lee el canal #reglas-leer-primero es importante que lo hagas
     Evita el spam
@@ -217,11 +220,13 @@ client.on('guildMemberAdd', member => {
     Evita usar las menciones (@alguien) con el staff si no es un tema urgente
     Recuerda que **NO PUEDES SOLICITAR AYUDA** con el cuestionario de ingreso
     Si notas que te llegan mensajes con spam de otros servidores comunícalo al staff`);
+            console.log("Mensaje enviado a la persona que recién entró");
 
-        const channel = member.guild.channels.cache.find(client.config.get("SERVER").CHANNEL_WELCOME);
-        console.log(channel);
-        if (!channel) return;
-        channel.send(`¡Heya ${member}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
+            const channel = member.guild.channels.resolve(client.config.get("SERVER").CHANNEL_WELCOME);
+            console.log(`${channel}`);
+            if (!channel) return;
+            channel.send(`¡Heya ${member}! Ten un... supongo... un, ¡si! ¡Una buena charla! Recuerda mirar #reglas-leer-primero antes de si quiera pensar escribir un emoji. Digo, ¡SI!`);
+        }
     } catch (err) {
         console.log("La putamadre Estiben, porqué no puedes notificar los nuevos miembros?");
         console.log(err);
@@ -231,9 +236,9 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
     try {
         console.log("Se nos va un grande");
-        console.log(member);
-        const channel = member.guild.channels.cache.find(client.config.get("SERVER").CHANNEL_FARAWELL);
-        console.log(channel);
+        console.log(`${member}`);
+        const channel = member.guild.channels.resolve(client.config.get("SERVER").CHANNEL_FARAWELL);
+        console.log(`${channel}`);
         if (!channel) return;
         channel.send(`¡Adios, **${member.user.username}**! Espero que vuelvas pronto :D`);
     } catch (err) {
@@ -256,7 +261,7 @@ client.on('guildBanAdd', (guild, user) => {
 
 client.on("message", message => {
 
-    var validarPermisos = async (message1, comando) => {
+    var validarPermisos = async(message1, comando) => {
         const autorID = message.author.id;
         const guild = client.guilds.cache.find(guild => guild.name == client.config.get("SERVER").NAME);
         var member = await guild.members.fetch(autorID);
