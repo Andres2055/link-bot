@@ -126,7 +126,7 @@ client.on("ready", async () => {
         }, SCPDIARY_TIME);
 
         rss.startAllRss(client);
-        const guild = client.guilds.cache.find(guild => guild.name === "Sitio 34-Z:  (No) Iremos a Japón");
+        const guild = client.guilds.resolve("698289558168666203");
         // console.log(guild.memberCount);
         // console.log(guild.name);
         // console.log(client.guilds.cache);
