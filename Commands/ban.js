@@ -37,7 +37,7 @@ module.exports = async (client, message, args) => {
             message.channel.send(`jejeje Qué crees? No tengo permisos para banear a este vatillo w(ﾟｏﾟ)w`);
             return;
         }
-        if (!razon || razon.trim() == "") {//valida que se proporcione una razón para el baneo
+        if (!razon) {//valida que se proporcione una razón para el baneo
             message.channel.send(`Debes darme una razón para banearlo de aquí  (シ. .)シ`);
             return;
         }
