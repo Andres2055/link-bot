@@ -91,7 +91,7 @@ module.exports.registrar_sancion = async(client, embed) => {
 module.exports.getRegistroDisciplinario = (message, member, accion, razon, color, vigencia, notas) => {
     const notficacion = new Discord.MessageEmbed()
         .setAuthor(message.author.username, message.author.displayAvatarURL)
-        .setField("**ID:**", member.id)
+        .addField("**ID:**", member.id)
         .addField("**Sujeto**", member.displayName)
         .addField("**Procedimiento**", accion)
         .addField("**Razón:**", razon)
