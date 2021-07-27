@@ -2,7 +2,7 @@
 const Discord = require("discord.js");
 
 //Bloquea el comando según su número de usos y setea un timeout para reactivarlo luego de esto
-module.exports.bloqueaComandoSpam = async (commandFile, message, client) => {
+module.exports.bloqueaComandoSpam = async(commandFile, message, client) => {
     message.channel.send(`Se está abusando del comando **${commandFile.config.name}**. El comando será bloqueado temporalmente`);
     commandFile.config.activo = false;
     client.setTimeout(() => {
@@ -15,7 +15,7 @@ module.exports.bloqueaComandoSpam = async (commandFile, message, client) => {
 };
 
 //Genera un mensaje aleatorio que se enviará mientras esperamos respuesta de scpper
-module.exports.msgR = async (message) => { //%10 de que salga
+module.exports.msgR = async(message) => { //%10 de que salga
     let msgNum = 1 + Math.floor(Math.random() * 10);
     console.log(msgNum)
     if (msgNum < 5) {
@@ -49,7 +49,7 @@ module.exports.msgR = async (message) => { //%10 de que salga
 };
 
 //Envía una notificación a los usuarios configurados como desarrolladores
-module.exports.notificar = async (error, client) => {
+module.exports.notificar = async(error, client) => {
     console.log("Error no controlado: " + error);
     console.log(error.stack); //En caso de un error no controlado, se podrá seguir el origen de este
     //console.trace(); 
@@ -80,7 +80,7 @@ module.exports.agregarIntervalos = (client) => {
 };
 
 //Función que agrega envía un mensaje notificando una nueva ejecución de sanción
-module.exports.registrar_sancion = async (client, embed) => {
+module.exports.registrar_sancion = async(client, embed) => {
     const guild = client.guilds.cache.find(guild => guild.name === client.config.get("SERVER").NAME);
     const channel = guild.channels.resolve(client.config.get("SERVER").CHANNEL_LOG);
     if (!channel) return;
@@ -91,6 +91,7 @@ module.exports.registrar_sancion = async (client, embed) => {
 module.exports.getRegistroDisciplinario = (message, member, accion, razon, color, vigencia, notas) => {
     const notficacion = new Discord.MessageEmbed()
         .setAuthor(message.author.username, message.author.displayAvatarURL)
+        .setField("**ID:**", member.id)
         .addField("**Sujeto**", member.displayName)
         .addField("**Procedimiento**", accion)
         .addField("**Razón:**", razon)
