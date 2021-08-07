@@ -78,7 +78,7 @@ module.exports = async (client, message, args) => {
 
 var confirmacion = (message, username, razon, client) => {
     return new Promise((resolve, reject) => {
-        if (client.config.get("ADMIN").CONFIRMACION_REQUIRED) {
+        /*if (client.config.get("ADMIN").CONFIRMACION_REQUIRED) {
             console.log("Solicitando confirmación");
             let timeout = client.config.get("ADMIN").TIME_OUT_CONFIRMACION * client.config.get("SCPDIARY_TIME");
             console.log("VAmos a generar el promter");
@@ -105,7 +105,8 @@ var confirmacion = (message, username, razon, client) => {
         } else {
             console.log("No se requiere confirmación para baneo");
             resolve(true);
-        }
+        }*/
+        resolve(true);
     })
 };
 
