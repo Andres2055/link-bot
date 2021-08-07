@@ -47,7 +47,7 @@ module.exports = async (client, message, args) => {
         }
 
         confirmacion(message, member.user.username, razon, client).then(async confirmar => {
-            console.log(confirmar);
+            console.log("confirmacion: ",confirmar);
             if (confirmar) {
                 //Se enviará un mensaje privado al usuario justo antes de ser baneado para informarle la razón de su baneo
                 await member.send(`Saludos **${member.displayName}** se le informa que ha sido baneado debido a: **${razon}**, con vigencia **${vigencia}**`);
@@ -66,7 +66,9 @@ module.exports = async (client, message, args) => {
                 message.channel.send(`**${message.author}** no me diste una respuesta afirmativa, así que no lo haré ┐(‘～\` )┌ `);
                 return;
             }
-        }).catch(() => {
+        }).catch((err) => {
+            console.log("error al confirmar");
+            console.log(err);
             message.channel.send(`**${message.author}** no confirmaste el baneo, así que no lo haré ┐(‘～\` )┌ `);
             return
         })
@@ -77,35 +79,7 @@ module.exports = async (client, message, args) => {
 };
 
 var confirmacion = (message, username, razon, client) => {
-    return new Promise((resolve, reject) => {
-        /*if (client.config.get("ADMIN").CONFIRMACION_REQUIRED) {
-            console.log("Solicitando confirmación");
-            let timeout = client.config.get("ADMIN").TIME_OUT_CONFIRMACION * client.config.get("SCPDIARY_TIME");
-            console.log("VAmos a generar el promter");
-            console.log("timeout", timeout);
-            prompter.message(message.channel, {
-                question: `Por favor confirma que deseas banear a **${username}** debido a **${razon}** : `,
-                userId: message.author.id,
-                max: 1,
-                timeout: timeout,
-            }).then(responses => {
-                if (!responses || !responses.size) {
-                    console.log("Reject")
-                    return reject();
-
-                }
-                const response = responses.first();
-                console.log("Response", response.toString());
-                console.log("Resolve");
-                return resolve(client.config.get("ADMIN")["R_AFIRMATIVAS"].includes(response.toString().toLowerCase().trim()));
-            }).catch(err => {
-                console.log(err);
-                return reject(err);
-            })
-        } else {
-            console.log("No se requiere confirmación para baneo");
-            resolve(true);
-        }*/
+    return new Promise((resolve) => {
         resolve(true);
     })
 };
