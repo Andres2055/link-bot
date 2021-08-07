@@ -50,8 +50,11 @@ module.exports = async (client, message, args) => {
             console.log("confirmacion: ",confirmar);
             if (confirmar) {
                 //Se enviará un mensaje privado al usuario justo antes de ser baneado para informarle la razón de su baneo
-                await member.send(`Saludos **${member.displayName}** se le informa que ha sido baneado debido a: **${razon}**, con vigencia **${vigencia}**`);
-
+                try {
+                     await member.send(`Saludos **${member.displayName}** se le informa que ha sido baneado debido a: **${razon}**, con vigencia **${vigencia}**`);}
+                catch(){
+                     message.channel.send("Alguien avisele al morro mamon, porque yo no pude :(");
+                }
                 member.ban({ reason: razon }).then(() => {
                     //message.channel.send(`El usuario **${member.user.username}** fue baneado debido a **${razon}**`);
                     let log = client.functions.get("REGISTAR_SANCION");
