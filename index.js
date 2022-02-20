@@ -210,11 +210,11 @@ client.on('guildMemberAdd', member => {
     No tenemos nada qué ver con el videojuego, canales de youtube, ni tampoco grupos de facebook
     Recuerda que nuestro staff son los usuarios:
     -Merlin-VI#1443 (Administrador)
-    -Inner Alchemy#5647 (Administrador)
-    -Luis Gm#9398 (Moderador)
+    -Luis Gm#9398 (Administrador)
     -LazyLasagne#5154 (Moderador)
+    -Nihonio (worm#9595) (Moderador)
     -marw#1241 (Veterano)
-    -Nihonio worm#9595 (Mod Junior)
+    -Amai#6618 (Moderador Junior)
 	
 	
     Evita usar las menciones (@alguien) con el staff si no es un tema urgente
